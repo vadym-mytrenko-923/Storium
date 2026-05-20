@@ -11,9 +11,11 @@ fun createHttpClient(): HttpClient = HttpClient {
         url(ApiConstants.BASE_URL)
     }
     install(ContentNegotiation) {
-        json(Json {
-            ignoreUnknownKeys = true
-            isLenient = true
-        })
+        json(
+            Json {
+                ignoreUnknownKeys = true
+                isLenient = true
+            }
+        )
     }
 }

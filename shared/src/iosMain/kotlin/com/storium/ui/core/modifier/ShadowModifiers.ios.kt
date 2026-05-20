@@ -30,9 +30,8 @@ actual fun Modifier.shadowGlow(
             val offsetYPx = offsetY.toPx()
             val borderRadiusPx = borderRadius.toPx()
 
-            if (color.alpha == 0f && blurRadiusPx <= 0f && spreadPx == 0f && offsetXPx == 0f && offsetYPx == 0f) {
-                return@drawBehind
-            }
+            val hasNoVisibleEffect = color.alpha == 0f && blurRadiusPx <= 0f && spreadPx == 0f && offsetXPx == 0f && offsetYPx == 0f
+            if (hasNoVisibleEffect) return@drawBehind
 
             val skiaPaint = SkiaPaint().apply {
                 isAntiAlias = true

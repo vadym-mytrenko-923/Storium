@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.kotlinSerialization)
+    alias(libs.plugins.detekt)
 }
 
 kotlin {
@@ -75,4 +76,17 @@ kotlin {
 
 dependencies {
     androidRuntimeClasspath(libs.compose.uiTooling)
+    detektPlugins(libs.detektFormatting)
+}
+
+detekt {
+    config.setFrom(file("../config/detekt/detekt.yml"))
+    parallel = true
+    buildUponDefaultConfig = true
+    autoCorrect = true
+    source.setFrom(
+        "src/commonMain/kotlin",
+        "src/androidMain/kotlin",
+        "src/iosMain/kotlin",
+    )
 }

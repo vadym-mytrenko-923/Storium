@@ -1,7 +1,6 @@
 package com.storium.ui.core.modifier
 
 import android.graphics.BlurMaskFilter
-import android.graphics.Paint as AndroidPaint
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
@@ -11,6 +10,7 @@ import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.nativeCanvas
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.unit.Dp
+import android.graphics.Paint as AndroidPaint
 
 @Composable
 actual fun Modifier.shadowGlow(
@@ -29,9 +29,8 @@ actual fun Modifier.shadowGlow(
             val offsetYPx = offsetY.toPx()
             val borderRadiusPx = borderRadius.toPx()
 
-            if (color.alpha == 0f && blurRadiusPx <= 0f && spreadPx == 0f && offsetXPx == 0f && offsetYPx == 0f) {
-                return@drawBehind
-            }
+            val hasNoVisibleEffect = color.alpha == 0f && blurRadiusPx <= 0f && spreadPx == 0f && offsetXPx == 0f && offsetYPx == 0f
+            if (hasNoVisibleEffect) return@drawBehind
 
             val frameworkPaint = AndroidPaint().apply {
                 isAntiAlias = true
@@ -48,7 +47,15 @@ actual fun Modifier.shadowGlow(
             val bottom = size.height + spreadPx + offsetYPx
 
             drawIntoCanvas { canvas ->
-                canvas.nativeCanvas.drawRoundRect(left, top, right, bottom, borderRadiusPx, borderRadiusPx, frameworkPaint)
+                canvas.nativeCanvas.drawRoundRect(
+                    left,
+                    top,
+                    right,
+                    bottom,
+                    borderRadiusPx,
+                    borderRadiusPx,
+                    frameworkPaint
+                )
             }
         }
     )

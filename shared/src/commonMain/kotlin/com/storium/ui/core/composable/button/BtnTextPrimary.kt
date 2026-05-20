@@ -1,5 +1,6 @@
 package com.storium.ui.core.composable.button
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.PaddingValues
@@ -7,7 +8,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.foundation.Image
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -21,10 +21,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.storium.ui.theme.AppIcons
 import com.storium.ui.theme.StoriumTheme
 import com.storium.ui.theme.appColors
-import com.storium.ui.theme.defaultIconSize
-import com.storium.ui.theme.marginPrimaryHalf
-import com.storium.ui.theme.marginPrimary
 import com.storium.ui.theme.containerShapeDefault
+import com.storium.ui.theme.defaultIconSize
+import com.storium.ui.theme.marginPrimary
+import com.storium.ui.theme.marginPrimaryHalf
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
