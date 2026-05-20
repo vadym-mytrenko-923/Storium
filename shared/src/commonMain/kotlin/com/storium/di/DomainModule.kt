@@ -1,7 +1,12 @@
 package com.storium.di
 
+import com.storium.domain.features.auth.usecase.IsUserLoggedInUseCase
+import com.storium.domain.features.auth.usecase.LogoutUseCase
+import com.storium.domain.features.auth.usecase.SetUserLoggedInUseCase
 import org.koin.dsl.module
 
 val domainModule = module {
-    // Use cases will be added here
+    factory { SetUserLoggedInUseCase(get()) }
+    factory { IsUserLoggedInUseCase(get()) }
+    factory { LogoutUseCase(get()) }
 }
