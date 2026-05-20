@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Login Screen -->
+    <string name="loginTitle">Login</string>
+    <string name="inputUsernameLabel">Username</string>
+    <string name="inputPasswordLabel">Password</string>
+    <string name="loginBtnLogin">Login</string>
+    <string name="loginBtnForgotPassword">Forgot your password?</string>
+
+    <!-- Main Screen -->
+    <string name="mainBtnLogout">Logout</string>
+
+    <!-- Errors -->
+    <string name="errorLoginFailed">Invalid username or password</string>
+</resources>

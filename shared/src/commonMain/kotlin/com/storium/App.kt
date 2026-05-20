@@ -1,12 +1,14 @@
 package com.storium
 
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import com.storium.ui.AppViewModel
+import com.storium.ui.navigation.app.AppNavHost
 import com.storium.ui.theme.StoriumTheme
+import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
-fun App() {
+fun App(viewModel: AppViewModel = koinViewModel()) {
     StoriumTheme {
-        Text("Storium")
+        AppNavHost(isUserLoggedInFlow = viewModel.isUserLoggedInFlow)
     }
 }
