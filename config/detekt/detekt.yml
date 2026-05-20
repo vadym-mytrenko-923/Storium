@@ -1,0 +1,80 @@
+build:
+  excludeCorrectable: false
+
+output-reports:
+  active: true
+  exclude:
+    - 'TxtOutputReport'
+    - 'MdOutputReport'
+    - 'SarifOutputReport'
+    - 'XmlOutputReport'
+
+complexity:
+  LongMethod:
+    active: false
+  LongParameterList:
+    active: false
+    functionThreshold: 8
+  TooManyFunctions:
+    active: false
+  LargeClass:
+    excludes: [ '**/test/**' ]
+  CyclomaticComplexMethod:
+    ignoreAnnotated:
+      - Composable
+
+naming:
+  FunctionNaming:
+    ignoreAnnotated: [ 'Composable' ]
+    excludes: [ '**/MainViewController.kt' ]
+  InvalidPackageDeclaration:
+    active: false
+  MatchingDeclarationName:
+    active: false
+
+potential-bugs:
+  IgnoredReturnValue:
+    active: false
+
+exceptions:
+  TooGenericExceptionCaught:
+    active: false
+
+performance:
+  SpreadOperator:
+    active: false
+
+style:
+  ForbiddenComment:
+    active: false
+  MagicNumber:
+    active: false
+    ignoreAnnotated:
+      - 'Preview'
+      - 'Composable'
+  MaxLineLength:
+    active: false
+  ReturnCount:
+    max: 3
+  UnusedPrivateMember:
+    active: false
+  UnusedPrivateProperty:
+    active: false
+  UnusedParameter:
+    active: false
+  UnnecessaryAbstractClass:
+    ignoreAnnotated:
+      - 'Module'
+  DestructuringDeclarationWithTooManyEntries:
+    maxDestructuringEntries: 5
+
+formatting:
+  android: true
+  AnnotationOnSeparateLine:
+    active: false
+  SpacingBetweenDeclarationsWithAnnotations:
+    active: false
+  MaximumLineLength:
+    maxLineLength: 140
+  Filename:
+    active: false

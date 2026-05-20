@@ -11,28 +11,24 @@ import androidx.compose.runtime.staticCompositionLocalOf
 
 private val LightColorScheme = lightColorScheme(
     primary = AppColorsLight.Primary,
-    secondary = AppColorsLight.Secondary,
     background = AppColorsLight.Background,
     surface = AppColorsLight.Surface,
     error = AppColorsLight.Error,
     onPrimary = AppColorsLight.OnPrimary,
-    onSecondary = AppColorsLight.OnSecondary,
-    onBackground = AppColorsLight.OnBackground,
-    onSurface = AppColorsLight.OnSurface,
-    onError = AppColorsLight.OnError,
+    onBackground = AppColorsLight.TextPrimary,
+    onSurface = AppColorsLight.TextPrimary,
+    outline = AppColorsLight.BorderDefault,
 )
 
 private val DarkColorScheme = darkColorScheme(
     primary = AppColorsDark.Primary,
-    secondary = AppColorsDark.Secondary,
     background = AppColorsDark.Background,
     surface = AppColorsDark.Surface,
     error = AppColorsDark.Error,
     onPrimary = AppColorsDark.OnPrimary,
-    onSecondary = AppColorsDark.OnSecondary,
-    onBackground = AppColorsDark.OnBackground,
-    onSurface = AppColorsDark.OnSurface,
-    onError = AppColorsDark.OnError,
+    onBackground = AppColorsDark.TextPrimary,
+    onSurface = AppColorsDark.TextPrimary,
+    outline = AppColorsDark.BorderDefault,
 )
 
 private val LocalAppColorsScheme = staticCompositionLocalOf { AppColorsScheme() }
@@ -53,6 +49,7 @@ fun StoriumTheme(
     CompositionLocalProvider(LocalAppColorsScheme provides appColorsScheme) {
         MaterialTheme(
             colorScheme = colorScheme,
+            typography = AppTypography,
             content = content,
         )
     }
