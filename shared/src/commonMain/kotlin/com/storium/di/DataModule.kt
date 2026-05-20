@@ -7,6 +7,6 @@ import com.storium.domain.features.auth.AuthRepository
 import org.koin.dsl.module
 
 val dataModule = module {
-    single<AuthLocalDataSource> { AuthLocalDataSourceImpl() }
+    single<AuthLocalDataSource> { AuthLocalDataSourceImpl(get()) }
     single<AuthRepository> { AuthRepositoryImpl(get()) }
 }
