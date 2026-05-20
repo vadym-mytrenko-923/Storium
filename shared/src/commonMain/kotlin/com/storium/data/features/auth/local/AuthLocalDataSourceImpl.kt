@@ -10,9 +10,7 @@ import kotlinx.coroutines.flow.Flow
 
 private val KEY_IS_LOGGED_IN = booleanPreferencesKey("is_logged_in")
 
-class AuthLocalDataSourceImpl(
-    private val dataStore: DataStore<Preferences>,
-) : AuthLocalDataSource {
+class AuthLocalDataSourceImpl(private val dataStore: DataStore<Preferences>) : AuthLocalDataSource {
     override val isLoggedInFlow: Flow<Boolean> = dataStore.getFlowValue(KEY_IS_LOGGED_IN, false)
 
     override suspend fun setIsLoggedIn(value: Boolean) = dataStore.putValue(KEY_IS_LOGGED_IN, value)
