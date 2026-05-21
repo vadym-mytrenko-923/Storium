@@ -17,23 +17,20 @@ import com.storium.ui.screens.main.MainScreen
 import kotlinx.coroutines.flow.StateFlow
 
 @Composable
-fun AppNavHost(isUserLoggedInFlow: StateFlow<Boolean>) {
+fun AppNavHost(isUserLoggedInFlow: StateFlow<Boolean?>) {
     val isUserLoggedIn by isUserLoggedInFlow.collectAsStateWithLifecycle()
-
-    // Stable start destination computed synchronously from the ViewModel's current value.
-    // This avoids a flash of the wrong screen — remember {} ensures it's only computed once.
-    val startDestination: AppNavRoute = remember {
-        if (isUserLoggedInFlow.value) AppNavRoute.Main else AppNavRoute.Login
-    }
-
+    val isLoggedIn = isUserLoggedIn ?: return
     val navController = rememberNavController()
 
-    // Track login state to detect actual transitions (login/logout), not recreation.
+    val startDestination: AppNavRoute = remember {
+        if (isUserLoggedInFlow.value == true) AppNavRoute.Main else AppNavRoute.Login
+    }
+
     var previousLoginState by rememberSaveable { mutableStateOf(startDestination == AppNavRoute.Main) }
-    LaunchedEffect(isUserLoggedIn) {
-        if (isUserLoggedIn != previousLoginState) {
-            previousLoginState = isUserLoggedIn
-            val targetRoute: AppNavRoute = if (isUserLoggedIn) AppNavRoute.Main else AppNavRoute.Login
+    LaunchedEffect(isLoggedIn) {
+        if (isLoggedIn != previousLoginState) {
+            previousLoginState = isLoggedIn
+            val targetRoute: AppNavRoute = if (isLoggedIn) AppNavRoute.Main else AppNavRoute.Login
             navController.navigate(targetRoute) {
                 popUpTo(0) { inclusive = true }
                 launchSingleTop = true

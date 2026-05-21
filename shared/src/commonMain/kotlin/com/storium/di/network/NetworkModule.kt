@@ -1,4 +1,4 @@
-package com.storium.di
+package com.storium.di.network
 
 import org.koin.dsl.module
 

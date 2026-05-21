@@ -45,6 +45,7 @@ kotlin {
             implementation(libs.compose.uiToolingPreview)
             implementation(libs.ktor.client.okhttp)
             implementation(libs.koin.android)
+            implementation(libs.tink.android)
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
