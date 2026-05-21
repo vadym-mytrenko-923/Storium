@@ -4,7 +4,7 @@
     <string name="loginTitle">Login</string>
     <string name="loginUsernameLabel">Username</string>
     <string name="loginPasswordLabel">Password</string>
-    <string name="loginUsernameError">Username should not be empty</string>
+    <string name="loginUsernameError">Username must be at least 4 characters</string>
     <string name="loginPasswordError">Password should not be empty</string>
     <string name="loginFailedError">Invalid username or password</string>
     <string name="loginBtnLogin">Login</string>

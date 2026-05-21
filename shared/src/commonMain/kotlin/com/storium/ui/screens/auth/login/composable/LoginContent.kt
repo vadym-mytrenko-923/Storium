@@ -7,15 +7,19 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import com.storium.ui.core.composable.button.BtnPrimary
 import com.storium.ui.core.composable.button.BtnTextPrimary
+import com.storium.ui.core.composable.icon.InputCheckIcon
 import com.storium.ui.core.composable.text.TextFieldPrimary
 import com.storium.ui.screens.auth.login.LoginIntent
 import com.storium.ui.screens.auth.login.LoginScreenState
@@ -69,8 +73,17 @@ fun LoginContent(
             value = state.username,
             onValueChange = { onIntent(LoginIntent.UsernameChanged(it)) },
             label = stringResource(Res.string.loginUsernameLabel),
-            isError = !state.validation.isUsernameValid,
+            isError = state.validation.showUsernameError,
             errorText = stringResource(Res.string.loginUsernameError),
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Text,
+                imeAction = ImeAction.Next,
+            ),
+            trailingIcon = if (state.validation.isUsernameValid) {
+                { InputCheckIcon() }
+            } else {
+                null
+            },
         )
 
         Spacer(modifier = Modifier.height(marginPrimary))
@@ -80,8 +93,17 @@ fun LoginContent(
             onValueChange = { onIntent(LoginIntent.PasswordChanged(it)) },
             label = stringResource(Res.string.loginPasswordLabel),
             visualTransformation = PasswordVisualTransformation(),
-            isError = !state.validation.isPasswordValid,
+            isError = state.validation.showPasswordError,
             errorText = stringResource(Res.string.loginPasswordError),
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Password,
+                imeAction = ImeAction.Done,
+            ),
+            trailingIcon = if (state.validation.isPasswordValid) {
+                { InputCheckIcon() }
+            } else {
+                null
+            },
         )
 
         Spacer(modifier = Modifier.height(marginPrimary2X))
@@ -104,7 +126,7 @@ fun LoginContent(
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 private fun LoginContentPreview() {
     StoriumTheme {
@@ -134,7 +156,7 @@ private fun LoginContentValidationErrorPreview() {
     StoriumTheme {
         LoginContent(
             state = LoginScreenState(
-                validation = LoginValidationResult(isUsernameValid = false, isPasswordValid = false),
+                validation = LoginValidationResult(showUsernameError = true, showPasswordError = true),
             ),
             onIntent = {},
             contentPadding = PaddingValues(marginZero),

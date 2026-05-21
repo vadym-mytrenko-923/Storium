@@ -9,6 +9,7 @@ val marginPrimaryHalf = 4.dp
 val marginPrimary = 8.dp
 val marginPrimary1_5X = 12.dp
 val marginPrimary2X = 16.dp
+val marginPrimary2_5X = 20.dp
 val marginPrimary3X = 24.dp
 val marginPrimary4X = 32.dp
 val marginPrimary5X = 40.dp
@@ -39,7 +40,7 @@ val textSizeLargest = 34.sp
 val textSizeLarge = 24.sp
 val textSizeMedium = 16.sp
 val textSizeNormal = 14.sp
-val textSizeSmall = 11.sp
+val textSizeSmall = 12.sp
 
 // Text line heights
 val textLineHeightLargest = 34.sp

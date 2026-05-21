@@ -8,11 +8,11 @@ import storium.shared.generated.resources.Res
 import storium.shared.generated.resources.errorNetwork
 import storium.shared.generated.resources.errorServer
 import storium.shared.generated.resources.errorUnknown
-import storium.shared.generated.resources.loginErrorFailed
+import storium.shared.generated.resources.loginFailedError
 
 class UiErrorParser {
     fun parseError(error: Throwable): UiError = when (error) {
-        is ClientRequestException -> UiError(messageResource = AppStringResource(Res.string.loginErrorFailed))
+        is ClientRequestException -> UiError(messageResource = AppStringResource(Res.string.loginFailedError))
         is ServerResponseException -> UiError(messageResource = AppStringResource(Res.string.errorServer))
         is kotlinx.io.IOException -> UiError(messageResource = AppStringResource(Res.string.errorNetwork))
         else -> UiError(messageResource = AppStringResource(Res.string.errorUnknown))

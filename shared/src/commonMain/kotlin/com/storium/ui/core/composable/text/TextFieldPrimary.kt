@@ -3,12 +3,15 @@ package com.storium.ui.core.composable.text
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsFocusedAsState
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -16,15 +19,19 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import com.storium.ui.theme.StoriumTheme
 import com.storium.ui.theme.appColors
 import com.storium.ui.theme.elevationInput
 import com.storium.ui.theme.inputHeight
+import com.storium.ui.theme.marginPrimary2X
+import com.storium.ui.theme.marginPrimary2_5X
 import com.storium.ui.theme.marginPrimaryHalf
 import com.storium.ui.theme.textFieldShapeDefault
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TextFieldPrimary(
     value: String,
@@ -35,18 +42,30 @@ fun TextFieldPrimary(
     isEnabled: Boolean = true,
     label: String = "",
     visualTransformation: VisualTransformation = VisualTransformation.None,
+    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     leadingIcon: @Composable (() -> Unit)? = null,
     trailingIcon: @Composable (() -> Unit)? = null,
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     val isFocused by interactionSource.collectIsFocusedAsState()
     val showLabelMinimized = value.isNotEmpty() || isFocused
+    val colors = TextFieldDefaults.colors(
+        focusedContainerColor = MaterialTheme.appColors.inputBackground,
+        unfocusedContainerColor = MaterialTheme.appColors.inputBackground,
+        disabledContainerColor = MaterialTheme.appColors.inputBackground,
+        errorContainerColor = MaterialTheme.appColors.inputBackground,
+        cursorColor = MaterialTheme.appColors.primary,
+        errorCursorColor = MaterialTheme.appColors.primary,
+        focusedIndicatorColor = Color.Transparent,
+        unfocusedIndicatorColor = Color.Transparent,
+        disabledIndicatorColor = Color.Transparent,
+        errorIndicatorColor = Color.Transparent,
+    )
 
     Column(modifier = modifier) {
-        TextField(
+        BasicTextField(
             value = value,
             onValueChange = onValueChange,
-            interactionSource = interactionSource,
             modifier = Modifier
                 .fillMaxWidth()
                 .height(inputHeight)
@@ -58,35 +77,51 @@ fun TextFieldPrimary(
                 ),
             singleLine = true,
             enabled = isEnabled,
-            isError = isError,
-            shape = textFieldShapeDefault,
+            interactionSource = interactionSource,
             visualTransformation = visualTransformation,
-            leadingIcon = leadingIcon,
-            trailingIcon = trailingIcon,
-            label = label.takeIf { it.isNotEmpty() }?.let {
-                {
-                    Text(
-                        text = label,
-                        style = if (showLabelMinimized) MaterialTheme.typography.bodySmall else MaterialTheme.typography.labelLarge,
-                        color = if (isError) MaterialTheme.appColors.error else MaterialTheme.appColors.textSecondary,
-                    )
-                }
-            },
+            keyboardOptions = keyboardOptions,
             textStyle = MaterialTheme.typography.labelLarge.copy(
                 color = MaterialTheme.appColors.textInput,
             ),
-            colors = TextFieldDefaults.colors(
-                focusedContainerColor = MaterialTheme.appColors.inputBackground,
-                unfocusedContainerColor = MaterialTheme.appColors.inputBackground,
-                disabledContainerColor = MaterialTheme.appColors.inputBackground,
-                errorContainerColor = MaterialTheme.appColors.inputBackground,
-                cursorColor = MaterialTheme.appColors.primary,
-                errorCursorColor = MaterialTheme.appColors.primary,
-                focusedIndicatorColor = Color.Transparent,
-                unfocusedIndicatorColor = Color.Transparent,
-                disabledIndicatorColor = Color.Transparent,
-                errorIndicatorColor = Color.Transparent,
-            ),
+            cursorBrush = SolidColor(MaterialTheme.appColors.primary),
+            decorationBox = { innerTextField ->
+                TextFieldDefaults.DecorationBox(
+                    value = value,
+                    innerTextField = innerTextField,
+                    enabled = isEnabled,
+                    singleLine = true,
+                    visualTransformation = visualTransformation,
+                    interactionSource = interactionSource,
+                    isError = isError,
+                    label = label.takeIf { it.isNotEmpty() }?.let {
+                        {
+                            Text(
+                                text = label,
+                                style = if (showLabelMinimized) {
+                                    MaterialTheme.typography.bodySmall
+                                } else {
+                                    MaterialTheme.typography.labelLarge
+                                },
+                                color = if (isError) {
+                                    MaterialTheme.appColors.error
+                                } else {
+                                    MaterialTheme.appColors.textSecondary
+                                },
+                            )
+                        }
+                    },
+                    leadingIcon = leadingIcon,
+                    trailingIcon = trailingIcon,
+                    shape = textFieldShapeDefault,
+                    colors = colors,
+                    contentPadding = PaddingValues(
+                        start = marginPrimary2_5X,
+                        end = marginPrimary2_5X,
+                        top = marginPrimary2X,
+                        bottom = marginPrimary2X,
+                    ),
+                )
+            },
         )
 
         if (isError && errorText != null) {
@@ -107,7 +142,7 @@ private fun TextFieldPrimaryEmptyPreview() {
         TextFieldPrimary(
             value = "",
             onValueChange = {},
-            label = "Email",
+            label = "Username",
         )
     }
 }
@@ -117,9 +152,9 @@ private fun TextFieldPrimaryEmptyPreview() {
 private fun TextFieldPrimaryFilledPreview() {
     StoriumTheme {
         TextFieldPrimary(
-            value = "john@example.com",
+            value = "emilys",
             onValueChange = {},
-            label = "Email",
+            label = "Username",
         )
     }
 }
@@ -129,11 +164,11 @@ private fun TextFieldPrimaryFilledPreview() {
 private fun TextFieldPrimaryErrorPreview() {
     StoriumTheme {
         TextFieldPrimary(
-            value = "john@ex",
+            value = "",
             onValueChange = {},
-            label = "Email",
+            label = "Username",
             isError = true,
-            errorText = "Not a valid email address",
+            errorText = "Username should not be empty",
         )
     }
 }

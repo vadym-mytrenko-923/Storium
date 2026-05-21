@@ -8,7 +8,7 @@ data class LoginScreenState(
     val isLoading: Boolean = false,
     val validation: LoginValidationResult = LoginValidationResult(),
 ) {
-    val isLoginButtonEnabled: Boolean get() = username.isNotBlank() && password.isNotEmpty() && !isLoading
+    val isLoginButtonEnabled: Boolean get() = validation.isValid && !isLoading
 }
 
 sealed interface LoginIntent {

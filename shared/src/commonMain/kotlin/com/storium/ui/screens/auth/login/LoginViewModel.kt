@@ -26,7 +26,7 @@ class LoginViewModel(
         updateUiState {
             copy(
                 username = value,
-                validation = if (!validation.isValid) loginValidator.validate(value, password) else validation,
+                validation = loginValidator.validate(value, password, validation),
             )
         }
     }
@@ -35,15 +35,13 @@ class LoginViewModel(
         updateUiState {
             copy(
                 password = value,
-                validation = if (!validation.isValid) loginValidator.validate(username, value) else validation,
+                validation = loginValidator.validate(username, value, validation),
             )
         }
     }
 
     private fun login() {
-        val validationResult = loginValidator.validate(currentState.username, currentState.password)
-        updateUiState { copy(validation = validationResult) }
-        if (!validationResult.isValid) return
+        if (!currentState.validation.isValid) return
 
         launchViewModelScope {
             updateUiState { copy(isLoading = true) }
