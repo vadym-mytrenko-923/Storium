@@ -8,7 +8,7 @@ private const val KEY_IS_LOGGED_IN = "is_logged_in"
 
 class UserStorageImpl(private val secureStorage: SecureStorage) : UserStorage {
     override val isLoggedInFlow: Flow<Boolean> = secureStorage.getFlowValue(KEY_IS_LOGGED_IN).map {
-        it?.toBooleanStrictOrNull() ?: true
+        it?.toBooleanStrictOrNull() ?: false
     }
 
     override suspend fun setIsLoggedIn(value: Boolean) = secureStorage.putValue(KEY_IS_LOGGED_IN, value.toString())
