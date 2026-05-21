@@ -19,7 +19,6 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import com.storium.ui.core.composable.button.BtnPrimary
 import com.storium.ui.core.composable.button.BtnTextPrimary
-import com.storium.ui.core.composable.icon.InputCheckIcon
 import com.storium.ui.core.composable.text.TextFieldPrimary
 import com.storium.ui.screens.auth.login.LoginIntent
 import com.storium.ui.screens.auth.login.LoginScreenState
@@ -72,16 +71,12 @@ fun LoginContent(
             onValueChange = { onIntent(LoginIntent.UsernameChanged(it)) },
             label = stringResource(Res.string.loginUsernameLabel),
             isError = state.validation.showUsernameError,
+            isValid = state.validation.isUsernameValid,
             errorText = stringResource(Res.string.loginUsernameError),
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Text,
                 imeAction = ImeAction.Next,
             ),
-            trailingIcon = if (state.validation.isUsernameValid) {
-                { InputCheckIcon() }
-            } else {
-                null
-            },
         )
 
         Spacer(modifier = Modifier.height(marginPrimary2X))
@@ -92,16 +87,12 @@ fun LoginContent(
             label = stringResource(Res.string.loginPasswordLabel),
             visualTransformation = PasswordVisualTransformation(),
             isError = state.validation.showPasswordError,
+            isValid = state.validation.isPasswordValid,
             errorText = stringResource(Res.string.loginPasswordError),
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Password,
                 imeAction = ImeAction.Done,
             ),
-            trailingIcon = if (state.validation.isPasswordValid) {
-                { InputCheckIcon() }
-            } else {
-                null
-            },
         )
 
         Spacer(modifier = Modifier.height(marginPrimary2X))

@@ -1,5 +1,6 @@
 package com.storium.ui.core.composable.text
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsFocusedAsState
 import androidx.compose.foundation.layout.Column
@@ -7,6 +8,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -22,14 +24,17 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
+import com.storium.ui.theme.AppIcons
 import com.storium.ui.theme.StoriumTheme
 import com.storium.ui.theme.appColors
+import com.storium.ui.theme.defaultIconSize
 import com.storium.ui.theme.elevationInput
 import com.storium.ui.theme.inputHeight
 import com.storium.ui.theme.marginPrimary2X
 import com.storium.ui.theme.marginPrimary2_5X
 import com.storium.ui.theme.marginPrimaryHalf
 import com.storium.ui.theme.textFieldShapeDefault
+import org.jetbrains.compose.resources.painterResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -38,6 +43,7 @@ fun TextFieldPrimary(
     onValueChange: (String) -> Unit,
     modifier: Modifier = Modifier,
     isError: Boolean = false,
+    isValid: Boolean = false,
     errorText: String? = null,
     isEnabled: Boolean = true,
     label: String = "",
@@ -49,6 +55,30 @@ fun TextFieldPrimary(
     val interactionSource = remember { MutableInteractionSource() }
     val isFocused by interactionSource.collectIsFocusedAsState()
     val showLabelMinimized = value.isNotEmpty() || isFocused
+    val displayTrailingIcon = trailingIcon ?: when {
+        isError -> {
+            {
+                Image(
+                    painter = painterResource(AppIcons.ErrorClose),
+                    contentDescription = null,
+                    modifier = Modifier.size(defaultIconSize),
+                )
+            }
+        }
+
+        isValid -> {
+            {
+                Image(
+                    painter = painterResource(AppIcons.InputCheck),
+                    contentDescription = null,
+                    modifier = Modifier.size(defaultIconSize),
+                )
+            }
+        }
+
+        else -> null
+    }
+
     val colors = TextFieldDefaults.colors(
         focusedContainerColor = MaterialTheme.appColors.inputBackground,
         unfocusedContainerColor = MaterialTheme.appColors.inputBackground,
@@ -111,7 +141,7 @@ fun TextFieldPrimary(
                         }
                     },
                     leadingIcon = leadingIcon,
-                    trailingIcon = trailingIcon,
+                    trailingIcon = displayTrailingIcon,
                     shape = textFieldShapeDefault,
                     colors = colors,
                     contentPadding = PaddingValues(
@@ -149,12 +179,13 @@ private fun TextFieldPrimaryEmptyPreview() {
 
 @Preview
 @Composable
-private fun TextFieldPrimaryFilledPreview() {
+private fun TextFieldPrimaryValidPreview() {
     StoriumTheme {
         TextFieldPrimary(
             value = "emilys",
             onValueChange = {},
             label = "Username",
+            isValid = true,
         )
     }
 }
