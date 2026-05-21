@@ -15,17 +15,17 @@ class LoginViewModel(
 
     override fun reduceIntent(intent: LoginIntent) {
         when (intent) {
-            is LoginIntent.EmailChanged -> onEmailChanged(intent.value)
+            is LoginIntent.UsernameChanged -> onUsernameChanged(intent.value)
             is LoginIntent.PasswordChanged -> onPasswordChanged(intent.value)
             is LoginIntent.LoginClicked -> login()
             is LoginIntent.ForgotPasswordClicked -> Unit
         }
     }
 
-    private fun onEmailChanged(value: String) {
+    private fun onUsernameChanged(value: String) {
         updateUiState {
             copy(
-                email = value,
+                username = value,
                 validation = if (!validation.isValid) loginValidator.validate(value, password) else validation,
             )
         }
@@ -35,19 +35,19 @@ class LoginViewModel(
         updateUiState {
             copy(
                 password = value,
-                validation = if (!validation.isValid) loginValidator.validate(email, value) else validation,
+                validation = if (!validation.isValid) loginValidator.validate(username, value) else validation,
             )
         }
     }
 
     private fun login() {
-        val validationResult = loginValidator.validate(currentState.email, currentState.password)
+        val validationResult = loginValidator.validate(currentState.username, currentState.password)
         updateUiState { copy(validation = validationResult) }
         if (!validationResult.isValid) return
 
         launchViewModelScope {
             updateUiState { copy(isLoading = true) }
-            loginUseCase(LoginParams(username = currentState.email, password = currentState.password))
+            loginUseCase(LoginParams(username = currentState.username, password = currentState.password))
                 .onSuccess {
                     setUserLoggedInUseCase()
                 }

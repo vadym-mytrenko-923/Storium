@@ -1,8 +1,8 @@
 package com.storium.ui.screens.auth.login
 
 data class LoginValidationResult(
-    val isEmailValid: Boolean = true,
+    val isUsernameValid: Boolean = true,
     val isPasswordValid: Boolean = true,
 ) {
-    val isValid: Boolean get() = isEmailValid && isPasswordValid
+    val isValid: Boolean get() = isUsernameValid && isPasswordValid
 }

@@ -31,13 +31,13 @@ import com.storium.ui.theme.marginZero
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import storium.shared.generated.resources.Res
-import storium.shared.generated.resources.inputEmailError
-import storium.shared.generated.resources.inputEmailLabel
-import storium.shared.generated.resources.inputPasswordError
-import storium.shared.generated.resources.inputPasswordLabel
 import storium.shared.generated.resources.loginBtnForgotPassword
 import storium.shared.generated.resources.loginBtnLogin
+import storium.shared.generated.resources.loginPasswordError
+import storium.shared.generated.resources.loginPasswordLabel
 import storium.shared.generated.resources.loginTitle
+import storium.shared.generated.resources.loginUsernameError
+import storium.shared.generated.resources.loginUsernameLabel
 
 @Composable
 fun LoginContent(
@@ -66,11 +66,11 @@ fun LoginContent(
         Spacer(modifier = Modifier.height(marginPrimary5X))
 
         TextFieldPrimary(
-            value = state.email,
-            onValueChange = { onIntent(LoginIntent.EmailChanged(it)) },
-            label = stringResource(Res.string.inputEmailLabel),
-            isError = !state.validation.isEmailValid,
-            errorText = stringResource(Res.string.inputEmailError),
+            value = state.username,
+            onValueChange = { onIntent(LoginIntent.UsernameChanged(it)) },
+            label = stringResource(Res.string.loginUsernameLabel),
+            isError = !state.validation.isUsernameValid,
+            errorText = stringResource(Res.string.loginUsernameError),
         )
 
         Spacer(modifier = Modifier.height(marginPrimary))
@@ -78,10 +78,10 @@ fun LoginContent(
         TextFieldPrimary(
             value = state.password,
             onValueChange = { onIntent(LoginIntent.PasswordChanged(it)) },
-            label = stringResource(Res.string.inputPasswordLabel),
+            label = stringResource(Res.string.loginPasswordLabel),
             visualTransformation = PasswordVisualTransformation(),
             isError = !state.validation.isPasswordValid,
-            errorText = stringResource(Res.string.inputPasswordError),
+            errorText = stringResource(Res.string.loginPasswordError),
         )
 
         Spacer(modifier = Modifier.height(marginPrimary2X))
@@ -121,7 +121,7 @@ private fun LoginContentPreview() {
 private fun LoginContentFilledPreview() {
     StoriumTheme {
         LoginContent(
-            state = LoginScreenState(email = "muffin.sweet@gmail.com", password = "password123"),
+            state = LoginScreenState(username = "emilys", password = "emilyspass"),
             onIntent = {},
             contentPadding = PaddingValues(marginZero),
         )
@@ -134,9 +134,7 @@ private fun LoginContentValidationErrorPreview() {
     StoriumTheme {
         LoginContent(
             state = LoginScreenState(
-                email = "invalid",
-                password = "12",
-                validation = LoginValidationResult(isEmailValid = false, isPasswordValid = false),
+                validation = LoginValidationResult(isUsernameValid = false, isPasswordValid = false),
             ),
             onIntent = {},
             contentPadding = PaddingValues(marginZero),

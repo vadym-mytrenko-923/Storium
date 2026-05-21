@@ -81,7 +81,7 @@ private fun LoginScreenLoadingContentPreview() {
 private fun LoginScreenContentFilledPreview() {
     StoriumTheme {
         LoginScreenContent(
-            state = LoginScreenState(email = "muffin.sweet@gmail.com", password = "password123"),
+            state = LoginScreenState(username = "emilys", password = "emilyspass"),
             onIntent = {},
         )
     }

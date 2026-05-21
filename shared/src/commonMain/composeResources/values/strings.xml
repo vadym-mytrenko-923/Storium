@@ -2,8 +2,11 @@
 <resources>
     <!-- Login Screen -->
     <string name="loginTitle">Login</string>
-    <string name="inputEmailLabel">Email</string>
-    <string name="inputPasswordLabel">Password</string>
+    <string name="loginUsernameLabel">Username</string>
+    <string name="loginPasswordLabel">Password</string>
+    <string name="loginUsernameError">Username should not be empty</string>
+    <string name="loginPasswordError">Password should not be empty</string>
+    <string name="loginFailedError">Invalid username or password</string>
     <string name="loginBtnLogin">Login</string>
     <string name="loginBtnForgotPassword">Forgot your password?</string>
 
@@ -11,11 +14,8 @@
     <string name="mainBtnLogout">Logout</string>
 
     <!-- Errors -->
-    <string name="errorLoginFailed">Invalid username or password</string>
     <string name="errorNetwork">No internet connection</string>
     <string name="errorServer">Server error. Please try again later</string>
     <string name="errorUnknown">Something went wrong</string>
     <string name="errorGenericOops">Oops!</string>
-    <string name="inputEmailError">Please enter a valid email</string>
-    <string name="inputPasswordError">Password should not be empty</string>
 </resources>
