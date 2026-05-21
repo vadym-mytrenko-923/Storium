@@ -8,6 +8,11 @@ import storium.shared.generated.resources.ic_nav_profile_active
 import storium.shared.generated.resources.ic_nav_profile_inactive
 import storium.shared.generated.resources.ic_nav_shop_active
 import storium.shared.generated.resources.ic_nav_shop_inactive
+import storium.shared.generated.resources.ic_search
+import storium.shared.generated.resources.ic_star_empty
+import storium.shared.generated.resources.ic_star_filled
+import storium.shared.generated.resources.ic_view_grid
+import storium.shared.generated.resources.ic_view_list
 
 object AppIcons {
     val ArrowRight = Res.drawable.ic_arrow_right
@@ -17,4 +22,9 @@ object AppIcons {
     val NavShopInactive = Res.drawable.ic_nav_shop_inactive
     val NavProfileActive = Res.drawable.ic_nav_profile_active
     val NavProfileInactive = Res.drawable.ic_nav_profile_inactive
+    val StarFilled = Res.drawable.ic_star_filled
+    val StarEmpty = Res.drawable.ic_star_empty
+    val Search = Res.drawable.ic_search
+    val ViewList = Res.drawable.ic_view_list
+    val ViewGrid = Res.drawable.ic_view_grid
 }

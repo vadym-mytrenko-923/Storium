@@ -26,6 +26,7 @@ val btnCornerRadius = 24.dp
 val circleRadius = 1000.dp
 
 // Icon sizes
+val ratingStarSize = 14.dp
 val smallIconSize = 16.dp
 val defaultIconSize = 24.dp
 val largeIconSize = 32.dp
@@ -35,18 +36,24 @@ val buttonHeight = 48.dp
 val inputHeight = 64.dp
 val searchBarHeight = 48.dp
 val bottomNavIconSize = 30.dp
-val productCardImageHeight = 160.dp
+val productListImageWidth = 104.dp
+val productCardImageHeight = 184.dp
+val discountChipHeight = 24.dp
+val discountChipPadding = 6.dp
 val categoryChipHeight = 36.dp
 
 // Text sizes
 val textSizeLargest = 34.sp
 val textSizeLarge = 24.sp
+val textSizeToolbar = 18.sp
 val textSizeMedium = 16.sp
 val textSizeNormal = 14.sp
 val textSizeSmall = 12.sp
+val textSizeTiny = 10.sp
 
 // Text line heights
 val textLineHeightLargest = 34.sp
+val textLineHeightToolbar = 22.sp
 val textLineHeightLarge = 28.8.sp
 val textLineHeightMedium = 16.sp
 val textLineHeightNormal = 20.sp
