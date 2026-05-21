@@ -27,10 +27,9 @@ import com.storium.ui.screens.auth.login.LoginValidationResult
 import com.storium.ui.theme.AppIcons
 import com.storium.ui.theme.StoriumTheme
 import com.storium.ui.theme.appColors
-import com.storium.ui.theme.marginPrimary
 import com.storium.ui.theme.marginPrimary2X
 import com.storium.ui.theme.marginPrimary4X
-import com.storium.ui.theme.marginPrimary5X
+import com.storium.ui.theme.marginPrimary9X
 import com.storium.ui.theme.marginZero
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -52,14 +51,13 @@ fun LoginContent(
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .padding(horizontal = marginPrimary2X)
             .padding(
                 top = contentPadding.calculateTopPadding(),
-                bottom = contentPadding.calculateBottomPadding(),
-                start = marginPrimary2X,
-                end = marginPrimary2X,
+                bottom = contentPadding.calculateBottomPadding()
             ),
     ) {
-        Spacer(modifier = Modifier.height(marginPrimary2X))
+        Spacer(modifier = Modifier.height(marginPrimary4X))
 
         Text(
             text = stringResource(Res.string.loginTitle),
@@ -67,7 +65,7 @@ fun LoginContent(
             color = MaterialTheme.appColors.textPrimary,
         )
 
-        Spacer(modifier = Modifier.height(marginPrimary5X))
+        Spacer(modifier = Modifier.height(marginPrimary9X))
 
         TextFieldPrimary(
             value = state.username,
@@ -86,7 +84,7 @@ fun LoginContent(
             },
         )
 
-        Spacer(modifier = Modifier.height(marginPrimary))
+        Spacer(modifier = Modifier.height(marginPrimary2X))
 
         TextFieldPrimary(
             value = state.password,

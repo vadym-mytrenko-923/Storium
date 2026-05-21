@@ -14,6 +14,8 @@ val marginPrimary3X = 24.dp
 val marginPrimary4X = 32.dp
 val marginPrimary5X = 40.dp
 val marginPrimary6X = 48.dp
+val marginPrimary8X = 64.dp
+val marginPrimary9X = 72.dp
 
 // Radii
 val inputRadius = 4.dp
