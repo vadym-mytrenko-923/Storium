@@ -1,9 +1,9 @@
-package com.storium.data.features.auth.mapper
+package com.storium.data.features.user.mapper
 
-import com.storium.data.features.auth.remote.model.LoginResponseDto
 import com.storium.data.features.user.local.model.UserData
+import com.storium.domain.features.auth.model.User
 
-fun LoginResponseDto.toDataModel(): UserData = UserData(
+fun UserData.toDomainModel(): User = User(
     id = id,
     username = username,
     email = email,

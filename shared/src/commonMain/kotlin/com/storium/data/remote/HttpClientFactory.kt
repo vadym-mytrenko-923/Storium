@@ -10,18 +10,13 @@ import io.ktor.client.plugins.logging.Logging
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 
-fun createHttpClient(appLogger: AppLogger): HttpClient = HttpClient {
+fun createHttpClient(json: Json, appLogger: AppLogger): HttpClient = HttpClient {
     expectSuccess = true
     defaultRequest {
         url(ApiConstants.BASE_URL)
     }
     install(ContentNegotiation) {
-        json(
-            Json {
-                ignoreUnknownKeys = true
-                isLenient = true
-            }
-        )
+        json(json)
     }
     install(Logging) {
         logger = HttpLogger(appLogger)

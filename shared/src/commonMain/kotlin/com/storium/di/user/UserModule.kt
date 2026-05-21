@@ -10,7 +10,7 @@ import org.koin.dsl.module
 
 val userModule = module {
     // Storage
-    single<UserStorage> { UserStorageImpl(get(named(USER_STORAGE_NAME))) }
+    single<UserStorage> { UserStorageImpl(get(named(USER_STORAGE_NAME)), get()) }
 
     // Data Sources
     single<UserLocalDataSource> { UserLocalDataSourceImpl(get()) }
