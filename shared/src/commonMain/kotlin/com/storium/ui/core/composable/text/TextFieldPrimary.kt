@@ -34,7 +34,6 @@ fun TextFieldPrimary(
     leadingIcon: @Composable (() -> Unit)? = null,
     trailingIcon: @Composable (() -> Unit)? = null,
 ) {
-    val hasError = isError || errorText != null
     val hasText = value.isNotEmpty()
 
     Column(modifier = modifier) {
@@ -52,7 +51,7 @@ fun TextFieldPrimary(
                 ),
             singleLine = true,
             enabled = isEnabled,
-            isError = hasError,
+            isError = isError,
             shape = textFieldShapeDefault,
             visualTransformation = visualTransformation,
             leadingIcon = leadingIcon,
@@ -60,9 +59,9 @@ fun TextFieldPrimary(
             label = label.takeIf { it.isNotEmpty() }?.let {
                 {
                     Text(
-                        text = errorText.takeIf { hasError && !it.isNullOrBlank() } ?: label,
+                        text = label,
                         style = if (hasText) MaterialTheme.typography.bodySmall else MaterialTheme.typography.labelLarge,
-                        color = if (hasError) MaterialTheme.appColors.error else MaterialTheme.appColors.textSecondary
+                        color = if (isError) MaterialTheme.appColors.error else MaterialTheme.appColors.textSecondary,
                     )
                 }
             },
@@ -83,9 +82,9 @@ fun TextFieldPrimary(
             ),
         )
 
-        errorText?.let {
+        if (isError && errorText != null) {
             Text(
-                text = it,
+                text = errorText,
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.appColors.error,
                 modifier = Modifier.padding(start = marginPrimaryHalf, top = marginPrimaryHalf),

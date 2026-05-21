@@ -4,6 +4,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 // Margins
+val marginZero = 0.dp
 val marginPrimaryHalf = 4.dp
 val marginPrimary = 8.dp
 val marginPrimary1_5X = 12.dp
@@ -47,6 +48,10 @@ val textLineHeightMedium = 16.sp
 val textLineHeightNormal = 20.sp
 val textLineHeightNormalExpanded = 21.sp
 val textLineHeightSmall = 11.sp
+
+// Alert
+val alertContainerRadius = 24.dp
+val appAlertSwipeThresholdSize = 48.dp
 
 // Elevation
 val elevationInput = 8.dp
