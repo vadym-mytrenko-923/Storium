@@ -1,4 +1,4 @@
-package com.storium.ui.screens.auth.login
+package com.storium.ui.screens.auth.login.validation
 
 private const val MIN_USERNAME_LENGTH = 4
 

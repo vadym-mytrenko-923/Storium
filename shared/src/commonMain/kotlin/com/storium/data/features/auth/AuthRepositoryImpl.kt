@@ -22,7 +22,7 @@ class AuthRepositoryImpl(
         return userData.toDomainModel()
     }
 
-    override suspend fun setLoggedIn(value: Boolean) = userLocalDataSource.setIsLoggedIn(value)
+    override suspend fun setUserLoggedIn() = userLocalDataSource.setIsLoggedIn(true)
 
     override suspend fun logout() = userLocalDataSource.clear()
 }

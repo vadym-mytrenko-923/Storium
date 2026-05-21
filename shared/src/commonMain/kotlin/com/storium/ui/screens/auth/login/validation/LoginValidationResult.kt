@@ -1,4 +1,4 @@
-package com.storium.ui.screens.auth.login
+package com.storium.ui.screens.auth.login.validation
 
 data class LoginValidationResult(
     val isUsernameValid: Boolean = false,

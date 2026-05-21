@@ -5,6 +5,7 @@ import com.storium.domain.features.auth.usecase.LoginUseCase
 import com.storium.domain.features.auth.usecase.SetUserLoggedInUseCase
 import com.storium.ui.base.BaseViewModel
 import com.storium.ui.core.error.UiErrorParser
+import com.storium.ui.screens.auth.login.validation.LoginValidator
 
 class LoginViewModel(
     private val loginUseCase: LoginUseCase,

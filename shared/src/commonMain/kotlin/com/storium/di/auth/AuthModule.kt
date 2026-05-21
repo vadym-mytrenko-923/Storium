@@ -8,8 +8,8 @@ import com.storium.domain.features.auth.usecase.IsUserLoggedInFlowUseCase
 import com.storium.domain.features.auth.usecase.LoginUseCase
 import com.storium.domain.features.auth.usecase.LogoutUseCase
 import com.storium.domain.features.auth.usecase.SetUserLoggedInUseCase
-import com.storium.ui.screens.auth.login.LoginValidator
 import com.storium.ui.screens.auth.login.LoginViewModel
+import com.storium.ui.screens.auth.login.validation.LoginValidator
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 

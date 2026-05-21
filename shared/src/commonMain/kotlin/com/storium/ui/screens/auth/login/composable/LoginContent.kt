@@ -22,7 +22,7 @@ import com.storium.ui.core.composable.button.BtnTextPrimary
 import com.storium.ui.core.composable.text.TextFieldPrimary
 import com.storium.ui.screens.auth.login.LoginIntent
 import com.storium.ui.screens.auth.login.LoginScreenState
-import com.storium.ui.screens.auth.login.LoginValidationResult
+import com.storium.ui.screens.auth.login.validation.LoginValidationResult
 import com.storium.ui.theme.AppIcons
 import com.storium.ui.theme.StoriumTheme
 import com.storium.ui.theme.appColors

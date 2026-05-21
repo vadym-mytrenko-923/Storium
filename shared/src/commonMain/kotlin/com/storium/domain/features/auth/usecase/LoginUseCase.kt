@@ -6,9 +6,7 @@ import com.storium.domain.features.auth.AuthRepository
 import com.storium.domain.features.auth.model.LoginParams
 import com.storium.domain.features.auth.model.User
 
-class LoginUseCase(
-    private val repository: AuthRepository,
-) : BaseUseCase<LoginParams, Result<User>>() {
+class LoginUseCase(private val repository: AuthRepository) : BaseUseCase<LoginParams, Result<User>>() {
     override suspend fun execute(parameters: LoginParams): Result<User> = useResultWrapper {
         repository.login(parameters)
     }

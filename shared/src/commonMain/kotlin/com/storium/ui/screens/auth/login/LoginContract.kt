@@ -1,6 +1,7 @@
 package com.storium.ui.screens.auth.login
 
 import com.storium.ui.core.error.model.UiError
+import com.storium.ui.screens.auth.login.validation.LoginValidationResult
 
 data class LoginScreenState(
     val username: String = "",
