@@ -1,3 +1,5 @@
 package com.storium.di
 
-fun initKoinIos() = initKoin(platformModules = listOf(iosModule))
+import com.storium.di.storage.storageModule
+
+fun initKoinIos() = initKoin(platformModules = listOf(storageModule))
