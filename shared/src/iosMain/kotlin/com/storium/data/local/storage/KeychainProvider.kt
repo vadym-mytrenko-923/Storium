@@ -10,9 +10,9 @@ import kotlinx.cinterop.ptr
 import kotlinx.cinterop.value
 import platform.CoreFoundation.CFDictionaryAddValue
 import platform.CoreFoundation.CFDictionaryCreateMutable
-import platform.CoreFoundation.CFMutableDictionaryRef
 import platform.CoreFoundation.CFTypeRefVar
 import platform.CoreFoundation.kCFAllocatorDefault
+import platform.CoreFoundation.kCFBooleanTrue
 import platform.Foundation.CFBridgingRelease
 import platform.Foundation.CFBridgingRetain
 import platform.Foundation.NSData
@@ -36,6 +36,8 @@ import platform.Security.kSecMatchLimitOne
 import platform.Security.kSecReturnData
 import platform.Security.kSecValueData
 
+private const val KEYCHAIN_SERVICE_PREFIX = "com.storium"
+
 interface KeychainProvider {
     fun get(key: String): String?
     fun set(key: String, value: String)
@@ -43,11 +45,15 @@ interface KeychainProvider {
     fun deleteAll()
 }
 
-class KeychainProviderImpl(private val serviceName: String) : KeychainProvider {
+class KeychainProviderImpl(name: String) : KeychainProvider {
+    private val serviceName = "$KEYCHAIN_SERVICE_PREFIX.$name"
 
     override fun get(key: String): String? = memScoped {
-        val query = itemQuery(key) ?: return null
-        CFDictionaryAddValue(query, kSecReturnData, CFBridgingRetain(true as Any))
+        val query = CFDictionaryCreateMutable(kCFAllocatorDefault, 6, null, null) ?: return null
+        CFDictionaryAddValue(query, kSecClass, kSecClassGenericPassword)
+        CFDictionaryAddValue(query, kSecAttrService, CFBridgingRetain(serviceName))
+        CFDictionaryAddValue(query, kSecAttrAccount, CFBridgingRetain(key))
+        CFDictionaryAddValue(query, kSecReturnData, kCFBooleanTrue)
         CFDictionaryAddValue(query, kSecMatchLimit, kSecMatchLimitOne)
 
         val result = alloc<CFTypeRefVar>()
@@ -58,43 +64,41 @@ class KeychainProviderImpl(private val serviceName: String) : KeychainProvider {
     }
 
     override fun set(key: String, value: String) {
-        val valueData = value.toNSData() ?: return
-        val query = itemQuery(key) ?: return
-        val attributes = valueAttributes(valueData) ?: return
+        val valueData = NSString.create(string = value).dataUsingEncoding(NSUTF8StringEncoding) ?: return
 
-        val status = SecItemUpdate(query, attributes)
-        if (status != errSecSuccess) {
-            CFDictionaryAddValue(query, kSecValueData, CFBridgingRetain(valueData))
-            SecItemAdd(query, null)
+        // Try to update the data first
+        val lookupQuery = CFDictionaryCreateMutable(kCFAllocatorDefault, 3, null, null) ?: return
+        CFDictionaryAddValue(lookupQuery, kSecClass, kSecClassGenericPassword)
+        CFDictionaryAddValue(lookupQuery, kSecAttrService, CFBridgingRetain(serviceName))
+        CFDictionaryAddValue(lookupQuery, kSecAttrAccount, CFBridgingRetain(key))
+
+        val updateAttrs = CFDictionaryCreateMutable(kCFAllocatorDefault, 1, null, null) ?: return
+        CFDictionaryAddValue(updateAttrs, kSecValueData, CFBridgingRetain(valueData))
+
+        if (SecItemUpdate(lookupQuery, updateAttrs) != errSecSuccess) {
+            val addQuery = CFDictionaryCreateMutable(kCFAllocatorDefault, 5, null, null)
+            CFDictionaryAddValue(addQuery, kSecClass, kSecClassGenericPassword)
+            CFDictionaryAddValue(addQuery, kSecAttrService, CFBridgingRetain(serviceName))
+            CFDictionaryAddValue(addQuery, kSecAttrAccount, CFBridgingRetain(key))
+            CFDictionaryAddValue(addQuery, kSecAttrAccessible, kSecAttrAccessibleWhenUnlockedThisDeviceOnly)
+            CFDictionaryAddValue(addQuery, kSecValueData, CFBridgingRetain(valueData))
+
+            addQuery?.let { SecItemAdd(it, null) }
         }
     }
 
     override fun delete(key: String) {
-        val query = itemQuery(key) ?: return
+        val query = CFDictionaryCreateMutable(kCFAllocatorDefault, 3, null, null) ?: return
+        CFDictionaryAddValue(query, kSecClass, kSecClassGenericPassword)
+        CFDictionaryAddValue(query, kSecAttrService, CFBridgingRetain(serviceName))
+        CFDictionaryAddValue(query, kSecAttrAccount, CFBridgingRetain(key))
         SecItemDelete(query)
     }
 
     override fun deleteAll() {
-        val query = serviceQuery() ?: return
+        val query = CFDictionaryCreateMutable(kCFAllocatorDefault, 2, null, null) ?: return
+        CFDictionaryAddValue(query, kSecClass, kSecClassGenericPassword)
+        CFDictionaryAddValue(query, kSecAttrService, CFBridgingRetain(serviceName))
         SecItemDelete(query)
     }
-
-    private fun serviceQuery(): CFMutableDictionaryRef? =
-        CFDictionaryCreateMutable(kCFAllocatorDefault, 2, null, null)?.apply {
-            CFDictionaryAddValue(this, kSecClass, kSecClassGenericPassword)
-            CFDictionaryAddValue(this, kSecAttrService, CFBridgingRetain(serviceName as Any))
-        }
-
-    private fun itemQuery(key: String): CFMutableDictionaryRef? =
-        serviceQuery()?.apply {
-            CFDictionaryAddValue(this, kSecAttrAccount, CFBridgingRetain(key as Any))
-            CFDictionaryAddValue(this, kSecAttrAccessible, kSecAttrAccessibleWhenUnlockedThisDeviceOnly)
-        }
-
-    private fun valueAttributes(data: NSData): CFMutableDictionaryRef? =
-        CFDictionaryCreateMutable(kCFAllocatorDefault, 1, null, null)?.apply {
-            CFDictionaryAddValue(this, kSecValueData, CFBridgingRetain(data))
-        }
-
-    private fun String.toNSData(): NSData? = NSString.create(string = this).dataUsingEncoding(NSUTF8StringEncoding)
 }

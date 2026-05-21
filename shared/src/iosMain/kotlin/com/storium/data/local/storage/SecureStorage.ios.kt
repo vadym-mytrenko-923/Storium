@@ -4,9 +4,7 @@ import com.storium.data.local.SecureStorage
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 
-fun createSecureStorage(name: String): SecureStorage = KeychainSecureStorage(KeychainProviderImpl(serviceName = "com.storium.$name"))
-
-private class KeychainSecureStorage(private val keychain: KeychainProvider) : SecureStorage {
+class KeychainSecureStorage(private val keychain: KeychainProvider) : SecureStorage {
     private val flows = mutableMapOf<String, MutableStateFlow<String?>>()
 
     override fun getFlowValue(key: String): Flow<String?> = getOrCreateFlow(key)

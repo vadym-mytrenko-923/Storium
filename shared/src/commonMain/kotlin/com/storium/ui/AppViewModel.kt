@@ -8,9 +8,9 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
 
 class AppViewModel(isUserLoggedInFlowUseCase: IsUserLoggedInFlowUseCase) : ViewModel() {
-    val isUserLoggedInFlow: StateFlow<Boolean> = isUserLoggedInFlowUseCase().stateIn(
+    val isUserLoggedInFlow: StateFlow<Boolean?> = isUserLoggedInFlowUseCase().stateIn(
         scope = viewModelScope,
         started = SharingStarted.Eagerly,
-        initialValue = false
+        initialValue = null,
     )
 }
