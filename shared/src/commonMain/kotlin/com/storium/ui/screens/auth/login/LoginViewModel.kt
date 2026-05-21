@@ -18,6 +18,7 @@ class LoginViewModel(
             is LoginIntent.UsernameChanged -> onUsernameChanged(intent.value)
             is LoginIntent.PasswordChanged -> onPasswordChanged(intent.value)
             is LoginIntent.LoginClicked -> login()
+            // TODO: implement forgot password screen
             is LoginIntent.ForgotPasswordClicked -> Unit
         }
     }
