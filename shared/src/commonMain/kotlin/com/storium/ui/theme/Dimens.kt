@@ -5,6 +5,7 @@ import androidx.compose.ui.unit.sp
 
 // Margins
 val marginZero = 0.dp
+val marginPrimaryQuarter = 2.dp
 val marginPrimaryHalf = 4.dp
 val marginPrimary = 8.dp
 val marginPrimary1_5X = 12.dp
@@ -33,7 +34,7 @@ val largeIconSize = 32.dp
 val buttonHeight = 48.dp
 val inputHeight = 64.dp
 val searchBarHeight = 48.dp
-val bottomNavHeight = 64.dp
+val bottomNavIconSize = 30.dp
 val productCardImageHeight = 160.dp
 val categoryChipHeight = 36.dp
 

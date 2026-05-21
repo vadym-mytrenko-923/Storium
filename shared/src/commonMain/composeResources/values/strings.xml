@@ -11,7 +11,15 @@
     <string name="loginBtnForgotPassword">Forgot your password?</string>
 
     <!-- Main Screen -->
-    <string name="mainBtnLogout">Logout</string>
+    <string name="mainNavShop">Shop</string>
+    <string name="mainNavProfile">Profile</string>
+
+    <!-- Shop Screen -->
+    <string name="shopTitle">Shop</string>
+
+    <!-- Profile Screen -->
+    <string name="profileTitle">Profile</string>
+    <string name="profileBtnLogout">Logout</string>
 
     <!-- Errors -->
     <string name="errorNetwork">No internet connection</string>
