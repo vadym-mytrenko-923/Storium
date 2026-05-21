@@ -31,6 +31,10 @@ object AppColorsLight {
     val BottomNavActive = Color(0xFFDB3022)
     val BottomNavInactive = Color(0xFF9B9B9B)
     val Divider = Color(0xFFE0E0E0)
+    val TextPrimaryOnDark = Color(0xFFFFFFFF)
+    val IconOnDark = Color(0xFFFFFFFF)
+    val BackgroundSuccess = Color(0xFF61D782)
+    val FullscreenLoaderBackground = Color(0x80000000)
 }
 
 object AppColorsDark {
@@ -61,6 +65,10 @@ object AppColorsDark {
     val BottomNavActive = Color(0xFFEF5350)
     val BottomNavInactive = Color(0xFF9B9B9B)
     val Divider = Color(0xFF333333)
+    val TextPrimaryOnDark = Color(0xFFFFFFFF)
+    val IconOnDark = Color(0xFFFFFFFF)
+    val BackgroundSuccess = Color(0xFF4CAF50)
+    val FullscreenLoaderBackground = Color(0x80000000)
 }
 
 @Immutable
@@ -92,6 +100,10 @@ data class AppColorsScheme(
     val bottomNavActive: Color = Color.Unspecified,
     val bottomNavInactive: Color = Color.Unspecified,
     val divider: Color = Color.Unspecified,
+    val textPrimaryOnDark: Color = Color.Unspecified,
+    val iconOnDark: Color = Color.Unspecified,
+    val backgroundSuccess: Color = Color.Unspecified,
+    val fullscreenLoaderBackground: Color = Color.Unspecified,
 )
 
 val LightAppColorsScheme = AppColorsScheme(
@@ -122,6 +134,10 @@ val LightAppColorsScheme = AppColorsScheme(
     bottomNavActive = AppColorsLight.BottomNavActive,
     bottomNavInactive = AppColorsLight.BottomNavInactive,
     divider = AppColorsLight.Divider,
+    textPrimaryOnDark = AppColorsLight.TextPrimaryOnDark,
+    iconOnDark = AppColorsLight.IconOnDark,
+    backgroundSuccess = AppColorsLight.BackgroundSuccess,
+    fullscreenLoaderBackground = AppColorsLight.FullscreenLoaderBackground,
 )
 
 val DarkAppColorsScheme = AppColorsScheme(
@@ -152,4 +168,8 @@ val DarkAppColorsScheme = AppColorsScheme(
     bottomNavActive = AppColorsDark.BottomNavActive,
     bottomNavInactive = AppColorsDark.BottomNavInactive,
     divider = AppColorsDark.Divider,
+    textPrimaryOnDark = AppColorsDark.TextPrimaryOnDark,
+    iconOnDark = AppColorsDark.IconOnDark,
+    backgroundSuccess = AppColorsDark.BackgroundSuccess,
+    fullscreenLoaderBackground = AppColorsDark.FullscreenLoaderBackground,
 )

@@ -4,7 +4,6 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.stringPreferencesKey
 import com.google.crypto.tink.Aead
-import com.storium.data.local.SecureStorage
 import kotlinx.coroutines.flow.Flow
 
 class DataStoreSecureStorage(

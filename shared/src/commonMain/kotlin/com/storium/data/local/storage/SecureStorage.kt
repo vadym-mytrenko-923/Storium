@@ -1,4 +1,4 @@
-package com.storium.data.local
+package com.storium.data.local.storage
 
 import kotlinx.coroutines.flow.Flow
 
