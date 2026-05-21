@@ -1,7 +1,7 @@
 package com.storium.data.features.user.local
 
 import com.storium.data.features.user.local.model.UserData
-import com.storium.data.local.storage.user.UserStorage
+import com.storium.data.features.user.local.storage.UserStorage
 import kotlinx.coroutines.flow.Flow
 
 class UserLocalDataSourceImpl(private val userStorage: UserStorage) : UserLocalDataSource {

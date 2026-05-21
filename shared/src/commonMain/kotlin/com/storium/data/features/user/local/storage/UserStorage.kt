@@ -1,4 +1,4 @@
-package com.storium.data.local.storage.user
+package com.storium.data.features.user.local.storage
 
 import com.storium.data.features.user.local.model.UserData
 import kotlinx.coroutines.flow.Flow

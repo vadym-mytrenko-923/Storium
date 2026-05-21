@@ -1,8 +1,6 @@
 package com.storium.di.auth
 
 import com.storium.data.features.auth.AuthRepositoryImpl
-import com.storium.data.features.auth.remote.api.AuthApi
-import com.storium.data.features.auth.remote.api.AuthApiImpl
 import com.storium.data.features.auth.remote.source.AuthRemoteDataSource
 import com.storium.data.features.auth.remote.source.AuthRemoteDataSourceImpl
 import com.storium.domain.features.auth.AuthRepository
@@ -16,9 +14,6 @@ import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 
 val authModule = module {
-    // API
-    single<AuthApi> { AuthApiImpl(get()) }
-
     // Data Sources
     single<AuthRemoteDataSource> { AuthRemoteDataSourceImpl(get()) }
 

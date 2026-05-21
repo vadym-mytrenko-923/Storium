@@ -1,10 +1,10 @@
-package com.storium.data.local.storage.user
+package com.storium.data.features.user.local.storage
 
 import com.storium.data.features.user.local.model.UserData
-import com.storium.data.local.SecureStorage
-import com.storium.data.local.getJsonFlowValue
-import com.storium.data.local.getJsonValue
-import com.storium.data.local.putJsonValue
+import com.storium.data.local.storage.SecureStorage
+import com.storium.data.local.storage.getJsonFlowValue
+import com.storium.data.local.storage.getJsonValue
+import com.storium.data.local.storage.putJsonValue
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.serialization.json.Json

@@ -1,8 +1,8 @@
 package com.storium.di.storage
 
-import com.storium.data.local.APP_STORAGE_NAME
-import com.storium.data.local.SecureStorage
-import com.storium.data.local.USER_STORAGE_NAME
+import com.storium.data.local.storage.APP_STORAGE_NAME
+import com.storium.data.local.storage.SecureStorage
+import com.storium.data.local.storage.USER_STORAGE_NAME
 import com.storium.data.local.storage.KeychainProvider
 import com.storium.data.local.storage.KeychainProviderImpl
 import com.storium.data.local.storage.KeychainSecureStorage
