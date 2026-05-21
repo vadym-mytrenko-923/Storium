@@ -7,7 +7,7 @@ import org.koin.android.ext.koin.androidContext
 class StoriumApp : Application() {
     override fun onCreate() {
         super.onCreate()
-        initKoin().apply {
+        initKoin {
             androidContext(this@StoriumApp)
         }
     }
