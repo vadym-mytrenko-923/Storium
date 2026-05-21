@@ -1,11 +1,11 @@
 package com.storium.di.storage
 
 import com.storium.data.local.storage.APP_STORAGE_NAME
-import com.storium.data.local.storage.SecureStorage
-import com.storium.data.local.storage.USER_STORAGE_NAME
 import com.storium.data.local.storage.KeychainProvider
 import com.storium.data.local.storage.KeychainProviderImpl
 import com.storium.data.local.storage.KeychainSecureStorage
+import com.storium.data.local.storage.SecureStorage
+import com.storium.data.local.storage.USER_STORAGE_NAME
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
