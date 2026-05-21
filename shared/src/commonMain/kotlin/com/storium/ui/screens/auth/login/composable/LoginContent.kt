@@ -1,6 +1,5 @@
 package com.storium.ui.screens.auth.login.composable
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
@@ -17,7 +16,6 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import com.storium.ui.core.composable.button.BtnPrimary
 import com.storium.ui.core.composable.button.BtnTextPrimary
-import com.storium.ui.core.composable.other.FullscreenProgressIndicator
 import com.storium.ui.core.composable.text.TextFieldPrimary
 import com.storium.ui.screens.auth.login.LoginIntent
 import com.storium.ui.screens.auth.login.LoginScreenState
@@ -46,70 +44,63 @@ fun LoginContent(
     state: LoginScreenState,
     onIntent: (LoginIntent) -> Unit,
     contentPadding: PaddingValues,
-    modifier: Modifier = Modifier,
 ) {
-    Box(modifier = modifier.fillMaxSize()) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(
-                    top = contentPadding.calculateTopPadding(),
-                    bottom = contentPadding.calculateBottomPadding(),
-                    start = marginPrimary2X,
-                    end = marginPrimary2X,
-                ),
-        ) {
-            Spacer(modifier = Modifier.height(marginPrimary2X))
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(
+                top = contentPadding.calculateTopPadding(),
+                bottom = contentPadding.calculateBottomPadding(),
+                start = marginPrimary2X,
+                end = marginPrimary2X,
+            ),
+    ) {
+        Spacer(modifier = Modifier.height(marginPrimary2X))
 
-            Text(
-                text = stringResource(Res.string.loginTitle),
-                style = MaterialTheme.typography.headlineLarge,
-                color = MaterialTheme.appColors.textPrimary,
-            )
+        Text(
+            text = stringResource(Res.string.loginTitle),
+            style = MaterialTheme.typography.headlineLarge,
+            color = MaterialTheme.appColors.textPrimary,
+        )
 
-            Spacer(modifier = Modifier.height(marginPrimary5X))
+        Spacer(modifier = Modifier.height(marginPrimary5X))
 
-            TextFieldPrimary(
-                value = state.email,
-                onValueChange = { onIntent(LoginIntent.EmailChanged(it)) },
-                label = stringResource(Res.string.inputEmailLabel),
-                isError = !state.validation.isEmailValid,
-                errorText = stringResource(Res.string.inputEmailError),
-            )
+        TextFieldPrimary(
+            value = state.email,
+            onValueChange = { onIntent(LoginIntent.EmailChanged(it)) },
+            label = stringResource(Res.string.inputEmailLabel),
+            isError = !state.validation.isEmailValid,
+            errorText = stringResource(Res.string.inputEmailError),
+        )
 
-            Spacer(modifier = Modifier.height(marginPrimary))
+        Spacer(modifier = Modifier.height(marginPrimary))
 
-            TextFieldPrimary(
-                value = state.password,
-                onValueChange = { onIntent(LoginIntent.PasswordChanged(it)) },
-                label = stringResource(Res.string.inputPasswordLabel),
-                visualTransformation = PasswordVisualTransformation(),
-                isError = !state.validation.isPasswordValid,
-                errorText = stringResource(Res.string.inputPasswordError),
-            )
+        TextFieldPrimary(
+            value = state.password,
+            onValueChange = { onIntent(LoginIntent.PasswordChanged(it)) },
+            label = stringResource(Res.string.inputPasswordLabel),
+            visualTransformation = PasswordVisualTransformation(),
+            isError = !state.validation.isPasswordValid,
+            errorText = stringResource(Res.string.inputPasswordError),
+        )
 
-            Spacer(modifier = Modifier.height(marginPrimary2X))
+        Spacer(modifier = Modifier.height(marginPrimary2X))
 
-            BtnTextPrimary(
-                text = stringResource(Res.string.loginBtnForgotPassword),
-                onClick = { onIntent(LoginIntent.ForgotPasswordClicked) },
-                modifier = Modifier.align(Alignment.End),
-                trailingIcon = painterResource(AppIcons.ArrowRight),
-            )
+        BtnTextPrimary(
+            text = stringResource(Res.string.loginBtnForgotPassword),
+            onClick = { onIntent(LoginIntent.ForgotPasswordClicked) },
+            modifier = Modifier.align(Alignment.End),
+            trailingIcon = painterResource(AppIcons.ArrowRight),
+        )
 
-            Spacer(modifier = Modifier.height(marginPrimary4X))
+        Spacer(modifier = Modifier.height(marginPrimary4X))
 
-            BtnPrimary(
-                modifier = Modifier.fillMaxWidth(),
-                text = stringResource(Res.string.loginBtnLogin),
-                isEnabled = !state.isLoading,
-                onClick = { onIntent(LoginIntent.LoginClicked) },
-            )
-        }
-
-        if (state.isLoading) {
-            FullscreenProgressIndicator()
-        }
+        BtnPrimary(
+            modifier = Modifier.fillMaxWidth(),
+            text = stringResource(Res.string.loginBtnLogin),
+            isEnabled = !state.isLoading,
+            onClick = { onIntent(LoginIntent.LoginClicked) },
+        )
     }
 }
 
@@ -146,22 +137,6 @@ private fun LoginContentValidationErrorPreview() {
                 email = "invalid",
                 password = "12",
                 validation = LoginValidationResult(isEmailValid = false, isPasswordValid = false),
-            ),
-            onIntent = {},
-            contentPadding = PaddingValues(marginZero),
-        )
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-private fun LoginContentLoadingPreview() {
-    StoriumTheme {
-        LoginContent(
-            state = LoginScreenState(
-                email = "muffin.sweet@gmail.com",
-                password = "password123",
-                isLoading = true,
             ),
             onIntent = {},
             contentPadding = PaddingValues(marginZero),

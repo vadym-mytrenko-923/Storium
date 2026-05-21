@@ -8,6 +8,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.storium.ui.core.alert.LocalAppAlert
+import com.storium.ui.core.composable.other.FullscreenProgressIndicator
 import com.storium.ui.screens.auth.login.composable.LoginContent
 import com.storium.ui.theme.StoriumTheme
 import com.storium.ui.theme.appColors
@@ -46,6 +47,10 @@ private fun LoginScreenContent(
             onIntent = onIntent,
             contentPadding = paddingValues,
         )
+
+        if (state.isLoading) {
+            FullscreenProgressIndicator()
+        }
     }
 }
 
@@ -55,6 +60,17 @@ private fun LoginScreenContentPreview() {
     StoriumTheme {
         LoginScreenContent(
             state = LoginScreenState(),
+            onIntent = {},
+        )
+    }
+}
+
+@Preview
+@Composable
+private fun LoginScreenLoadingContentPreview() {
+    StoriumTheme {
+        LoginScreenContent(
+            state = LoginScreenState(isLoading = true),
             onIntent = {},
         )
     }
