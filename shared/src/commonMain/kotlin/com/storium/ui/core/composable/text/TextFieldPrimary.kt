@@ -8,7 +8,11 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsFocusedAsState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
@@ -34,12 +38,15 @@ fun TextFieldPrimary(
     leadingIcon: @Composable (() -> Unit)? = null,
     trailingIcon: @Composable (() -> Unit)? = null,
 ) {
-    val hasText = value.isNotEmpty()
+    val interactionSource = remember { MutableInteractionSource() }
+    val isFocused by interactionSource.collectIsFocusedAsState()
+    val showLabelMinimized = value.isNotEmpty() || isFocused
 
     Column(modifier = modifier) {
         TextField(
             value = value,
             onValueChange = onValueChange,
+            interactionSource = interactionSource,
             modifier = Modifier
                 .fillMaxWidth()
                 .height(inputHeight)
@@ -60,7 +67,7 @@ fun TextFieldPrimary(
                 {
                     Text(
                         text = label,
-                        style = if (hasText) MaterialTheme.typography.bodySmall else MaterialTheme.typography.labelLarge,
+                        style = if (showLabelMinimized) MaterialTheme.typography.bodySmall else MaterialTheme.typography.labelLarge,
                         color = if (isError) MaterialTheme.appColors.error else MaterialTheme.appColors.textSecondary,
                     )
                 }

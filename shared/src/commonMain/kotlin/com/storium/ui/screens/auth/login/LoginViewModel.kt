@@ -24,23 +24,19 @@ class LoginViewModel(
 
     private fun onEmailChanged(value: String) {
         updateUiState {
-            val updatedValidation = if (validation.isValid) {
-                validation
-            } else {
-                loginValidator.validate(value, password)
-            }
-            copy(email = value, validation = updatedValidation)
+            copy(
+                email = value,
+                validation = if (!validation.isValid) loginValidator.validate(value, password) else validation,
+            )
         }
     }
 
     private fun onPasswordChanged(value: String) {
         updateUiState {
-            val updatedValidation = if (validation.isValid) {
-                validation
-            } else {
-                loginValidator.validate(email, value)
-            }
-            copy(password = value, validation = updatedValidation)
+            copy(
+                password = value,
+                validation = if (!validation.isValid) loginValidator.validate(email, value) else validation,
+            )
         }
     }
 

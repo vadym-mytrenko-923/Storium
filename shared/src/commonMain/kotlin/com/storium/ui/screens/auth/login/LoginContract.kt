@@ -7,7 +7,9 @@ data class LoginScreenState(
     val password: String = "",
     val isLoading: Boolean = false,
     val validation: LoginValidationResult = LoginValidationResult(),
-)
+) {
+    val isLoginButtonEnabled: Boolean get() = email.isNotBlank() && password.isNotEmpty() && !isLoading
+}
 
 sealed interface LoginIntent {
     data class EmailChanged(val value: String) : LoginIntent

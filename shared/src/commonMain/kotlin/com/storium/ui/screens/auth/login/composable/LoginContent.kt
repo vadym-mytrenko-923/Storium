@@ -98,7 +98,7 @@ fun LoginContent(
         BtnPrimary(
             modifier = Modifier.fillMaxWidth(),
             text = stringResource(Res.string.loginBtnLogin),
-            isEnabled = !state.isLoading,
+            isEnabled = state.isLoginButtonEnabled,
             onClick = { onIntent(LoginIntent.LoginClicked) },
         )
     }
