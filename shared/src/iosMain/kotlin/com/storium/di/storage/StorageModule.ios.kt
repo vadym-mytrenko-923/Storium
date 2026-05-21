@@ -8,7 +8,7 @@ import com.storium.data.local.storage.KeychainSecureStorage
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
-val storageModule = module {
+actual val storageModule = module {
     // Keychain Providers
     single(named(USER_STORAGE_NAME)) { KeychainProviderImpl(USER_STORAGE_NAME) }
     single(named(APP_STORAGE_NAME)) { KeychainProviderImpl(APP_STORAGE_NAME) }
