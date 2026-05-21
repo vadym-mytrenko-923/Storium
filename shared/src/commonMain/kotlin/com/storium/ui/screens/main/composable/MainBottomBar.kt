@@ -9,13 +9,13 @@ import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.selection.selectable
-import com.storium.ui.theme.containerShapeDefault
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.tooling.preview.Preview
 import com.storium.ui.screens.main.model.MainTab
@@ -23,10 +23,10 @@ import com.storium.ui.theme.StoriumTheme
 import com.storium.ui.theme.appColors
 import com.storium.ui.theme.bottomNavIconSize
 import com.storium.ui.theme.bottomNavShapeDefault
-import androidx.compose.ui.draw.clip
-import com.storium.ui.theme.marginPrimary2X
+import com.storium.ui.theme.containerShapeDefault
 import com.storium.ui.theme.elevationCard
 import com.storium.ui.theme.marginPrimary
+import com.storium.ui.theme.marginPrimary2X
 import com.storium.ui.theme.marginPrimaryHalf
 import com.storium.ui.theme.marginPrimaryQuarter
 import com.storium.ui.theme.textSizeSmall
