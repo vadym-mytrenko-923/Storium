@@ -15,7 +15,6 @@ import com.storium.ui.theme.appColors
 import com.storium.ui.theme.chipShapeDefault
 import com.storium.ui.theme.discountChipHeight
 import com.storium.ui.theme.discountChipPadding
-import com.storium.ui.theme.textSizeSmall
 import org.jetbrains.compose.resources.stringResource
 import storium.shared.generated.resources.Res
 import storium.shared.generated.resources.shopDiscountFormat
@@ -37,7 +36,7 @@ fun DiscountChip(
     ) {
         Text(
             text = stringResource(Res.string.shopDiscountFormat, discountPercent),
-            fontSize = textSizeSmall,
+            style = MaterialTheme.typography.bodySmall,
             color = MaterialTheme.appColors.btnPrimaryText,
         )
     }
