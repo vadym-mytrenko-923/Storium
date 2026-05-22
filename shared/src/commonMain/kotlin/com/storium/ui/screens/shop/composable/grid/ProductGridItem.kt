@@ -43,12 +43,10 @@ fun ProductGridItem(
             .clip(containerShapeDefault)
             .clickable { onClick() },
     ) {
-        ElevatedSurface(
-            modifier = Modifier.height(productCardImageHeight),
-            shape = imageShapeDefault
-        ) {
+        ElevatedSurface(shape = imageShapeDefault) {
             Box {
                 AsyncImage(
+                    modifier = Modifier.height(productCardImageHeight),
                     model = product.thumbnail,
                     contentDescription = product.title,
                     contentScale = ContentScale.Crop,
