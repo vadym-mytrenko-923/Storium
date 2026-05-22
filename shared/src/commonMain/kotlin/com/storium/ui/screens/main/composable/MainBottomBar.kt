@@ -29,15 +29,14 @@ import com.storium.ui.theme.marginPrimary
 import com.storium.ui.theme.marginPrimary2X
 import com.storium.ui.theme.marginPrimaryHalf
 import com.storium.ui.theme.marginPrimaryQuarter
-import com.storium.ui.theme.textSizeSmall
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun MainBottomBar(
+    modifier: Modifier = Modifier,
     selectedTab: MainTab,
     onTabSelected: (MainTab) -> Unit,
-    modifier: Modifier = Modifier,
 ) {
     Surface(
         modifier = modifier.fillMaxWidth(),
@@ -77,7 +76,7 @@ fun MainBottomBar(
 
                     Text(
                         text = stringResource(tab.labelRes),
-                        fontSize = textSizeSmall,
+                        style = MaterialTheme.typography.bodySmall,
                         color = if (isSelected) {
                             MaterialTheme.appColors.primary
                         } else {

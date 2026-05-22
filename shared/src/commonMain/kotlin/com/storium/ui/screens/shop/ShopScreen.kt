@@ -1,27 +1,40 @@
 package com.storium.ui.screens.shop
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import com.storium.ui.theme.appColors
-import org.jetbrains.compose.resources.stringResource
-import storium.shared.generated.resources.Res
-import storium.shared.generated.resources.shopTitle
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.storium.ui.screens.shop.composable.ShopContent
+import com.storium.ui.screens.shop.composable.preview.ShopPreviewUiModels
+import com.storium.ui.theme.StoriumTheme
+import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
-fun ShopScreen() {
-    Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center,
-    ) {
-        Text(
-            text = stringResource(Res.string.shopTitle),
-            style = MaterialTheme.typography.headlineLarge,
-            color = MaterialTheme.appColors.textPrimary,
+fun ShopScreen(
+    paddingValues: PaddingValues = PaddingValues(),
+    viewModel: ShopViewModel = koinViewModel(),
+) {
+    val state by viewModel.uiStateFlow.collectAsStateWithLifecycle()
+
+    ShopContent(
+        state = state,
+        onIntent = viewModel::onUserIntent,
+        paddingValues = paddingValues,
+    )
+}
+
+@Preview
+@Composable
+private fun ShopScreenPreview() {
+    StoriumTheme {
+        ShopContent(
+            state = ShopScreenState(
+                products = ShopPreviewUiModels.products,
+                categories = ShopPreviewUiModels.categories,
+                isLoading = false,
+            ),
+            onIntent = {},
         )
     }
 }

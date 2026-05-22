@@ -45,14 +45,11 @@ private fun MainScreenContent(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(
-                    top = paddingValues.calculateTopPadding(),
-                    bottom = paddingValues.calculateBottomPadding(),
-                ),
+                .padding(bottom = paddingValues.calculateBottomPadding()),
         ) {
             when (state.selectedTab) {
-                MainTab.Shop -> ShopScreen()
-                MainTab.Profile -> ProfileScreen()
+                MainTab.Shop -> ShopScreen(paddingValues = paddingValues)
+                MainTab.Profile -> ProfileScreen(paddingValues = paddingValues)
             }
         }
     }

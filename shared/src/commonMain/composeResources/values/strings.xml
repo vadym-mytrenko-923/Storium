@@ -16,9 +16,14 @@
 
     <!-- Shop Screen -->
     <string name="shopTitle">Shop</string>
+    <string name="shopEmptyState">No products found</string>
+    <string name="shopRatingCount">(%1$d)</string>
+    <string name="shopPriceFormat">%1$d$</string>
+    <string name="shopDiscountFormat">-%1$d%</string>
 
     <!-- Profile Screen -->
     <string name="profileTitle">Profile</string>
+    <string name="profileComingSoon">Coming Soon...</string>
     <string name="profileBtnLogout">Logout</string>
 
     <!-- Errors -->

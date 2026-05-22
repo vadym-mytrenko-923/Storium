@@ -1,7 +1,56 @@
 package com.storium.ui.screens.shop
 
+import com.storium.domain.features.product.usecase.GetProductsFlowUseCase
+import com.storium.domain.features.product.usecase.GetSelectedCategoryIdsFlowUseCase
+import com.storium.domain.features.product.usecase.ToggleCategorySelectionUseCase
 import com.storium.ui.base.BaseViewModel
+import com.storium.ui.screens.shop.mapper.toUiModels
+import com.storium.ui.screens.shop.model.DisplayMode
+import kotlinx.coroutines.flow.combine
 
-class ShopViewModel : BaseViewModel<ShopScreenState, ShopIntent, ShopEffect>(ShopScreenState()) {
-    override fun reduceIntent(intent: ShopIntent) = Unit
+class ShopViewModel(
+    private val getProductsFlowUseCase: GetProductsFlowUseCase,
+    private val getSelectedCategoryIdsFlowUseCase: GetSelectedCategoryIdsFlowUseCase,
+    private val toggleCategorySelectionUseCase: ToggleCategorySelectionUseCase,
+) : BaseViewModel<ShopScreenState, ShopIntent, ShopEffect>(ShopScreenState()) {
+
+    init {
+        observeProducts()
+    }
+
+    override fun reduceIntent(intent: ShopIntent) {
+        when (intent) {
+            is ShopIntent.CategoryToggled -> toggleCategorySelectionUseCase(intent.categoryId)
+            is ShopIntent.DisplayModeToggled -> onDisplayModeToggled()
+            is ShopIntent.ProductClicked -> Unit
+        }
+    }
+
+    private fun observeProducts() {
+        launchViewModelScope {
+            combine(
+                getProductsFlowUseCase(),
+                getSelectedCategoryIdsFlowUseCase(),
+            ) { dataState, selectedCategoryIds ->
+                currentState.copy(
+                    products = dataState.products.toUiModels(),
+                    categories = dataState.categories.toUiModels(selectedIds = selectedCategoryIds),
+                    isLoading = dataState.isLoading,
+                )
+            }.collect { uiState ->
+                updateUiState { uiState }
+            }
+        }
+    }
+
+    private fun onDisplayModeToggled() {
+        updateUiState {
+            copy(
+                displayMode = when (displayMode) {
+                    DisplayMode.List -> DisplayMode.Grid
+                    DisplayMode.Grid -> DisplayMode.List
+                },
+            )
+        }
+    }
 }

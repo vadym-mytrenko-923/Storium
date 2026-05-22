@@ -98,9 +98,9 @@ fun LoginContent(
         Spacer(modifier = Modifier.height(marginPrimary2X))
 
         BtnTextPrimary(
+            modifier = Modifier.align(Alignment.End),
             text = stringResource(Res.string.loginBtnForgotPassword),
             onClick = { onIntent(LoginIntent.ForgotPasswordClicked) },
-            modifier = Modifier.align(Alignment.End),
             trailingIcon = painterResource(AppIcons.ArrowRight),
         )
 

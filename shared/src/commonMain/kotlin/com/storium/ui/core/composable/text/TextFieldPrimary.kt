@@ -39,9 +39,9 @@ import org.jetbrains.compose.resources.painterResource
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TextFieldPrimary(
+    modifier: Modifier = Modifier,
     value: String,
     onValueChange: (String) -> Unit,
-    modifier: Modifier = Modifier,
     isError: Boolean = false,
     isValid: Boolean = false,
     errorText: String? = null,

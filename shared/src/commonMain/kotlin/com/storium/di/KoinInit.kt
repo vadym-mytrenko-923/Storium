@@ -5,6 +5,7 @@ import com.storium.di.auth.authModule
 import com.storium.di.main.mainModule
 import com.storium.di.navigation.navigationModule
 import com.storium.di.network.networkModule
+import com.storium.di.product.productModule
 import com.storium.di.storage.storageModule
 import com.storium.di.user.userModule
 import org.koin.core.KoinApplication
@@ -21,6 +22,7 @@ fun initKoin(config: KoinAppDeclaration? = null): KoinApplication = startKoin {
         navigationModule,
         userModule,
         authModule,
+        productModule,
         mainModule,
     )
 }
