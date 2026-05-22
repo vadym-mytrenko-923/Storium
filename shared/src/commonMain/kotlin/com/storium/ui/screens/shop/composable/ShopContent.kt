@@ -4,6 +4,8 @@ import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.togetherWith
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -11,6 +13,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -24,17 +27,22 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.storium.domain.features.product.model.Category
 import com.storium.ui.core.composable.other.FullscreenProgressIndicator
+import com.storium.ui.core.composable.other.Toolbar
 import com.storium.ui.screens.shop.ShopIntent
 import com.storium.ui.screens.shop.ShopScreenState
 import com.storium.ui.screens.shop.composable.preview.ShopPreviewUiModels
 import com.storium.ui.screens.shop.model.DisplayMode
+import com.storium.ui.theme.AppIcons
 import com.storium.ui.theme.StoriumTheme
 import com.storium.ui.theme.appColors
+import com.storium.ui.theme.defaultIconSize
 import com.storium.ui.theme.marginPrimary
 import com.storium.ui.theme.marginPrimary2X
+import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import storium.shared.generated.resources.Res
 import storium.shared.generated.resources.shopEmptyState
+import storium.shared.generated.resources.shopTitle
 
 private const val GRID_COLUMNS = 2
 
@@ -45,9 +53,23 @@ fun ShopContent(
     modifier: Modifier = Modifier,
 ) {
     Column(modifier = modifier.fillMaxSize()) {
-        ShopToolbar(
-            displayMode = state.displayMode,
-            onDisplayModeToggle = { onIntent(ShopIntent.DisplayModeToggled) },
+        Toolbar(
+            modifier = modifier,
+            title = stringResource(Res.string.shopTitle),
+            trailingContent = {
+                Image(
+                    modifier = Modifier
+                        .size(defaultIconSize)
+                        .clickable { onIntent(ShopIntent.DisplayModeToggled) },
+                    painter = painterResource(
+                        when (state.displayMode) {
+                            DisplayMode.List -> AppIcons.ViewGrid
+                            DisplayMode.Grid -> AppIcons.ViewList
+                        },
+                    ),
+                    contentDescription = null,
+                )
+            },
         )
 
         if (!state.isLoading && state.categories.isNotEmpty()) {
@@ -68,6 +90,7 @@ fun ShopContent(
                         backgroundColor = MaterialTheme.appColors.background,
                     )
                 }
+
                 state.products.isEmpty() -> {
                     Box(
                         modifier = Modifier.fillMaxSize(),
@@ -80,6 +103,7 @@ fun ShopContent(
                         )
                     }
                 }
+
                 else -> {
                     AnimatedContent(
                         targetState = state.displayMode,

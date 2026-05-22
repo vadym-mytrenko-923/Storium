@@ -63,7 +63,7 @@ private fun CategoryChip(
                 },
             )
             .clickable { onClick() }
-            .padding(horizontal = marginPrimary1_5X, vertical = marginPrimary),
+            .padding(marginPrimary1_5X),
         contentAlignment = Alignment.Center,
     ) {
         Text(
