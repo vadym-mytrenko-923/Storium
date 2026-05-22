@@ -1,4 +1,4 @@
-package com.storium.ui.screens.shop.composable
+package com.storium.ui.screens.shop.composable.list
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -25,6 +25,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import coil3.compose.AsyncImage
 import com.storium.ui.core.composable.surface.ElevatedSurface
+import com.storium.ui.screens.shop.composable.common.DiscountChip
+import com.storium.ui.screens.shop.composable.common.SmallRatingBar
 import com.storium.ui.screens.shop.composable.preview.ShopPreviewUiModels
 import com.storium.ui.screens.shop.model.ProductUiModel
 import com.storium.ui.theme.StoriumTheme

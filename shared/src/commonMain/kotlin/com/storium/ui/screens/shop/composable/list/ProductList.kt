@@ -1,4 +1,4 @@
-package com.storium.ui.screens.shop.composable
+package com.storium.ui.screens.shop.composable.list
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues

@@ -25,6 +25,8 @@ import com.storium.ui.core.composable.other.Toolbar
 import com.storium.ui.core.composable.surface.ElevatedSurface
 import com.storium.ui.screens.shop.ShopIntent
 import com.storium.ui.screens.shop.ShopScreenState
+import com.storium.ui.screens.shop.composable.grid.ProductGrid
+import com.storium.ui.screens.shop.composable.list.ProductList
 import com.storium.ui.screens.shop.composable.preview.ShopPreviewUiModels
 import com.storium.ui.screens.shop.model.DisplayMode
 import com.storium.ui.theme.AppIcons

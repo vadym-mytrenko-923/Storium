@@ -1,4 +1,4 @@
-package com.storium.ui.screens.shop.composable
+package com.storium.ui.screens.shop.composable.common
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
