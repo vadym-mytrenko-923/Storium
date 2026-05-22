@@ -3,6 +3,7 @@ package com.storium.ui.screens.shop.composable
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.MaterialTheme
@@ -16,7 +17,6 @@ import com.storium.ui.theme.StoriumTheme
 import com.storium.ui.theme.appColors
 import com.storium.ui.theme.marginPrimaryQuarter
 import com.storium.ui.theme.ratingStarSize
-import com.storium.ui.theme.textSizeTiny
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import storium.shared.generated.resources.Res
@@ -32,16 +32,16 @@ fun SmallRatingBar(
     maxStars: Int = DEFAULT_MAX_STARS,
 ) {
     Row(
-        modifier = modifier,
+        modifier = modifier.height(ratingStarSize),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         repeat(maxStars) { index ->
             Image(
+                modifier = Modifier.size(ratingStarSize),
                 painter = painterResource(
                     if (index < rating.toInt()) AppIcons.StarFilled else AppIcons.StarEmpty,
                 ),
                 contentDescription = null,
-                modifier = Modifier.size(ratingStarSize),
             )
         }
 
@@ -49,8 +49,9 @@ fun SmallRatingBar(
 
         Text(
             text = stringResource(Res.string.shopRatingCount, reviewCount),
-            fontSize = textSizeTiny,
-            color = MaterialTheme.appColors.textSecondary,
+            style = MaterialTheme.typography.bodySmall.copy(
+                color = MaterialTheme.appColors.textSecondary,
+            )
         )
     }
 }

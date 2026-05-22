@@ -9,5 +9,7 @@ class ProductRemoteDataSourceImpl(private val productApi: ProductApi) : ProductR
 
     override suspend fun getCategories(): List<CategoryDto> = productApi.getCategories()
 
-    override suspend fun getProductsByCategory(id: String): List<ProductDto> = productApi.getProductsByCategory(id).products
+    override suspend fun getProductsByCategory(id: String): List<ProductDto> {
+        return productApi.getProductsByCategory(id).products
+    }
 }

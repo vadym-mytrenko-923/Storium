@@ -12,7 +12,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import com.storium.ui.theme.StoriumTheme
@@ -20,15 +19,14 @@ import com.storium.ui.theme.appColors
 import com.storium.ui.theme.defaultIconSize
 import com.storium.ui.theme.marginPrimary2X
 import com.storium.ui.theme.marginPrimary3X
+import com.storium.ui.theme.marginPrimary4X
 import com.storium.ui.theme.marginZero
-import com.storium.ui.theme.textLineHeightToolbar
-import com.storium.ui.theme.textSizeToolbar
 
 @Composable
 fun Toolbar(
     title: String,
     modifier: Modifier = Modifier,
-    topPadding: Dp = marginPrimary2X,
+    topPadding: Dp = marginPrimary4X,
     backgroundColor: Color = Color.Transparent,
     titleColor: Color = Color.Unspecified,
     leadingContent: (@Composable () -> Unit)? = null,
@@ -59,9 +57,7 @@ fun Toolbar(
         ) {
             Text(
                 text = title,
-                fontWeight = FontWeight.Medium,
-                fontSize = textSizeToolbar,
-                lineHeight = textLineHeightToolbar,
+                style = MaterialTheme.typography.headlineLarge,
                 color = if (titleColor != Color.Unspecified) titleColor else MaterialTheme.appColors.textPrimary,
             )
         }

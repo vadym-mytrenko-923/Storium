@@ -10,5 +10,7 @@ class ProductApiImpl(private val httpClient: HttpClient) : ProductApi {
 
     override suspend fun getCategories(): List<CategoryDto> = httpClient.getRequest("/products/categories")
 
-    override suspend fun getProductsByCategory(id: String): ProductsResponseDto = httpClient.getRequest("/products/category/$id")
+    override suspend fun getProductsByCategory(id: String): ProductsResponseDto {
+        return httpClient.getRequest("/products/category/$id")
+    }
 }

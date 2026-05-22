@@ -23,8 +23,6 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import coil3.compose.AsyncImage
-import com.storium.ui.screens.shop.composable.DiscountChip
-import com.storium.ui.screens.shop.composable.SmallRatingBar
 import com.storium.ui.screens.shop.composable.preview.ShopPreviewUiModels
 import com.storium.ui.screens.shop.model.ProductUiModel
 import com.storium.ui.theme.StoriumTheme

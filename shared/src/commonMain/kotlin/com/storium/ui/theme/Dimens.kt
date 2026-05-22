@@ -58,7 +58,7 @@ val textLineHeightLarge = 28.8.sp
 val textLineHeightMedium = 16.sp
 val textLineHeightNormal = 20.sp
 val textLineHeightNormalExpanded = 21.sp
-val textLineHeightSmall = 11.sp
+val textLineHeightSmall = 12.sp
 
 // Alert
 val alertContainerRadius = 24.dp
