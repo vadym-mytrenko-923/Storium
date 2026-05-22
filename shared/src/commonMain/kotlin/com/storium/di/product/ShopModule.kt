@@ -14,7 +14,7 @@ val shopModule = module {
     single<ProductRemoteDataSource> { ProductRemoteDataSourceImpl(get()) }
 
     // Repositories
-    single<ProductRepository> { ProductRepositoryImpl(get()) }
+    single<ProductRepository> { ProductRepositoryImpl(get(), get()) }
 
     // Use Cases
     factory { GetProductsFlowUseCase(get()) }

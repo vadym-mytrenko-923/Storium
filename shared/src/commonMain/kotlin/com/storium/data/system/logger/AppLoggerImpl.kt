@@ -6,7 +6,6 @@ import com.storium.domain.system.logger.AppLogger
 private const val TAG = "AppLogger"
 
 class AppLoggerImpl : AppLogger {
-
     override fun log(message: String) {
         Logger.d(TAG) { message }
     }

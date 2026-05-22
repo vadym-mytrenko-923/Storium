@@ -6,7 +6,7 @@ import com.storium.domain.features.product.ProductRepository
 import com.storium.domain.features.product.model.Category
 import com.storium.domain.features.product.model.Product
 import com.storium.domain.features.product.model.ProductsDataState
-import kotlinx.coroutines.channels.awaitClose
+import com.storium.domain.system.logger.AppLogger
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.channelFlow
@@ -15,12 +15,13 @@ import kotlinx.coroutines.launch
 
 class ProductRepositoryImpl(
     private val remoteDataSource: ProductRemoteDataSource,
+    private val appLogger: AppLogger,
 ) : ProductRepository {
     private val cachedProducts = MutableStateFlow<List<Product>>(emptyList())
     private val cachedCategories = MutableStateFlow<List<Category>>(emptyList())
     private val isSyncInProgress = MutableStateFlow(false)
 
-    override fun getProductsFlow(): Flow<ProductsDataState> = channelFlow {
+    override val productsFlow: Flow<ProductsDataState> = channelFlow {
         launch { fetchInitialDataIfNeeded() }
 
         combine(cachedProducts, cachedCategories, isSyncInProgress) { products, categories, isLoading ->
@@ -29,16 +30,17 @@ class ProductRepositoryImpl(
                 categories = categories,
                 isLoading = isLoading,
             )
-        }.collect { send(it) }
-
-        awaitClose()
+        }.collect {
+            send(it)
+        }
     }
 
     override suspend fun fetchProducts() {
         isSyncInProgress.value = true
         try {
-            val products = remoteDataSource.getProducts().map { it.toDomainModel() }
-            cachedProducts.value = products
+            cachedProducts.value = remoteDataSource.getProducts().map { it.toDomainModel() }
+        } catch (e: Exception) {
+            appLogger.logException(e)
         } finally {
             isSyncInProgress.value = false
         }
@@ -47,24 +49,23 @@ class ProductRepositoryImpl(
     override suspend fun fetchProductsByCategory(id: String) {
         isSyncInProgress.value = true
         try {
-            val products = remoteDataSource.getProductsByCategory(id).map { it.toDomainModel() }
-            cachedProducts.value = products
+            cachedProducts.value = remoteDataSource.getProductsByCategory(id).map { it.toDomainModel() }
+        } catch (e: Exception) {
+            appLogger.logException(e)
         } finally {
             isSyncInProgress.value = false
         }
     }
 
-    // TODO review if refactor is needed
     private suspend fun fetchInitialDataIfNeeded() {
         if (cachedProducts.value.isNotEmpty()) return
 
         isSyncInProgress.value = true
         try {
-            val categories = remoteDataSource.getCategories().map { it.toDomainModel() }
-            cachedCategories.value = categories
-
-            val products = remoteDataSource.getProducts().map { it.toDomainModel() }
-            cachedProducts.value = products
+            cachedCategories.value = remoteDataSource.getCategories().map { it.toDomainModel() }
+            cachedProducts.value = remoteDataSource.getProducts().map { it.toDomainModel() }
+        } catch (e: Exception) {
+            appLogger.logException(e)
         } finally {
             isSyncInProgress.value = false
         }

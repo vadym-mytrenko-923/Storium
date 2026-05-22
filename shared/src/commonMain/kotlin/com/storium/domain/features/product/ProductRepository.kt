@@ -4,7 +4,7 @@ import com.storium.domain.features.product.model.ProductsDataState
 import kotlinx.coroutines.flow.Flow
 
 interface ProductRepository {
-    fun getProductsFlow(): Flow<ProductsDataState>
+    val productsFlow: Flow<ProductsDataState>
     suspend fun fetchProducts()
     suspend fun fetchProductsByCategory(id: String)
 }
