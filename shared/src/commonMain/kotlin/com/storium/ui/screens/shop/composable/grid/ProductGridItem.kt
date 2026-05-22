@@ -79,15 +79,17 @@ fun ProductGridItem(
 
         Spacer(modifier = Modifier.height(marginPrimary0_75X))
 
-        Text(
-            text = product.brand,
-            style = MaterialTheme.typography.bodySmall,
-            color = MaterialTheme.appColors.textSecondary,
-            maxLines = 1,
-            overflow = TextOverflow.Ellipsis,
-        )
+        if (product.brand.isNotEmpty()) {
+            Text(
+                text = product.brand,
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.appColors.textSecondary,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+            )
 
-        Spacer(modifier = Modifier.height(marginPrimaryHalf))
+            Spacer(modifier = Modifier.height(marginPrimaryHalf))
+        }
 
         Text(
             text = product.title,
