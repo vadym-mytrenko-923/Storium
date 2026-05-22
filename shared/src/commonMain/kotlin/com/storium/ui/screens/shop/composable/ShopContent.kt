@@ -21,8 +21,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.storium.ui.core.composable.other.FullscreenProgressIndicator
-import com.storium.ui.core.composable.other.Toolbar
 import com.storium.ui.core.composable.surface.ElevatedSurface
+import com.storium.ui.core.composable.toolbar.Toolbar
 import com.storium.ui.screens.shop.ShopIntent
 import com.storium.ui.screens.shop.ShopScreenState
 import com.storium.ui.screens.shop.composable.grid.ProductGrid

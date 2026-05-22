@@ -6,14 +6,17 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.storium.ui.core.composable.other.Toolbar
+import com.storium.ui.core.composable.toolbar.Toolbar
+import com.storium.ui.core.composable.toolbar.ToolbarStyle
 import com.storium.ui.theme.AppIcons
 import com.storium.ui.theme.StoriumTheme
 import com.storium.ui.theme.appColors
@@ -29,49 +32,57 @@ import storium.shared.generated.resources.productDetailsTitle
 fun ProductDetailsScreen(
     viewModel: ProductDetailsViewModel = koinViewModel(),
 ) {
-    ProductDetailsContent(
-        onIntent = viewModel::onUserIntent,
-    )
+    ProductDetailsScreenContent(onIntent = viewModel::onUserIntent)
 }
 
 @Composable
-private fun ProductDetailsContent(
+private fun ProductDetailsScreenContent(
     modifier: Modifier = Modifier,
     onIntent: (ProductDetailsIntent) -> Unit,
 ) {
-    Column(modifier = modifier.fillMaxSize()) {
-        Toolbar(
-            title = stringResource(Res.string.productDetailsTitle),
-            leadingContent = {
-                Image(
-                    modifier = Modifier
-                        .size(defaultIconSize)
-                        .clickable { onIntent(ProductDetailsIntent.BackClicked) },
-                    painter = painterResource(AppIcons.ArrowBack),
-                    contentDescription = null,
-                )
-            },
-        )
-
-        Box(
-            modifier = Modifier
-                .weight(1f)
-                .fillMaxWidth(),
-            contentAlignment = Alignment.Center,
+    Scaffold(
+        containerColor = MaterialTheme.appColors.background,
+    ) { paddingValues ->
+        Column(
+            modifier = modifier
+                .fillMaxSize()
+                .padding(bottom = paddingValues.calculateBottomPadding()),
         ) {
-            Text(
-                text = stringResource(Res.string.productDetailsComingSoon),
-                style = MaterialTheme.typography.bodyLarge,
-                color = MaterialTheme.appColors.textSecondary,
+            Toolbar(
+                modifier = Modifier.padding(top = paddingValues.calculateTopPadding()),
+                title = stringResource(Res.string.productDetailsTitle),
+                style = ToolbarStyle.Small,
+                leadingContent = {
+                    Image(
+                        modifier = Modifier
+                            .size(defaultIconSize)
+                            .clickable { onIntent(ProductDetailsIntent.BackClicked) },
+                        painter = painterResource(AppIcons.ArrowBack),
+                        contentDescription = null,
+                    )
+                },
             )
+
+            Box(
+                modifier = Modifier
+                    .weight(1f)
+                    .fillMaxWidth(),
+                contentAlignment = Alignment.Center,
+            ) {
+                Text(
+                    text = stringResource(Res.string.productDetailsComingSoon),
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = MaterialTheme.appColors.textSecondary,
+                )
+            }
         }
     }
 }
 
 @Preview(showBackground = true)
 @Composable
-private fun ProductDetailsContentPreview() {
+private fun ProductDetailsScreenContentPreview() {
     StoriumTheme {
-        ProductDetailsContent(onIntent = {})
+        ProductDetailsScreenContent(onIntent = {})
     }
 }
