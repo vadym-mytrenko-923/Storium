@@ -49,7 +49,7 @@ private fun MainScreenContent(
         ) {
             when (state.selectedTab) {
                 MainTab.Shop -> ShopScreen(paddingValues = paddingValues)
-                MainTab.Profile -> ProfileScreen()
+                MainTab.Profile -> ProfileScreen(paddingValues = paddingValues)
             }
         }
     }

@@ -2,6 +2,7 @@ package com.storium.ui.screens.profile
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -22,9 +23,15 @@ import storium.shared.generated.resources.profileComingSoon
 import storium.shared.generated.resources.profileTitle
 
 @Composable
-fun ProfileScreen(viewModel: ProfileViewModel = koinViewModel()) {
+fun ProfileScreen(
+    paddingValues: PaddingValues = PaddingValues(),
+    viewModel: ProfileViewModel = koinViewModel(),
+) {
     Column(modifier = Modifier.fillMaxSize()) {
-        Toolbar(title = stringResource(Res.string.profileTitle))
+        Toolbar(
+            modifier = Modifier.padding(top = paddingValues.calculateTopPadding()),
+            title = stringResource(Res.string.profileTitle),
+        )
 
         Box(
             modifier = Modifier

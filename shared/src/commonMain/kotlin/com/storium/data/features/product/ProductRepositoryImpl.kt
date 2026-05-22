@@ -10,9 +10,8 @@ import com.storium.domain.system.logger.AppLogger
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.channelFlow
 import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.onStart
 
 class ProductRepositoryImpl(
     private val remoteDataSource: ProductRemoteDataSource,
@@ -23,29 +22,25 @@ class ProductRepositoryImpl(
     private val selectedCategoryIds = MutableStateFlow<Set<String>>(emptySet())
     private val isSyncInProgress = MutableStateFlow(false)
 
-    override val productsFlow: Flow<ProductsDataState> = channelFlow {
-        launch { fetchInitialDataIfNeeded() }
-
-        combine(
-            cachedProducts,
-            cachedCategories,
-            selectedCategoryIds,
-            isSyncInProgress,
-        ) { products, categories, selectedIds, isLoading ->
-            val filteredProducts = if (selectedIds.isEmpty()) {
-                products
-            } else {
-                products.filter { it.category in selectedIds }
-            }
-
-            ProductsDataState(
-                products = filteredProducts,
-                categories = categories,
-                isLoading = isLoading,
-            )
-        }.collect {
-            send(it)
+    override val productsFlow: Flow<ProductsDataState> = combine(
+        cachedProducts,
+        cachedCategories,
+        selectedCategoryIds,
+        isSyncInProgress,
+    ) { products, categories, selectedIds, isLoading ->
+        val filteredProducts = if (selectedIds.isEmpty()) {
+            emptyList()
+        } else {
+            products.filter { it.category in selectedIds }
         }
+
+        ProductsDataState(
+            products = filteredProducts,
+            categories = categories,
+            isLoading = isLoading,
+        )
+    }.onStart {
+        fetchInitialDataIfNeeded()
     }
 
     override val selectedCategoryIdsFlow: Flow<Set<String>> = selectedCategoryIds.asStateFlow()

@@ -2,7 +2,6 @@ package com.storium.ui.screens.shop.composable.list
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -20,12 +19,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import coil3.compose.AsyncImage
 import com.storium.ui.core.composable.surface.ElevatedSurface
 import com.storium.ui.screens.shop.composable.common.DiscountChip
+import com.storium.ui.screens.shop.composable.common.ProductPriceRow
 import com.storium.ui.screens.shop.composable.common.SmallRatingBar
 import com.storium.ui.screens.shop.composable.preview.ShopPreviewUiModels
 import com.storium.ui.screens.shop.model.ProductUiModel
@@ -37,9 +36,6 @@ import com.storium.ui.theme.marginPrimary
 import com.storium.ui.theme.marginPrimary1_5X
 import com.storium.ui.theme.marginPrimaryHalf
 import com.storium.ui.theme.productListImageWidth
-import org.jetbrains.compose.resources.stringResource
-import storium.shared.generated.resources.Res
-import storium.shared.generated.resources.shopPriceFormat
 
 @Composable
 fun ProductListItem(
@@ -111,28 +107,10 @@ fun ProductListItem(
 
                 Spacer(modifier = Modifier.height(marginPrimary))
 
-                Row(horizontalArrangement = Arrangement.spacedBy(marginPrimaryHalf)) {
-                    if (product.oldPrice != null) {
-                        Text(
-                            text = stringResource(Res.string.shopPriceFormat, product.oldPrice),
-                            style = MaterialTheme.typography.labelLarge,
-                            color = MaterialTheme.appColors.textSecondary,
-                            textDecoration = TextDecoration.LineThrough,
-                        )
-
-                        Text(
-                            text = stringResource(Res.string.shopPriceFormat, product.price),
-                            style = MaterialTheme.typography.labelLarge,
-                            color = MaterialTheme.appColors.primary,
-                        )
-                    } else {
-                        Text(
-                            text = stringResource(Res.string.shopPriceFormat, product.price),
-                            style = MaterialTheme.typography.labelLarge,
-                            color = MaterialTheme.appColors.textPrimary,
-                        )
-                    }
-                }
+                ProductPriceRow(
+                    price = product.price,
+                    oldPrice = product.oldPrice,
+                )
             }
         }
     }
