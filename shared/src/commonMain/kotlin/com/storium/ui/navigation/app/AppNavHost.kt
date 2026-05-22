@@ -11,13 +11,18 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.storium.ui.navigation.base.NavigationEffectHandler
 import com.storium.ui.navigation.model.AppNavRoute
 import com.storium.ui.screens.auth.login.LoginScreen
 import com.storium.ui.screens.main.MainScreen
+import com.storium.ui.screens.product.details.ProductDetailsScreen
 import kotlinx.coroutines.flow.StateFlow
 
 @Composable
-fun AppNavHost(isUserLoggedInFlow: StateFlow<Boolean?>) {
+fun AppNavHost(
+    appNavigator: AppNavigator,
+    isUserLoggedInFlow: StateFlow<Boolean?>,
+) {
     val isUserLoggedIn by isUserLoggedInFlow.collectAsStateWithLifecycle()
     val isLoggedIn = isUserLoggedIn ?: return
     val navController = rememberNavController()
@@ -38,12 +43,17 @@ fun AppNavHost(isUserLoggedInFlow: StateFlow<Boolean?>) {
         }
     }
 
+    NavigationEffectHandler(navigator = appNavigator, navController = navController)
+
     NavHost(navController = navController, startDestination = startDestination) {
         composable<AppNavRoute.Login> {
             LoginScreen()
         }
         composable<AppNavRoute.Main> {
             MainScreen()
+        }
+        composable<AppNavRoute.ProductDetails> {
+            ProductDetailsScreen()
         }
     }
 }

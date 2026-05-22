@@ -12,7 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.storium.ui.core.composable.button.BtnPrimary
-import com.storium.ui.core.composable.other.Toolbar
+import com.storium.ui.core.composable.toolbar.Toolbar
 import com.storium.ui.theme.appColors
 import com.storium.ui.theme.marginPrimary2X
 import org.jetbrains.compose.resources.stringResource

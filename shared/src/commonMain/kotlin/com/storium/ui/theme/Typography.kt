@@ -35,6 +35,12 @@ val AppTypography
             fontSize = textSizeLarge,
             lineHeight = textLineHeightLarge,
         ),
+        titleLarge = TextStyle(
+            fontFamily = MetropolisFontFamily,
+            fontWeight = FontWeight.Bold,
+            fontSize = textSizeMediumLarge,
+            lineHeight = textLineHeightToolbar,
+        ),
         titleMedium = TextStyle(
             fontFamily = MetropolisFontFamily,
             fontWeight = FontWeight.Normal,

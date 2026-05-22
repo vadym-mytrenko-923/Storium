@@ -33,6 +33,8 @@ val defaultIconSize = 24.dp
 val largeIconSize = 32.dp
 
 // Component sizes
+val largeToolbarHeight = 80.dp
+val smallToolbarHeight = 56.dp
 val buttonHeight = 48.dp
 val inputHeight = 64.dp
 val searchBarHeight = 48.dp
@@ -46,7 +48,7 @@ val categoryChipHeight = 36.dp
 // Text sizes
 val textSizeLargest = 34.sp
 val textSizeLarge = 24.sp
-val textSizeToolbar = 18.sp
+val textSizeMediumLarge = 18.sp
 val textSizeMedium = 16.sp
 val textSizeNormal = 14.sp
 val textSizeSmall = 12.sp
