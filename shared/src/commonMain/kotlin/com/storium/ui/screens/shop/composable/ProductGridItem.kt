@@ -1,13 +1,11 @@
 package com.storium.ui.screens.shop.composable
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
@@ -16,21 +14,21 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import coil3.compose.AsyncImage
+import com.storium.ui.core.composable.surface.ElevatedSurface
 import com.storium.ui.screens.shop.composable.preview.ShopPreviewUiModels
 import com.storium.ui.screens.shop.model.ProductUiModel
 import com.storium.ui.theme.StoriumTheme
 import com.storium.ui.theme.appColors
 import com.storium.ui.theme.containerShapeDefault
-import com.storium.ui.theme.elevationCard
 import com.storium.ui.theme.imageShapeDefault
 import com.storium.ui.theme.marginPrimary
+import com.storium.ui.theme.marginPrimary0_75X
 import com.storium.ui.theme.marginPrimaryHalf
 import com.storium.ui.theme.productCardImageHeight
 import org.jetbrains.compose.resources.stringResource
@@ -48,26 +46,25 @@ fun ProductGridItem(
             .clip(containerShapeDefault)
             .clickable { onClick() },
     ) {
-        Box {
-            AsyncImage(
-                model = product.thumbnail,
-                contentDescription = product.title,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(productCardImageHeight)
-                    .shadow(elevation = elevationCard, shape = imageShapeDefault)
-                    .clip(imageShapeDefault)
-                    .background(MaterialTheme.appColors.surface),
-                contentScale = ContentScale.Crop,
-            )
-
-            product.discountPercent?.let {
-                DiscountChip(
-                    discountPercent = it,
-                    modifier = Modifier
-                        .align(Alignment.TopStart)
-                        .padding(marginPrimary),
+        ElevatedSurface(
+            modifier = Modifier.height(productCardImageHeight),
+            shape = imageShapeDefault
+        ) {
+            Box {
+                AsyncImage(
+                    model = product.thumbnail,
+                    contentDescription = product.title,
+                    contentScale = ContentScale.Crop,
                 )
+
+                product.discountPercent?.let {
+                    DiscountChip(
+                        modifier = Modifier
+                            .align(Alignment.TopStart)
+                            .padding(marginPrimary),
+                        discountPercent = it,
+                    )
+                }
             }
         }
 
@@ -78,7 +75,7 @@ fun ProductGridItem(
             reviewCount = product.reviewCount,
         )
 
-        Spacer(modifier = Modifier.height(marginPrimaryHalf + marginPrimaryHalf / 2))
+        Spacer(modifier = Modifier.height(marginPrimary0_75X))
 
         Text(
             text = product.brand,

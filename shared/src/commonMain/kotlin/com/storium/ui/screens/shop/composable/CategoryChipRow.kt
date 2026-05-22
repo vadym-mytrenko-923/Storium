@@ -26,9 +26,9 @@ import com.storium.ui.theme.marginPrimary2X
 
 @Composable
 fun CategoryChipRow(
+    modifier: Modifier = Modifier,
     categories: List<CategoryUiModel>,
     onCategoryClicked: (CategoryUiModel) -> Unit,
-    modifier: Modifier = Modifier,
 ) {
     LazyRow(
         modifier = modifier,

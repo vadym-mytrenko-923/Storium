@@ -40,7 +40,7 @@ fun Toolbar(
             .padding(
                 start = marginPrimary2X,
                 end = marginPrimary2X,
-                bottom = marginPrimary2X,
+                bottom = marginPrimary3X,
                 top = topPadding,
             ),
         verticalAlignment = Alignment.CenterVertically,

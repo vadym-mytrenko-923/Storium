@@ -1,5 +1,6 @@
 package com.storium.ui.screens.shop
 
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.tooling.preview.Preview
@@ -10,12 +11,16 @@ import com.storium.ui.theme.StoriumTheme
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
-fun ShopScreen(viewModel: ShopViewModel = koinViewModel()) {
+fun ShopScreen(
+    paddingValues: PaddingValues = PaddingValues(),
+    viewModel: ShopViewModel = koinViewModel(),
+) {
     val state by viewModel.uiStateFlow.collectAsStateWithLifecycle()
 
     ShopContent(
         state = state,
         onIntent = viewModel::onUserIntent,
+        paddingValues = paddingValues,
     )
 }
 
