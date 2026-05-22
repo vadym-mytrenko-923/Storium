@@ -35,9 +35,9 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun MainBottomBar(
+    modifier: Modifier = Modifier,
     selectedTab: MainTab,
     onTabSelected: (MainTab) -> Unit,
-    modifier: Modifier = Modifier,
 ) {
     Surface(
         modifier = modifier.fillMaxWidth(),

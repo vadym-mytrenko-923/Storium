@@ -18,9 +18,9 @@ private const val GRID_COLUMNS = 2
 
 @Composable
 fun ProductGrid(
+    modifier: Modifier = Modifier,
     state: ShopScreenState,
     onIntent: (ShopIntent) -> Unit,
-    modifier: Modifier = Modifier,
 ) {
     LazyVerticalGrid(
         modifier = modifier,

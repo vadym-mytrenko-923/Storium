@@ -41,9 +41,9 @@ import storium.shared.generated.resources.shopTitle
 
 @Composable
 fun ShopContent(
+    modifier: Modifier = Modifier,
     state: ShopScreenState,
     onIntent: (ShopIntent) -> Unit,
-    modifier: Modifier = Modifier,
     paddingValues: PaddingValues = PaddingValues(),
 ) {
     Column(modifier = modifier.fillMaxSize()) {

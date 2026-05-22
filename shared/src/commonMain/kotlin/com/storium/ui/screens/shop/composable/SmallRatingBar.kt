@@ -26,9 +26,9 @@ private const val DEFAULT_MAX_STARS = 5
 
 @Composable
 fun SmallRatingBar(
+    modifier: Modifier = Modifier,
     rating: Double,
     reviewCount: Int,
-    modifier: Modifier = Modifier,
     maxStars: Int = DEFAULT_MAX_STARS,
 ) {
     Row(

@@ -47,10 +47,10 @@ fun CategoryChipRow(
 
 @Composable
 private fun CategoryChip(
+    modifier: Modifier = Modifier,
     text: String,
     isSelected: Boolean,
     onClick: () -> Unit,
-    modifier: Modifier = Modifier,
 ) {
     Box(
         modifier = modifier

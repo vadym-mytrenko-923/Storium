@@ -22,8 +22,8 @@ import storium.shared.generated.resources.shopDiscountFormat
 
 @Composable
 fun DiscountChip(
-    discountPercent: Int,
     modifier: Modifier = Modifier,
+    discountPercent: Int,
 ) {
     Box(
         modifier = modifier

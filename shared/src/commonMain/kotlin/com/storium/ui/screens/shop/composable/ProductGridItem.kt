@@ -37,9 +37,9 @@ import storium.shared.generated.resources.shopPriceFormat
 
 @Composable
 fun ProductGridItem(
+    modifier: Modifier = Modifier,
     product: ProductUiModel,
     onClick: () -> Unit,
-    modifier: Modifier = Modifier,
 ) {
     Column(
         modifier = modifier

@@ -15,9 +15,9 @@ import com.storium.ui.theme.marginPrimary2X
 
 @Composable
 fun ProductList(
+    modifier: Modifier = Modifier,
     state: ShopScreenState,
     onIntent: (ShopIntent) -> Unit,
-    modifier: Modifier = Modifier,
 ) {
     LazyColumn(
         modifier = modifier,

@@ -66,10 +66,10 @@ fun ProductListItem(
 
                 product.discountPercent?.let {
                     DiscountChip(
-                        discountPercent = it,
                         modifier = Modifier
                             .align(Alignment.TopStart)
                             .padding(marginPrimary),
+                        discountPercent = it,
                     )
                 }
             }

@@ -29,9 +29,9 @@ import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun BtnTextPrimary(
+    modifier: Modifier = Modifier,
     text: String,
     onClick: () -> Unit,
-    modifier: Modifier = Modifier,
     isEnabled: Boolean = true,
     leadingIcon: Painter? = null,
     trailingIcon: Painter? = null,

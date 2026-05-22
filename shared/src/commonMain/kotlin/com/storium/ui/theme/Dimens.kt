@@ -7,6 +7,7 @@ import androidx.compose.ui.unit.sp
 val marginZero = 0.dp
 val marginPrimaryQuarter = 2.dp
 val marginPrimaryHalf = 4.dp
+val marginPrimary0_75X = 6.dp
 val marginPrimary = 8.dp
 val marginPrimary1_5X = 12.dp
 val marginPrimary2X = 16.dp

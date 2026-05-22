@@ -24,8 +24,8 @@ import com.storium.ui.theme.marginZero
 
 @Composable
 fun Toolbar(
-    title: String,
     modifier: Modifier = Modifier,
+    title: String,
     topPadding: Dp = marginPrimary4X,
     backgroundColor: Color = Color.Transparent,
     titleColor: Color = Color.Unspecified,
