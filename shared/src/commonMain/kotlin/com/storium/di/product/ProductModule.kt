@@ -11,7 +11,7 @@ import com.storium.ui.screens.shop.ShopViewModel
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 
-val shopModule = module {
+val productModule = module {
     // Data Sources
     single<ProductRemoteDataSource> { ProductRemoteDataSourceImpl(get()) }
 

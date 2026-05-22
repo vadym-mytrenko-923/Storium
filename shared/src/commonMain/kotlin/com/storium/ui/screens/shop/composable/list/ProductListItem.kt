@@ -90,15 +90,17 @@ fun ProductListItem(
                     overflow = TextOverflow.Ellipsis,
                 )
 
-                Spacer(modifier = Modifier.height(marginPrimaryHalf))
+                if (product.brand.isNotEmpty()) {
+                    Spacer(modifier = Modifier.height(marginPrimaryHalf))
 
-                Text(
-                    text = product.brand,
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.appColors.textSecondary,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis,
-                )
+                    Text(
+                        text = product.brand,
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.appColors.textSecondary,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                    )
+                }
 
                 Spacer(modifier = Modifier.height(marginPrimary))
 
