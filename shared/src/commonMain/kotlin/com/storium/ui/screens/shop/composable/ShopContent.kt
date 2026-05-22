@@ -20,7 +20,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.storium.domain.features.product.model.Category
 import com.storium.ui.core.composable.other.FullscreenProgressIndicator
 import com.storium.ui.core.composable.other.Toolbar
 import com.storium.ui.core.composable.surface.ElevatedSurface
@@ -72,7 +71,7 @@ fun ShopContent(
                     CategoryChipRow(
                         categories = state.categories,
                         onCategoryClicked = { category ->
-                            onIntent(ShopIntent.CategoryToggled(Category(id = category.id, name = category.name)))
+                            onIntent(ShopIntent.CategoryToggled(category.id))
                         },
                     )
 

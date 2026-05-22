@@ -9,6 +9,7 @@ import com.storium.domain.features.product.model.ProductsDataState
 import com.storium.domain.system.logger.AppLogger
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.channelFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
@@ -19,20 +20,42 @@ class ProductRepositoryImpl(
 ) : ProductRepository {
     private val cachedProducts = MutableStateFlow<List<Product>>(emptyList())
     private val cachedCategories = MutableStateFlow<List<Category>>(emptyList())
+    private val selectedCategoryIds = MutableStateFlow<Set<String>>(emptySet())
     private val isSyncInProgress = MutableStateFlow(false)
 
     override val productsFlow: Flow<ProductsDataState> = channelFlow {
         launch { fetchInitialDataIfNeeded() }
 
-        combine(cachedProducts, cachedCategories, isSyncInProgress) { products, categories, isLoading ->
+        combine(
+            cachedProducts,
+            cachedCategories,
+            selectedCategoryIds,
+            isSyncInProgress,
+        ) { products, categories, selectedIds, isLoading ->
+            val filteredProducts = if (selectedIds.isEmpty()) {
+                products
+            } else {
+                products.filter { it.category in selectedIds }
+            }
+
             ProductsDataState(
-                products = products,
+                products = filteredProducts,
                 categories = categories,
                 isLoading = isLoading,
             )
         }.collect {
             send(it)
         }
+    }
+
+    override val selectedCategoryIdsFlow: Flow<Set<String>> = selectedCategoryIds.asStateFlow()
+
+    override fun toggleCategorySelection(categoryId: String) {
+        val current = selectedCategoryIds.value
+        val categoryIds = cachedCategories.value.map { it.id }.toSet()
+        val updatedCategories = if (categoryId in current) current - categoryId else current + categoryId
+
+        selectedCategoryIds.value = if (updatedCategories.size == categoryIds.size) categoryIds else updatedCategories
     }
 
     override suspend fun fetchProducts() {
@@ -62,8 +85,12 @@ class ProductRepositoryImpl(
 
         isSyncInProgress.value = true
         try {
-            cachedCategories.value = remoteDataSource.getCategories().map { it.toDomainModel() }
-            cachedProducts.value = remoteDataSource.getProducts().map { it.toDomainModel() }
+            val categories = remoteDataSource.getCategories().map { it.toDomainModel() }
+            val products = remoteDataSource.getProducts().map { it.toDomainModel() }
+
+            cachedProducts.value = products
+            cachedCategories.value = categories
+            selectedCategoryIds.value = categories.map { it.id }.toSet()
         } catch (e: Exception) {
             appLogger.logException(e)
         } finally {

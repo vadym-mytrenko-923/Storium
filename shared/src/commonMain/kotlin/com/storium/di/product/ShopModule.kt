@@ -5,6 +5,8 @@ import com.storium.data.features.product.remote.source.ProductRemoteDataSource
 import com.storium.data.features.product.remote.source.ProductRemoteDataSourceImpl
 import com.storium.domain.features.product.ProductRepository
 import com.storium.domain.features.product.usecase.GetProductsFlowUseCase
+import com.storium.domain.features.product.usecase.GetSelectedCategoryIdsFlowUseCase
+import com.storium.domain.features.product.usecase.ToggleCategorySelectionUseCase
 import com.storium.ui.screens.shop.ShopViewModel
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
@@ -18,7 +20,9 @@ val shopModule = module {
 
     // Use Cases
     factory { GetProductsFlowUseCase(get()) }
+    factory { GetSelectedCategoryIdsFlowUseCase(get()) }
+    factory { ToggleCategorySelectionUseCase(get()) }
 
     // ViewModels
-    viewModel { ShopViewModel(get()) }
+    viewModel { ShopViewModel(get(), get(), get()) }
 }
