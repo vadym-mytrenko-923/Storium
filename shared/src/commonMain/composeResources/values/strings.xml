@@ -21,6 +21,10 @@
     <string name="shopPriceFormat">%1$d$</string>
     <string name="shopDiscountFormat">-%1$d%</string>
 
+    <!-- Product Details Screen -->
+    <string name="productDetailsTitle">Product Details</string>
+    <string name="productDetailsComingSoon">Coming Soon...</string>
+
     <!-- Profile Screen -->
     <string name="profileTitle">Profile</string>
     <string name="profileComingSoon">Coming Soon...</string>

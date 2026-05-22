@@ -4,11 +4,14 @@ import com.storium.domain.features.product.usecase.GetProductsFlowUseCase
 import com.storium.domain.features.product.usecase.GetSelectedCategoryIdsFlowUseCase
 import com.storium.domain.features.product.usecase.ToggleCategorySelectionUseCase
 import com.storium.ui.base.BaseViewModel
+import com.storium.ui.navigation.app.AppNavigator
+import com.storium.ui.navigation.model.AppNavRoute
 import com.storium.ui.screens.shop.mapper.toUiModels
 import com.storium.ui.screens.shop.model.DisplayMode
 import kotlinx.coroutines.flow.combine
 
 class ShopViewModel(
+    private val appNavigator: AppNavigator,
     private val getProductsFlowUseCase: GetProductsFlowUseCase,
     private val getSelectedCategoryIdsFlowUseCase: GetSelectedCategoryIdsFlowUseCase,
     private val toggleCategorySelectionUseCase: ToggleCategorySelectionUseCase,
@@ -19,10 +22,12 @@ class ShopViewModel(
     }
 
     override fun reduceIntent(intent: ShopIntent) {
-        when (intent) {
-            is ShopIntent.CategoryToggled -> toggleCategorySelectionUseCase(intent.categoryId)
-            is ShopIntent.DisplayModeToggled -> onDisplayModeToggled()
-            is ShopIntent.ProductClicked -> Unit
+        launchViewModelScope {
+            when (intent) {
+                is ShopIntent.CategoryToggled -> toggleCategorySelectionUseCase(intent.categoryId)
+                is ShopIntent.DisplayModeToggled -> onDisplayModeToggled()
+                is ShopIntent.ProductClicked -> appNavigator.navigateTo(AppNavRoute.ProductDetails(intent.productId))
+            }
         }
     }
 
