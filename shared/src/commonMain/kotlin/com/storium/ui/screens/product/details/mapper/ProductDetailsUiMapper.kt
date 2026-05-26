@@ -11,8 +11,8 @@ class ProductDetailsUiMapper(private val reviewUiMapper: ReviewUiMapper) {
         brand = product.brand,
         description = product.description,
         images = product.images.ifEmpty { listOf(product.thumbnail) },
-        priceInfo = toPriceUiModel(product.price, product.discountPercentage),
-        rating = product.toRatingUiModel(),
+        priceInfo = toPriceUiModel(price = product.price, discountPercentage = product.discountPercentage),
+        rating = toRatingUiModel(reviews = product.reviews),
         reviews = reviewUiMapper.map(product.reviews),
     )
 }

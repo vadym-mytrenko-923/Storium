@@ -2,9 +2,7 @@ package com.storium.ui.screens.product.details.composable.review
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -18,6 +16,7 @@ import com.storium.ui.screens.product.details.model.RatingUiModel
 import com.storium.ui.screens.product.details.model.ReviewUiModel
 import com.storium.ui.theme.StoriumTheme
 import com.storium.ui.theme.appColors
+import com.storium.ui.theme.marginPrimary
 import com.storium.ui.theme.marginPrimary2X
 import org.jetbrains.compose.resources.stringResource
 import storium.shared.generated.resources.Res
@@ -40,14 +39,13 @@ fun RatingReviewsSection(
     ) {
         Text(
             text = stringResource(Res.string.productDetailsRatingTitle),
-            style = MaterialTheme.typography.headlineLarge,
+            style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.Medium),
         )
 
-        Spacer(modifier = Modifier.height(marginPrimary2X))
-
-        RatingSummary(rating = rating)
-
-        Spacer(modifier = Modifier.height(marginPrimary2X))
+        RatingSummary(
+            modifier = Modifier.padding(vertical = marginPrimary),
+            rating = rating
+        )
 
         Text(
             text = stringResource(Res.string.productDetailsReviewsCountFormat, reviews.size),
