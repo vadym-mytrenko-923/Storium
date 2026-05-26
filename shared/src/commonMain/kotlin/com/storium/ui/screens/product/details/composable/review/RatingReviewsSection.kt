@@ -55,7 +55,7 @@ fun RatingReviewsSection(
             color = MaterialTheme.appColors.textPrimary,
         )
 
-        reviews.forEach { review -> ReviewCard(review = review) }
+        reviews.forEach { review -> ReviewCard(review = review, maxStars = rating.maxStars) }
     }
 }
 

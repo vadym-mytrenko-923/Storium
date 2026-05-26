@@ -66,10 +66,7 @@ fun ProductGridItem(
 
         Spacer(modifier = Modifier.height(marginPrimary))
 
-        SmallRatingBar(
-            rating = product.rating,
-            reviewCount = product.reviewCount,
-        )
+        SmallRatingBar(rating = product.rating)
 
         Spacer(modifier = Modifier.height(marginPrimary0_75X))
 

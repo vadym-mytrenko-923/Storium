@@ -20,7 +20,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.storium.ui.screens.product.details.composable.preview.ProductDetailsPreviewUiModels
-import com.storium.ui.screens.product.details.composable.rating.MAX_STARS
 import com.storium.ui.screens.product.details.model.ReviewUiModel
 import com.storium.ui.theme.AppIcons
 import com.storium.ui.theme.StoriumTheme
@@ -35,6 +34,7 @@ import org.jetbrains.compose.resources.painterResource
 fun ReviewCard(
     modifier: Modifier = Modifier,
     review: ReviewUiModel,
+    maxStars: Int,
 ) {
     Column(
         modifier = modifier
@@ -57,7 +57,7 @@ fun ReviewCard(
             horizontalArrangement = Arrangement.SpaceBetween,
         ) {
             Row(horizontalArrangement = Arrangement.spacedBy(1.dp)) {
-                repeat(MAX_STARS) { index ->
+                repeat(maxStars) { index ->
                     Image(
                         modifier = Modifier.size(ratingStarSize),
                         painter = painterResource(
@@ -89,6 +89,9 @@ fun ReviewCard(
 @Composable
 private fun ReviewCardPreview() {
     StoriumTheme {
-        ReviewCard(review = ProductDetailsPreviewUiModels.reviews.first())
+        ReviewCard(
+            review = ProductDetailsPreviewUiModels.reviews.first(),
+            maxStars = ProductDetailsPreviewUiModels.rating.maxStars,
+        )
     }
 }

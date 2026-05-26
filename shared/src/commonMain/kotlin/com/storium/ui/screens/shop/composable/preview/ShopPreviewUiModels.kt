@@ -1,6 +1,7 @@
 package com.storium.ui.screens.shop.composable.preview
 
 import com.storium.ui.core.error.model.AppStringResource
+import com.storium.ui.screens.product.details.composable.preview.ProductDetailsPreviewUiModels
 import com.storium.ui.screens.shop.model.CategoryUiModel
 import com.storium.ui.screens.shop.model.PriceUiModel
 import com.storium.ui.screens.shop.model.ProductUiModel
@@ -18,8 +19,7 @@ object ShopPreviewUiModels {
         priceInfo = PriceUiModel.Regular(
             price = AppStringResource(Res.string.shopPriceFormat, listOf("51.00")),
         ),
-        rating = 4.0,
-        reviewCount = 3,
+        rating = ProductDetailsPreviewUiModels.rating,
     )
 
     val productWithDiscount = ProductUiModel(
@@ -32,8 +32,7 @@ object ShopPreviewUiModels {
             oldPrice = AppStringResource(Res.string.shopPriceFormat, listOf("21.00")),
             discountPercent = 20,
         ),
-        rating = 5.0,
-        reviewCount = 10,
+        rating = ProductDetailsPreviewUiModels.rating,
     )
 
     val products = List(PREVIEW_PRODUCTS_COUNT) { index ->

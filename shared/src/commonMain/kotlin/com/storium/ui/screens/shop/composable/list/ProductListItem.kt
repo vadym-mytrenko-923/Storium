@@ -101,10 +101,7 @@ fun ProductListItem(
 
                 Spacer(modifier = Modifier.height(marginPrimary))
 
-                SmallRatingBar(
-                    rating = product.rating,
-                    reviewCount = product.reviewCount,
-                )
+                SmallRatingBar(rating = product.rating)
 
                 Spacer(modifier = Modifier.height(marginPrimary))
 

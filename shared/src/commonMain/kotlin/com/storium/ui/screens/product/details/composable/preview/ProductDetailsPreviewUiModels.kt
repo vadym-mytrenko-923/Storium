@@ -37,6 +37,8 @@ object ProductDetailsPreviewUiModels {
     val ratingDistributionItemEmpty = RatingDistributionUiModel(stars = 1, reviewsNumber = 0, reviewsFraction = 0f)
     val rating = RatingUiModel(
         displayRating = "4.0",
+        filledStars = 4,
+        maxStars = 5,
         totalCount = reviews.size,
         distribution = listOf(
             RatingDistributionUiModel(stars = 5, reviewsNumber = 1, reviewsFraction = 1f / 3),

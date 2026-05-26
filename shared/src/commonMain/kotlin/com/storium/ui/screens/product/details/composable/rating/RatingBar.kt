@@ -30,19 +30,18 @@ import com.storium.ui.theme.ratingBarShape
 import com.storium.ui.theme.ratingStarSize
 import org.jetbrains.compose.resources.painterResource
 
-internal const val MAX_STARS = 5
-
 @Composable
 fun RatingBar(
     modifier: Modifier = Modifier,
     item: RatingDistributionUiModel,
+    maxStars: Int,
 ) {
     Row(
         modifier = modifier,
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Row(
-            modifier = Modifier.width(ratingStarSize * MAX_STARS),
+            modifier = Modifier.width(ratingStarSize * maxStars),
             horizontalArrangement = Arrangement.End,
         ) {
             repeat(item.stars) {
@@ -89,7 +88,10 @@ fun RatingBar(
 @Composable
 private fun RatingBarPreview() {
     StoriumTheme {
-        RatingBar(item = ProductDetailsPreviewUiModels.ratingDistributionItem)
+        RatingBar(
+            item = ProductDetailsPreviewUiModels.ratingDistributionItem,
+            maxStars = ProductDetailsPreviewUiModels.rating.maxStars,
+        )
     }
 }
 
@@ -97,6 +99,9 @@ private fun RatingBarPreview() {
 @Composable
 private fun RatingBarEmptyPreview() {
     StoriumTheme {
-        RatingBar(item = ProductDetailsPreviewUiModels.ratingDistributionItemEmpty)
+        RatingBar(
+            item = ProductDetailsPreviewUiModels.ratingDistributionItemEmpty,
+            maxStars = ProductDetailsPreviewUiModels.rating.maxStars,
+        )
     }
 }

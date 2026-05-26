@@ -52,7 +52,7 @@ fun RatingSummary(
             verticalArrangement = Arrangement.spacedBy(marginPrimaryHalf),
         ) {
             rating.distribution.forEach { item ->
-                RatingBar(item = item)
+                RatingBar(item = item, maxStars = rating.maxStars)
             }
         }
     }
