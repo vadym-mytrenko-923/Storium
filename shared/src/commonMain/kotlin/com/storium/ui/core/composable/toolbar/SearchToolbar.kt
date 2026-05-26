@@ -14,7 +14,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
@@ -45,6 +48,7 @@ fun SearchToolbar(
     onCloseClicked: () -> Unit,
 ) {
     val focusRequester = remember { FocusRequester() }
+    var searchQuery by remember { mutableStateOf(query) }
     val minHeight = when (style) {
         ToolbarStyle.Large -> largeToolbarHeight
         ToolbarStyle.Small -> smallToolbarHeight
@@ -52,6 +56,10 @@ fun SearchToolbar(
 
     LaunchedEffect(Unit) {
         focusRequester.requestFocus()
+    }
+
+    LaunchedEffect(searchQuery) {
+        onQueryChanged(searchQuery)
     }
 
     Row(
@@ -72,12 +80,12 @@ fun SearchToolbar(
         )
 
         BasicTextField(
-            value = query,
-            onValueChange = onQueryChanged,
             modifier = Modifier
                 .weight(1f)
                 .padding(horizontal = marginPrimary2X)
                 .focusRequester(focusRequester),
+            value = searchQuery,
+            onValueChange = { searchQuery = it },
             textStyle = MaterialTheme.typography.bodyLarge.copy(
                 color = MaterialTheme.appColors.textPrimary,
             ),
@@ -85,7 +93,7 @@ fun SearchToolbar(
             cursorBrush = SolidColor(MaterialTheme.appColors.primary),
             keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Words),
             decorationBox = { innerTextField ->
-                if (query.isEmpty() && placeholder.isNotEmpty()) {
+                if (searchQuery.isEmpty() && placeholder.isNotEmpty()) {
                     Text(
                         text = placeholder,
                         style = MaterialTheme.typography.bodyLarge,
@@ -97,11 +105,11 @@ fun SearchToolbar(
             },
         )
 
-        if (query.isNotEmpty()) {
+        if (searchQuery.isNotEmpty()) {
             Image(
                 modifier = Modifier
                     .size(defaultIconSize)
-                    .clickable { onQueryChanged("") },
+                    .clickable { searchQuery = "" },
                 painter = painterResource(AppIcons.Close),
                 contentDescription = null,
             )
