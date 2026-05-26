@@ -13,6 +13,6 @@ actual fun formatIsoDate(isoDate: String, outputPattern: String): String {
         timeZone = TimeZone.getTimeZone(UTC)
     }
 
-    val date = isoFormat.parse(isoDate) ?: return isoDate
+    val date = requireNotNull(isoFormat.parse(isoDate))
     return outputFormat.format(date)
 }
