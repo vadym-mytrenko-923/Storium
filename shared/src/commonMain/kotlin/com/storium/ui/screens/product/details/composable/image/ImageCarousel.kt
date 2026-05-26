@@ -1,30 +1,29 @@
 package com.storium.ui.screens.product.details.composable.image
 
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PageSize
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Density
-import androidx.compose.ui.unit.IntOffset
 import coil3.compose.AsyncImage
 import com.storium.ui.screens.shop.composable.common.DiscountChip
 import com.storium.ui.theme.StoriumTheme
@@ -36,6 +35,7 @@ import com.storium.ui.theme.marginPrimary
 import com.storium.ui.theme.marginPrimaryHalf
 
 private const val PAGE_SIZE_FRACTION = 0.7f
+private const val PAGE_INDICATOR_ANIMATION_LABEL = "indicatorFraction"
 
 @Composable
 fun ImageCarousel(
@@ -101,17 +101,23 @@ private fun CarouselIndicator(
     modifier: Modifier = Modifier,
     pagerState: PagerState,
 ) {
-    BoxWithConstraints(modifier = modifier.fillMaxWidth()) {
-        val indicatorWidth = maxWidth / pagerState.pageCount
-        val indicatorWidthPx = with(LocalDensity.current) { indicatorWidth.toPx() }
+    val targetFraction by animateFloatAsState(
+        targetValue = pagerState.currentPage.toFloat() / (pagerState.pageCount - 1).coerceAtLeast(1),
+        label = PAGE_INDICATOR_ANIMATION_LABEL,
+    )
 
+    Box(
+        modifier = modifier
+            .fillMaxWidth()
+            .height(carouselIndicatorHeight),
+    ) {
         Box(
             modifier = Modifier
-                .width(indicatorWidth)
-                .height(carouselIndicatorHeight)
-                .offset {
-                    val progress = pagerState.currentPage + pagerState.currentPageOffsetFraction
-                    IntOffset(x = (indicatorWidthPx * progress).toInt(), y = 0)
+                .fillMaxWidth(1f / pagerState.pageCount)
+                .fillMaxHeight()
+                .graphicsLayer {
+                    val maxOffsetPx = size.width * (pagerState.pageCount - 1)
+                    translationX = maxOffsetPx * targetFraction
                 }
                 .clip(carouselIndicatorShape)
                 .background(MaterialTheme.appColors.textPrimary),
