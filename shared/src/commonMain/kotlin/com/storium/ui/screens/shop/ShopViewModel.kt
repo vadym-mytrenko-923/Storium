@@ -1,7 +1,9 @@
 package com.storium.ui.screens.shop
 
 import com.storium.domain.features.product.usecase.GetProductsFlowUseCase
+import com.storium.domain.features.product.usecase.GetProductsSearchQueryFlowUseCase
 import com.storium.domain.features.product.usecase.GetSelectedCategoryIdsFlowUseCase
+import com.storium.domain.features.product.usecase.SetProductsSearchQueryUseCase
 import com.storium.domain.features.product.usecase.ToggleCategorySelectionUseCase
 import com.storium.ui.base.BaseViewModel
 import com.storium.ui.navigation.app.AppNavigator
@@ -14,7 +16,9 @@ class ShopViewModel(
     private val appNavigator: AppNavigator,
     private val getProductsFlowUseCase: GetProductsFlowUseCase,
     private val getSelectedCategoryIdsFlowUseCase: GetSelectedCategoryIdsFlowUseCase,
+    private val getProductsSearchQueryFlowUseCase: GetProductsSearchQueryFlowUseCase,
     private val toggleCategorySelectionUseCase: ToggleCategorySelectionUseCase,
+    private val setProductsSearchQueryUseCase: SetProductsSearchQueryUseCase,
 ) : BaseViewModel<ShopScreenState, ShopIntent, ShopEffect>(ShopScreenState()) {
 
     init {
@@ -27,6 +31,8 @@ class ShopViewModel(
                 is ShopIntent.CategoryToggled -> toggleCategorySelectionUseCase(intent.categoryId)
                 is ShopIntent.DisplayModeToggled -> onDisplayModeToggled()
                 is ShopIntent.ProductClicked -> appNavigator.navigateTo(AppNavRoute.ProductDetails(intent.productId))
+                is ShopIntent.SearchToggled -> onSearchToggled()
+                is ShopIntent.SearchQueryChanged -> setProductsSearchQueryUseCase(intent.query)
             }
         }
     }
@@ -36,11 +42,13 @@ class ShopViewModel(
             combine(
                 getProductsFlowUseCase(),
                 getSelectedCategoryIdsFlowUseCase(),
-            ) { dataState, selectedCategoryIds ->
+                getProductsSearchQueryFlowUseCase(),
+            ) { dataState, selectedCategoryIds, searchQuery ->
                 currentState.copy(
                     products = dataState.products.toUiModels(),
                     categories = dataState.categories.toUiModels(selectedIds = selectedCategoryIds),
                     isLoading = dataState.isLoading,
+                    searchQuery = searchQuery,
                 )
             }.collect { uiState ->
                 updateUiState { uiState }
@@ -57,5 +65,13 @@ class ShopViewModel(
                 },
             )
         }
+    }
+
+    private suspend fun onSearchToggled() {
+        if (currentState.isSearchActive) {
+            setProductsSearchQueryUseCase("")
+        }
+
+        updateUiState { copy(isSearchActive = !currentState.isSearchActive) }
     }
 }

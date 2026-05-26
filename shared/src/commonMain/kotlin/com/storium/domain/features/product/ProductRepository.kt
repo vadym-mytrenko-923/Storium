@@ -7,7 +7,9 @@ import kotlinx.coroutines.flow.Flow
 interface ProductRepository {
     val productsFlow: Flow<ProductsDataState>
     val selectedCategoryIdsFlow: Flow<Set<String>>
+    val searchQueryFlow: Flow<String>
     fun toggleCategorySelection(categoryId: String)
+    fun setSearchQuery(query: String)
     suspend fun getProductById(id: Int): Product
     suspend fun fetchProducts()
     suspend fun fetchProductsByCategory(id: String)

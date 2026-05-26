@@ -21,6 +21,7 @@ class ProductRepositoryImpl(
     private val cachedProducts = MutableStateFlow<List<Product>>(emptyList())
     private val cachedCategories = MutableStateFlow<List<Category>>(emptyList())
     private val selectedCategoryIds = MutableStateFlow<Set<String>>(emptySet())
+    private val searchQuery = MutableStateFlow("")
     private val isSyncInProgress = MutableStateFlow(false)
 
     override val productsFlow: Flow<ProductsDataState> = combine(
@@ -28,15 +29,24 @@ class ProductRepositoryImpl(
         cachedCategories,
         selectedCategoryIds,
         isSyncInProgress,
-    ) { products, categories, selectedIds, isLoading ->
-        val filteredProducts = if (selectedIds.isEmpty()) {
+        searchQuery,
+    ) { products, categories, selectedIds, isLoading, query ->
+        val categoryFiltered = if (selectedIds.isEmpty()) {
             emptyList()
         } else {
             products.filter { it.categoryId in selectedIds }
         }
 
+        val searchFiltered = if (query.isBlank()) {
+            categoryFiltered
+        } else {
+            categoryFiltered.filter {
+                it.title.contains(query, ignoreCase = true) || it.brand.contains(query, ignoreCase = true)
+            }
+        }
+
         ProductsDataState(
-            products = filteredProducts,
+            products = searchFiltered,
             categories = categories,
             isLoading = isLoading,
         )
@@ -46,12 +56,18 @@ class ProductRepositoryImpl(
 
     override val selectedCategoryIdsFlow: Flow<Set<String>> = selectedCategoryIds.asStateFlow()
 
+    override val searchQueryFlow: Flow<String> = searchQuery.asStateFlow()
+
     override fun toggleCategorySelection(categoryId: String) {
         val current = selectedCategoryIds.value
         val categoryIds = cachedCategories.value.map { it.id }.toSet()
         val updatedCategories = if (categoryId in current) current - categoryId else current + categoryId
 
         selectedCategoryIds.value = if (updatedCategories.size == categoryIds.size) categoryIds else updatedCategories
+    }
+
+    override fun setSearchQuery(query: String) {
+        searchQuery.value = query
     }
 
     override suspend fun getProductById(id: Int): Product {

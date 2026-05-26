@@ -4,41 +4,27 @@ import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.togetherWith
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.storium.ui.core.composable.empty.EmptyStateView
 import com.storium.ui.core.composable.other.FullscreenProgressIndicator
-import com.storium.ui.core.composable.surface.ElevatedSurface
-import com.storium.ui.core.composable.toolbar.Toolbar
 import com.storium.ui.screens.shop.ShopIntent
 import com.storium.ui.screens.shop.ShopScreenState
 import com.storium.ui.screens.shop.composable.grid.ProductGrid
 import com.storium.ui.screens.shop.composable.list.ProductList
 import com.storium.ui.screens.shop.composable.preview.ShopPreviewUiModels
 import com.storium.ui.screens.shop.model.DisplayMode
-import com.storium.ui.theme.AppIcons
 import com.storium.ui.theme.StoriumTheme
 import com.storium.ui.theme.appColors
-import com.storium.ui.theme.defaultIconSize
-import com.storium.ui.theme.marginPrimary2X
-import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import storium.shared.generated.resources.Res
 import storium.shared.generated.resources.shopEmptyState
-import storium.shared.generated.resources.shopTitle
 
 @Composable
 fun ShopContent(
@@ -48,39 +34,11 @@ fun ShopContent(
     paddingValues: PaddingValues = PaddingValues(),
 ) {
     Column(modifier = modifier.fillMaxSize()) {
-        ElevatedSurface {
-            Column {
-                Toolbar(
-                    modifier = Modifier.padding(top = paddingValues.calculateTopPadding()),
-                    title = stringResource(Res.string.shopTitle),
-                    trailingContent = {
-                        Image(
-                            modifier = Modifier
-                                .size(defaultIconSize)
-                                .clickable { onIntent(ShopIntent.DisplayModeToggled) },
-                            painter = painterResource(
-                                when (state.displayMode) {
-                                    DisplayMode.List -> AppIcons.ViewGrid
-                                    DisplayMode.Grid -> AppIcons.ViewList
-                                },
-                            ),
-                            contentDescription = null,
-                        )
-                    },
-                )
-
-                if (!state.isLoading && state.categories.isNotEmpty()) {
-                    CategoryChipRow(
-                        categories = state.categories,
-                        onCategoryClicked = { category ->
-                            onIntent(ShopIntent.CategoryToggled(category.id))
-                        },
-                    )
-
-                    Spacer(modifier = Modifier.height(marginPrimary2X))
-                }
-            }
-        }
+        ShopHeader(
+            state = state,
+            onIntent = onIntent,
+            paddingValues = paddingValues,
+        )
 
         Box(modifier = Modifier.weight(1f)) {
             when {
@@ -89,16 +47,7 @@ fun ShopContent(
                 }
 
                 state.products.isEmpty() -> {
-                    Box(
-                        modifier = Modifier.fillMaxSize(),
-                        contentAlignment = Alignment.Center,
-                    ) {
-                        Text(
-                            text = stringResource(Res.string.shopEmptyState),
-                            style = MaterialTheme.typography.bodyLarge,
-                            color = MaterialTheme.appColors.textSecondary,
-                        )
-                    }
+                    EmptyStateView(message = stringResource(Res.string.shopEmptyState))
                 }
 
                 else -> {
@@ -127,6 +76,23 @@ private fun ShopContentPreview() {
                 products = ShopPreviewUiModels.products,
                 categories = ShopPreviewUiModels.categories,
                 isLoading = false,
+            ),
+            onIntent = {},
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun ShopContentSearchPreview() {
+    StoriumTheme {
+        ShopContent(
+            state = ShopScreenState(
+                products = ShopPreviewUiModels.products,
+                categories = ShopPreviewUiModels.categories,
+                isLoading = false,
+                isSearchActive = true,
+                searchQuery = "Pullover",
             ),
             onIntent = {},
         )
