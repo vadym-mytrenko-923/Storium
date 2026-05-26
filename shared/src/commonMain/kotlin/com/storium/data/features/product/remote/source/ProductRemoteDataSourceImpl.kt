@@ -7,6 +7,8 @@ import com.storium.data.features.product.remote.model.ProductDto
 class ProductRemoteDataSourceImpl(private val productApi: ProductApi) : ProductRemoteDataSource {
     override suspend fun getProducts(): List<ProductDto> = productApi.getProducts().products
 
+    override suspend fun getProductById(id: Int): ProductDto = productApi.getProductById(id)
+
     override suspend fun getCategories(): List<CategoryDto> = productApi.getCategories()
 
     override suspend fun getProductsByCategory(id: String): List<ProductDto> {

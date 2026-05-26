@@ -20,17 +20,20 @@ val marginPrimary8X = 64.dp
 val marginPrimary9X = 72.dp
 
 // Radii
+val pageIndicatorRadius = 4.dp
 val inputRadius = 4.dp
 val defaultRadius = 8.dp
 val bottomSheetRadius = 12.dp
+val alertContainerRadius = 24.dp
 val btnCornerRadius = 24.dp
 val circleRadius = 1000.dp
 
-// Icon sizes
+// Icon and image sizes
 val ratingStarSize = 14.dp
 val smallIconSize = 16.dp
 val defaultIconSize = 24.dp
 val largeIconSize = 32.dp
+val carouselImageHeight = 400.dp
 
 // Component sizes
 val largeToolbarHeight = 80.dp
@@ -44,6 +47,8 @@ val productCardImageHeight = 184.dp
 val discountChipHeight = 24.dp
 val discountChipPadding = 6.dp
 val categoryChipHeight = 36.dp
+val carouselIndicatorHeight = 3.dp
+val ratingBarHeight = 8.dp
 
 // Text sizes
 val textSizeLargest = 34.sp
@@ -64,7 +69,6 @@ val textLineHeightNormalExpanded = 21.sp
 val textLineHeightSmall = 12.sp
 
 // Alert
-val alertContainerRadius = 24.dp
 val appAlertSwipeThresholdSize = 48.dp
 
 // Elevation

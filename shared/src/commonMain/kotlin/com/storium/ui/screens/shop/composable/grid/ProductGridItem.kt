@@ -19,9 +19,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import coil3.compose.AsyncImage
 import com.storium.ui.core.composable.surface.ElevatedSurface
 import com.storium.ui.screens.shop.composable.common.DiscountChip
-import com.storium.ui.screens.shop.composable.common.ProductPriceRow
 import com.storium.ui.screens.shop.composable.common.SmallRatingBar
+import com.storium.ui.screens.shop.composable.common.price.ProductPriceRow
 import com.storium.ui.screens.shop.composable.preview.ShopPreviewUiModels
+import com.storium.ui.screens.shop.model.PriceUiModel
 import com.storium.ui.screens.shop.model.ProductUiModel
 import com.storium.ui.theme.StoriumTheme
 import com.storium.ui.theme.appColors
@@ -52,12 +53,12 @@ fun ProductGridItem(
                     contentScale = ContentScale.Crop,
                 )
 
-                product.discountPercent?.let {
+                if (product.priceInfo is PriceUiModel.Discounted) {
                     DiscountChip(
                         modifier = Modifier
                             .align(Alignment.TopStart)
                             .padding(marginPrimary),
-                        discountPercent = it,
+                        discountPercent = product.priceInfo.discountPercent,
                     )
                 }
             }
@@ -65,10 +66,7 @@ fun ProductGridItem(
 
         Spacer(modifier = Modifier.height(marginPrimary))
 
-        SmallRatingBar(
-            rating = product.rating,
-            reviewCount = product.reviewCount,
-        )
+        SmallRatingBar(rating = product.rating)
 
         Spacer(modifier = Modifier.height(marginPrimary0_75X))
 
@@ -94,10 +92,7 @@ fun ProductGridItem(
 
         Spacer(modifier = Modifier.height(marginPrimaryHalf))
 
-        ProductPriceRow(
-            price = product.price,
-            oldPrice = product.oldPrice,
-        )
+        ProductPriceRow(priceInfo = product.priceInfo)
     }
 }
 

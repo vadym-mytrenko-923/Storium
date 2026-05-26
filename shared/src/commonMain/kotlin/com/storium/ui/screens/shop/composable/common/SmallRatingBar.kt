@@ -12,6 +12,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.storium.ui.screens.product.details.composable.preview.ProductDetailsPreviewUiModels
+import com.storium.ui.screens.product.details.model.RatingUiModel
 import com.storium.ui.theme.AppIcons
 import com.storium.ui.theme.StoriumTheme
 import com.storium.ui.theme.appColors
@@ -20,26 +22,22 @@ import com.storium.ui.theme.ratingStarSize
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import storium.shared.generated.resources.Res
-import storium.shared.generated.resources.shopRatingCount
-
-private const val DEFAULT_MAX_STARS = 5
+import storium.shared.generated.resources.shopRatingCountFormat
 
 @Composable
 fun SmallRatingBar(
     modifier: Modifier = Modifier,
-    rating: Double,
-    reviewCount: Int,
-    maxStars: Int = DEFAULT_MAX_STARS,
+    rating: RatingUiModel,
 ) {
     Row(
         modifier = modifier.height(ratingStarSize),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        repeat(maxStars) { index ->
+        repeat(rating.maxStars) { index ->
             Image(
                 modifier = Modifier.size(ratingStarSize),
                 painter = painterResource(
-                    if (index < rating.toInt()) AppIcons.StarFilled else AppIcons.StarEmpty,
+                    if (index < rating.filledStars) AppIcons.StarFilled else AppIcons.StarEmpty,
                 ),
                 contentDescription = null,
             )
@@ -48,10 +46,10 @@ fun SmallRatingBar(
         Spacer(modifier = Modifier.width(marginPrimaryQuarter))
 
         Text(
-            text = stringResource(Res.string.shopRatingCount, reviewCount),
+            text = stringResource(Res.string.shopRatingCountFormat, rating.totalCount),
             style = MaterialTheme.typography.bodySmall.copy(
                 color = MaterialTheme.appColors.textSecondary,
-            )
+            ),
         )
     }
 }
@@ -60,14 +58,6 @@ fun SmallRatingBar(
 @Composable
 private fun SmallRatingBarPreview() {
     StoriumTheme {
-        SmallRatingBar(rating = 4.2, reviewCount = 3)
-    }
-}
-
-@Preview
-@Composable
-private fun SmallRatingBarEmptyPreview() {
-    StoriumTheme {
-        SmallRatingBar(rating = 0.0, reviewCount = 0)
+        SmallRatingBar(rating = ProductDetailsPreviewUiModels.rating)
     }
 }
