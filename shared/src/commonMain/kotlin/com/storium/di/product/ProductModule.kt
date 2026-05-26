@@ -6,7 +6,9 @@ import com.storium.data.features.product.remote.source.ProductRemoteDataSourceIm
 import com.storium.domain.features.product.ProductRepository
 import com.storium.domain.features.product.usecase.GetProductByIdUseCase
 import com.storium.domain.features.product.usecase.GetProductsFlowUseCase
+import com.storium.domain.features.product.usecase.GetProductsSearchQueryFlowUseCase
 import com.storium.domain.features.product.usecase.GetSelectedCategoryIdsFlowUseCase
+import com.storium.domain.features.product.usecase.SetProductsSearchQueryUseCase
 import com.storium.domain.features.product.usecase.ToggleCategorySelectionUseCase
 import com.storium.ui.screens.product.details.ProductDetailsViewModel
 import com.storium.ui.screens.product.details.mapper.ProductDetailsUiMapper
@@ -35,10 +37,12 @@ val productModule = module {
     factory { GetProductByIdUseCase(get()) }
     factory { GetProductsFlowUseCase(get()) }
     factory { GetSelectedCategoryIdsFlowUseCase(get()) }
+    factory { GetProductsSearchQueryFlowUseCase(get()) }
     factory { ToggleCategorySelectionUseCase(get()) }
+    factory { SetProductsSearchQueryUseCase(get()) }
 
     // ViewModels
-    viewModel { ShopViewModel(get(), get(), get(), get()) }
+    viewModel { ShopViewModel(get(), get(), get(), get(), get(), get()) }
     viewModel { ProductDetailsViewModel(get(), get(), get(), get()) }
 
     // Formatters

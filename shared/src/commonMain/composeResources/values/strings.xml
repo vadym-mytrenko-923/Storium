@@ -20,6 +20,7 @@
     <string name="shopRatingCountFormat">(%1$d)</string>
     <string name="shopPriceFormat">%1$s$</string>
     <string name="shopDiscountFormat">-%1$d%</string>
+    <string name="shopSearchPlaceholder">Search products...</string>
 
     <!-- Product Details Screen -->
     <string name="productDetailsTitle">Product Details</string>

@@ -3,8 +3,8 @@ package com.storium.domain.features.product.usecase
 import com.storium.domain.base.usecase.BaseUseCase
 import com.storium.domain.features.product.ProductRepository
 
-class ToggleCategorySelectionUseCase(
+class SetProductsSearchQueryUseCase(
     private val repository: ProductRepository,
 ) : BaseUseCase<String, Unit>() {
-    override suspend fun execute(parameters: String) = repository.toggleCategorySelection(parameters)
+    override suspend fun execute(parameters: String) = repository.setSearchQuery(parameters)
 }
