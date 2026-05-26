@@ -5,9 +5,7 @@ data class ProductUiModel(
     val title: String,
     val brand: String,
     val thumbnail: String,
-    val price: Int,
-    val oldPrice: Int?,
-    val discountPercent: Int?,
+    val priceInfo: PriceUiModel,
     val rating: Double,
     val reviewCount: Int,
 )

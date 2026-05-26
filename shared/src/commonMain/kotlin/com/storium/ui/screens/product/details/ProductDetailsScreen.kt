@@ -2,42 +2,50 @@ package com.storium.ui.screens.product.details
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.storium.ui.core.composable.other.FullscreenProgressIndicator
+import com.storium.ui.core.composable.surface.ElevatedSurface
 import com.storium.ui.core.composable.toolbar.Toolbar
 import com.storium.ui.core.composable.toolbar.ToolbarStyle
+import com.storium.ui.screens.product.details.composable.ProductDetailsContent
+import com.storium.ui.screens.product.details.composable.preview.ProductDetailsPreviewUiModels
 import com.storium.ui.theme.AppIcons
 import com.storium.ui.theme.StoriumTheme
 import com.storium.ui.theme.appColors
 import com.storium.ui.theme.defaultIconSize
+import com.storium.ui.theme.elevationToolbar
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import storium.shared.generated.resources.Res
-import storium.shared.generated.resources.productDetailsComingSoon
 import storium.shared.generated.resources.productDetailsTitle
 
 @Composable
 fun ProductDetailsScreen(
     viewModel: ProductDetailsViewModel = koinViewModel(),
 ) {
-    ProductDetailsScreenContent(onIntent = viewModel::onUserIntent)
+    val state by viewModel.uiStateFlow.collectAsStateWithLifecycle()
+
+    ProductDetailsScreenContent(
+        state = state,
+        onIntent = viewModel::onUserIntent,
+    )
 }
 
 @Composable
 private fun ProductDetailsScreenContent(
     modifier: Modifier = Modifier,
+    state: ProductDetailsScreenState,
     onIntent: (ProductDetailsIntent) -> Unit,
 ) {
     Scaffold(
@@ -48,32 +56,36 @@ private fun ProductDetailsScreenContent(
                 .fillMaxSize()
                 .padding(bottom = paddingValues.calculateBottomPadding()),
         ) {
-            Toolbar(
-                modifier = Modifier.padding(top = paddingValues.calculateTopPadding()),
-                title = stringResource(Res.string.productDetailsTitle),
-                style = ToolbarStyle.Small,
-                leadingContent = {
-                    Image(
-                        modifier = Modifier
-                            .size(defaultIconSize)
-                            .clickable { onIntent(ProductDetailsIntent.BackClicked) },
-                        painter = painterResource(AppIcons.ArrowBack),
-                        contentDescription = null,
-                    )
-                },
-            )
-
-            Box(
-                modifier = Modifier
-                    .weight(1f)
-                    .fillMaxWidth(),
-                contentAlignment = Alignment.Center,
+            ElevatedSurface(
+                shadowElevation = elevationToolbar,
             ) {
-                Text(
-                    text = stringResource(Res.string.productDetailsComingSoon),
-                    style = MaterialTheme.typography.bodyLarge,
-                    color = MaterialTheme.appColors.textSecondary,
+                Toolbar(
+                    title = state.product?.title ?: stringResource(Res.string.productDetailsTitle),
+                    style = ToolbarStyle.Small,
+                    topPadding = paddingValues.calculateTopPadding(),
+                    leadingContent = {
+                        Image(
+                            modifier = Modifier
+                                .size(defaultIconSize)
+                                .clickable { onIntent(ProductDetailsIntent.BackClicked) },
+                            painter = painterResource(AppIcons.ArrowBack),
+                            contentDescription = null,
+                        )
+                    },
                 )
+            }
+
+            when {
+                state.isLoading -> {
+                    FullscreenProgressIndicator(backgroundColor = MaterialTheme.appColors.background)
+                }
+
+                state.product != null -> {
+                    ProductDetailsContent(
+                        modifier = Modifier.weight(1f),
+                        product = state.product,
+                    )
+                }
             }
         }
     }
@@ -81,8 +93,25 @@ private fun ProductDetailsScreenContent(
 
 @Preview(showBackground = true)
 @Composable
+private fun ProductDetailsScreenContentLoadingPreview() {
+    StoriumTheme {
+        ProductDetailsScreenContent(
+            state = ProductDetailsScreenState(),
+            onIntent = {},
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
 private fun ProductDetailsScreenContentPreview() {
     StoriumTheme {
-        ProductDetailsScreenContent(onIntent = {})
+        ProductDetailsScreenContent(
+            state = ProductDetailsScreenState(
+                isLoading = false,
+                product = ProductDetailsPreviewUiModels.productWithDiscount,
+            ),
+            onIntent = {},
+        )
     }
 }

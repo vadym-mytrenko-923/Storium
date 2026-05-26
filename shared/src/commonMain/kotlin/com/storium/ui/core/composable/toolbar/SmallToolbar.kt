@@ -15,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import com.storium.ui.theme.AppIcons
@@ -22,6 +23,7 @@ import com.storium.ui.theme.StoriumTheme
 import com.storium.ui.theme.appColors
 import com.storium.ui.theme.defaultIconSize
 import com.storium.ui.theme.marginPrimary2X
+import com.storium.ui.theme.marginPrimary4X
 import com.storium.ui.theme.smallToolbarHeight
 import org.jetbrains.compose.resources.painterResource
 
@@ -47,10 +49,13 @@ internal fun SmallToolbar(
         contentAlignment = Alignment.Center,
     ) {
         Text(
+            modifier = Modifier.padding(horizontal = marginPrimary4X),
             text = title,
             style = MaterialTheme.typography.titleLarge,
             textAlign = TextAlign.Center,
             color = resolvedTitleColor,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
         )
 
         Row(

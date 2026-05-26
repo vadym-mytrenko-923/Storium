@@ -20,7 +20,7 @@ import com.storium.ui.theme.ratingStarSize
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import storium.shared.generated.resources.Res
-import storium.shared.generated.resources.shopRatingCount
+import storium.shared.generated.resources.shopRatingCountFormat
 
 private const val DEFAULT_MAX_STARS = 5
 
@@ -48,7 +48,7 @@ fun SmallRatingBar(
         Spacer(modifier = Modifier.width(marginPrimaryQuarter))
 
         Text(
-            text = stringResource(Res.string.shopRatingCount, reviewCount),
+            text = stringResource(Res.string.shopRatingCountFormat, reviewCount),
             style = MaterialTheme.typography.bodySmall.copy(
                 color = MaterialTheme.appColors.textSecondary,
             )

@@ -1,7 +1,10 @@
 package com.storium.ui.screens.product.details
 
+import com.storium.ui.screens.product.details.model.ProductDetailsUiModel
+
 data class ProductDetailsScreenState(
-    val productId: Int = 0,
+    val isLoading: Boolean = true,
+    val product: ProductDetailsUiModel? = null,
 )
 
 sealed interface ProductDetailsIntent {

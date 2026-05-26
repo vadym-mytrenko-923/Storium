@@ -17,13 +17,16 @@
     <!-- Shop Screen -->
     <string name="shopTitle">Shop</string>
     <string name="shopEmptyState">No products found</string>
-    <string name="shopRatingCount">(%1$d)</string>
-    <string name="shopPriceFormat">%1$d$</string>
+    <string name="shopRatingCountFormat">(%1$d)</string>
+    <string name="shopPriceFormat">%1$s$</string>
     <string name="shopDiscountFormat">-%1$d%</string>
 
     <!-- Product Details Screen -->
     <string name="productDetailsTitle">Product Details</string>
     <string name="productDetailsComingSoon">Coming Soon...</string>
+    <string name="productDetailsRatingTitle">Rating \u0026 Reviews</string>
+    <string name="productDetailsRatingsCountFormat">%1$d ratings</string>
+    <string name="productDetailsReviewsCountFormat">%1$d reviews</string>
 
     <!-- Profile Screen -->
     <string name="profileTitle">Profile</string>

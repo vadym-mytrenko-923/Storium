@@ -5,6 +5,7 @@ import com.storium.data.features.product.remote.model.ProductDto
 
 interface ProductRemoteDataSource {
     suspend fun getProducts(): List<ProductDto>
+    suspend fun getProductById(id: Int): ProductDto
     suspend fun getCategories(): List<CategoryDto>
     suspend fun getProductsByCategory(id: String): List<ProductDto>
 }

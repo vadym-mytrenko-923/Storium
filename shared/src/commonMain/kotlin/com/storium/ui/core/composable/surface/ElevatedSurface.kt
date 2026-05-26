@@ -11,6 +11,7 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.zIndex
 import com.storium.ui.theme.StoriumTheme
 import com.storium.ui.theme.appColors
 import com.storium.ui.theme.elevationCard
@@ -24,7 +25,9 @@ fun ElevatedSurface(
     content: @Composable () -> Unit,
 ) {
     Surface(
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier
+            .fillMaxWidth()
+            .zIndex(1f),
         shape = shape,
         shadowElevation = shadowElevation,
         color = MaterialTheme.appColors.cardBackground,

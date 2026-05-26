@@ -7,4 +7,5 @@ data class ReviewDto(
     val rating: Int,
     val comment: String,
     val reviewerName: String,
+    val date: String = "",
 )

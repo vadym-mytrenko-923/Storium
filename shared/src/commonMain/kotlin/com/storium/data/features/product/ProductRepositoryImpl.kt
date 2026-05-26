@@ -1,6 +1,7 @@
 package com.storium.data.features.product
 
 import com.storium.data.features.product.mapper.toDomainModel
+import com.storium.data.features.product.mapper.toDomainModels
 import com.storium.data.features.product.remote.source.ProductRemoteDataSource
 import com.storium.domain.features.product.ProductRepository
 import com.storium.domain.features.product.model.Category
@@ -31,7 +32,7 @@ class ProductRepositoryImpl(
         val filteredProducts = if (selectedIds.isEmpty()) {
             emptyList()
         } else {
-            products.filter { it.category in selectedIds }
+            products.filter { it.categoryId in selectedIds }
         }
 
         ProductsDataState(
@@ -53,10 +54,14 @@ class ProductRepositoryImpl(
         selectedCategoryIds.value = if (updatedCategories.size == categoryIds.size) categoryIds else updatedCategories
     }
 
+    override suspend fun getProductById(id: Int): Product {
+        return remoteDataSource.getProductById(id).toDomainModel()
+    }
+
     override suspend fun fetchProducts() {
         isSyncInProgress.value = true
         try {
-            cachedProducts.value = remoteDataSource.getProducts().map { it.toDomainModel() }
+            cachedProducts.value = remoteDataSource.getProducts().toDomainModels()
         } catch (e: Exception) {
             appLogger.logException(e)
         } finally {
@@ -67,7 +72,7 @@ class ProductRepositoryImpl(
     override suspend fun fetchProductsByCategory(id: String) {
         isSyncInProgress.value = true
         try {
-            cachedProducts.value = remoteDataSource.getProductsByCategory(id).map { it.toDomainModel() }
+            cachedProducts.value = remoteDataSource.getProductsByCategory(id).toDomainModels()
         } catch (e: Exception) {
             appLogger.logException(e)
         } finally {
@@ -80,8 +85,8 @@ class ProductRepositoryImpl(
 
         isSyncInProgress.value = true
         try {
-            val categories = remoteDataSource.getCategories().map { it.toDomainModel() }
-            val products = remoteDataSource.getProducts().map { it.toDomainModel() }
+            val categories = remoteDataSource.getCategories().toDomainModels()
+            val products = remoteDataSource.getProducts().toDomainModels()
 
             cachedProducts.value = products
             cachedCategories.value = categories
