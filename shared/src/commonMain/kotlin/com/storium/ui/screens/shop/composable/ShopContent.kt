@@ -4,11 +4,12 @@ import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.togetherWith
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -26,6 +27,7 @@ import org.jetbrains.compose.resources.stringResource
 import storium.shared.generated.resources.Res
 import storium.shared.generated.resources.shopEmptyState
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ShopContent(
     modifier: Modifier = Modifier,
@@ -40,9 +42,13 @@ fun ShopContent(
             paddingValues = paddingValues,
         )
 
-        Box(modifier = Modifier.weight(1f)) {
+        PullToRefreshBox(
+            modifier = Modifier.weight(1f),
+            isRefreshing = state.isRefreshing,
+            onRefresh = { onIntent(ShopIntent.PullToRefresh) },
+        ) {
             when {
-                state.isLoading -> {
+                state.isLoading && !state.isRefreshing -> {
                     FullscreenProgressIndicator(backgroundColor = MaterialTheme.appColors.background)
                 }
 

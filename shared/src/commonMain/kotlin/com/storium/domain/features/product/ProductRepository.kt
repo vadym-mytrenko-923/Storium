@@ -5,12 +5,11 @@ import com.storium.domain.features.product.model.ProductsDataState
 import kotlinx.coroutines.flow.Flow
 
 interface ProductRepository {
-    val productsFlow: Flow<ProductsDataState>
-    val selectedCategoryIdsFlow: Flow<Set<String>>
+    val selectedCategoryIdsFlow: Flow<List<String>>
     val searchQueryFlow: Flow<String>
+    val productsFlow: Flow<ProductsDataState>
     fun toggleCategorySelection(categoryId: String)
     fun setSearchQuery(query: String)
     suspend fun getProductById(id: Int): Product
     suspend fun fetchProducts()
-    suspend fun fetchProductsByCategory(id: String)
 }

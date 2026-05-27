@@ -6,6 +6,7 @@ import com.storium.ui.screens.shop.model.ProductUiModel
 
 data class ShopScreenState(
     val isLoading: Boolean = true,
+    val isRefreshing: Boolean = false,
     val products: List<ProductUiModel> = emptyList(),
     val categories: List<CategoryUiModel> = emptyList(),
     val displayMode: DisplayMode = DisplayMode.List,
@@ -19,6 +20,7 @@ sealed interface ShopIntent {
     data class ProductClicked(val productId: Int) : ShopIntent
     data object SearchToggled : ShopIntent
     data class SearchQueryChanged(val query: String) : ShopIntent
+    data object PullToRefresh : ShopIntent
 }
 
 sealed interface ShopEffect

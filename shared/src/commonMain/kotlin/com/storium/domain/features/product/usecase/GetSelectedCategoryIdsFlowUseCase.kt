@@ -6,6 +6,6 @@ import kotlinx.coroutines.flow.Flow
 
 class GetSelectedCategoryIdsFlowUseCase(
     private val repository: ProductRepository,
-) : BaseNoParamsFlowUseCase<Set<String>>() {
-    override fun execute(): Flow<Set<String>> = repository.selectedCategoryIdsFlow
+) : BaseNoParamsFlowUseCase<List<String>>() {
+    override fun execute(): Flow<List<String>> = repository.selectedCategoryIdsFlow
 }
