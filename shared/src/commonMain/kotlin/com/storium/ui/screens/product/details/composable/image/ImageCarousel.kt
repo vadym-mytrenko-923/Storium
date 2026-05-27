@@ -26,6 +26,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Density
 import coil3.compose.AsyncImage
 import com.storium.ui.screens.shop.composable.common.DiscountChip
+import com.storium.ui.theme.AppIcons
 import com.storium.ui.theme.StoriumTheme
 import com.storium.ui.theme.appColors
 import com.storium.ui.theme.carouselImageHeight
@@ -33,6 +34,7 @@ import com.storium.ui.theme.carouselIndicatorHeight
 import com.storium.ui.theme.carouselIndicatorShape
 import com.storium.ui.theme.marginPrimary
 import com.storium.ui.theme.marginPrimaryHalf
+import org.jetbrains.compose.resources.painterResource
 
 private const val PAGE_SIZE_FRACTION = 0.7f
 private const val PAGE_INDICATOR_ANIMATION_LABEL = "indicatorFraction"
@@ -77,6 +79,7 @@ fun ImageCarousel(
                     model = images.getOrNull(page),
                     contentDescription = null,
                     contentScale = ContentScale.Fit,
+                    error = painterResource(AppIcons.ImagePlaceholder),
                 )
             }
 

@@ -13,6 +13,7 @@ val marginPrimary1_5X = 12.dp
 val marginPrimary2X = 16.dp
 val marginPrimary2_5X = 20.dp
 val marginPrimary3X = 24.dp
+val marginPrimary3_5X = 28.dp
 val marginPrimary4X = 32.dp
 val marginPrimary5X = 40.dp
 val marginPrimary6X = 48.dp
@@ -33,6 +34,7 @@ val ratingStarSize = 14.dp
 val smallIconSize = 16.dp
 val defaultIconSize = 24.dp
 val largeIconSize = 32.dp
+val profileAvatarSize = 64.dp
 val carouselImageHeight = 400.dp
 
 // Component sizes
@@ -47,6 +49,7 @@ val productCardImageHeight = 184.dp
 val discountChipHeight = 24.dp
 val discountChipPadding = 6.dp
 val categoryChipHeight = 36.dp
+val profileMenuItemHeight = 72.dp
 val carouselIndicatorHeight = 3.dp
 val ratingBarHeight = 8.dp
 

@@ -30,8 +30,10 @@
     <string name="productDetailsReviewsCountFormat">%1$d reviews</string>
 
     <!-- Profile Screen -->
-    <string name="profileTitle">Profile</string>
-    <string name="profileComingSoon">Coming Soon...</string>
+    <string name="profileDisplayNameFormat" translatable="false">%1$s %2$s</string>
+    <string name="profileTitle">My profile</string>
+    <string name="profileSettingsTitle">Settings</string>
+    <string name="profileSettingsSubtitle">User info, language, and theme</string>
     <string name="profileBtnLogout">Logout</string>
 
     <!-- Errors -->
