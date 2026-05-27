@@ -14,6 +14,7 @@ import com.storium.data.local.converter.StringListConverter
 @Database(
     entities = [ProductEntity::class, CategoryEntity::class, ReviewEntity::class],
     version = 1,
+    exportSchema = false,
 )
 @TypeConverters(StringListConverter::class)
 @ConstructedBy(ProductsDatabaseConstructor::class)

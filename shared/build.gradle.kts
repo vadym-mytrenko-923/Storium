@@ -102,6 +102,9 @@ detekt {
 
 tasks.withType<io.gitlab.arturbosch.detekt.Detekt>().configureEach {
     exclude("**/generated/**", "**/build/**")
+    // KMP detekt tasks auto-add KSP generated sources as source roots,
+    // so path-based excludes don't match. Remove them from source directly.
+    setSource(source.filter { !it.path.contains("/build/") })
 }
 
 room {
