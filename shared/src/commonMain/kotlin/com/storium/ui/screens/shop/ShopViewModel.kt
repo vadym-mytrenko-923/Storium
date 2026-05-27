@@ -3,6 +3,7 @@ package com.storium.ui.screens.shop
 import com.storium.domain.features.product.usecase.GetProductsFlowUseCase
 import com.storium.domain.features.product.usecase.GetProductsSearchQueryFlowUseCase
 import com.storium.domain.features.product.usecase.GetSelectedCategoryIdsFlowUseCase
+import com.storium.domain.features.product.usecase.RefreshProductsUseCase
 import com.storium.domain.features.product.usecase.SetProductsSearchQueryUseCase
 import com.storium.domain.features.product.usecase.ToggleCategorySelectionUseCase
 import com.storium.ui.base.BaseViewModel
@@ -19,6 +20,7 @@ class ShopViewModel(
     private val getProductsSearchQueryFlowUseCase: GetProductsSearchQueryFlowUseCase,
     private val toggleCategorySelectionUseCase: ToggleCategorySelectionUseCase,
     private val setProductsSearchQueryUseCase: SetProductsSearchQueryUseCase,
+    private val refreshProductsUseCase: RefreshProductsUseCase,
 ) : BaseViewModel<ShopScreenState, ShopIntent, ShopEffect>(ShopScreenState()) {
 
     init {
@@ -33,6 +35,7 @@ class ShopViewModel(
                 is ShopIntent.ProductClicked -> appNavigator.navigateTo(AppNavRoute.ProductDetails(intent.productId))
                 is ShopIntent.SearchToggled -> onSearchToggled()
                 is ShopIntent.SearchQueryChanged -> setProductsSearchQueryUseCase(intent.query)
+                is ShopIntent.PullToRefresh -> onPullToRefresh()
             }
         }
     }
@@ -73,5 +76,11 @@ class ShopViewModel(
         }
 
         updateUiState { copy(isSearchActive = !currentState.isSearchActive) }
+    }
+
+    private suspend fun onPullToRefresh() {
+        updateUiState { copy(isRefreshing = true) }
+        refreshProductsUseCase()
+        updateUiState { copy(isRefreshing = false) }
     }
 }

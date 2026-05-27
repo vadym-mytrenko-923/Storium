@@ -5,6 +5,7 @@ import storium.shared.generated.resources.ic_arrow_back
 import storium.shared.generated.resources.ic_arrow_right
 import storium.shared.generated.resources.ic_close
 import storium.shared.generated.resources.ic_error_close
+import storium.shared.generated.resources.ic_image_placeholder
 import storium.shared.generated.resources.ic_input_check
 import storium.shared.generated.resources.ic_nav_profile_active
 import storium.shared.generated.resources.ic_nav_profile_inactive
@@ -22,6 +23,7 @@ object AppIcons {
     val Close = Res.drawable.ic_close
     val InputCheck = Res.drawable.ic_input_check
     val ErrorClose = Res.drawable.ic_error_close
+    val ImagePlaceholder = Res.drawable.ic_image_placeholder
     val NavShopActive = Res.drawable.ic_nav_shop_active
     val NavShopInactive = Res.drawable.ic_nav_shop_inactive
     val NavProfileActive = Res.drawable.ic_nav_profile_active
