@@ -101,7 +101,7 @@ detekt {
 }
 
 tasks.withType<io.gitlab.arturbosch.detekt.Detekt>().configureEach {
-    exclude("**/generated/**")
+    exclude("**/generated/**", "**/build/**")
 }
 
 room {
