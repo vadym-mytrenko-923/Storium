@@ -1,10 +1,9 @@
 package com.storium.ui.theme
 
 import storium.shared.generated.resources.Res
-import storium.shared.generated.resources.ic_arrow_back
 import storium.shared.generated.resources.ic_arrow_right
 import storium.shared.generated.resources.ic_avatar_placeholder
-import storium.shared.generated.resources.ic_chevron_left
+import storium.shared.generated.resources.ic_back
 import storium.shared.generated.resources.ic_close
 import storium.shared.generated.resources.ic_error_close
 import storium.shared.generated.resources.ic_flag_english
@@ -24,8 +23,7 @@ import storium.shared.generated.resources.ic_view_grid
 import storium.shared.generated.resources.ic_view_list
 
 object AppIcons {
-    val ArrowBack = Res.drawable.ic_arrow_back
-    val ChevronLeft = Res.drawable.ic_chevron_left
+    val Back = Res.drawable.ic_back
     val ArrowRight = Res.drawable.ic_arrow_right
     val Close = Res.drawable.ic_close
     val InputCheck = Res.drawable.ic_input_check

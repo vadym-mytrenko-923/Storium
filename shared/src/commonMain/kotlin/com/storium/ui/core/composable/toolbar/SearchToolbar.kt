@@ -76,7 +76,7 @@ fun SearchToolbar(
             modifier = Modifier
                 .size(defaultIconSize)
                 .clickable { onCloseClicked() },
-            painter = painterResource(AppIcons.ArrowBack),
+            painter = painterResource(AppIcons.Back),
             contentDescription = null,
             colorFilter = ColorFilter.tint(MaterialTheme.appColors.iconPrimary),
         )
