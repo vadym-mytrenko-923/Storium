@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Login Screen -->
+    <string name="loginTitle">Iniciar sesión</string>
+    <string name="loginUsernameLabel">Nombre de usuario</string>
+    <string name="loginPasswordLabel">Contraseña</string>
+    <string name="loginUsernameError">El nombre de usuario debe tener al menos 4 caracteres</string>
+    <string name="loginPasswordError">La contraseña no debe estar vacía</string>
+    <string name="loginFailedError">Nombre de usuario o contraseña incorrectos</string>
+    <string name="loginBtnLogin">Iniciar sesión</string>
+    <string name="loginBtnForgotPassword">¿Olvidaste tu contraseña?</string>
+
+    <!-- Main Screen -->
+    <string name="mainNavShop">Tienda</string>
+    <string name="mainNavProfile">Perfil</string>
+
+    <!-- Shop Screen -->
+    <string name="shopTitle">Tienda</string>
+    <string name="shopEmptyState">No se encontraron productos</string>
+    <string name="shopSearchPlaceholder">Buscar productos...</string>
+
+    <!-- Product Details Screen -->
+    <string name="productDetailsTitle">Detalles del producto</string>
+    <string name="productDetailsComingSoon">Próximamente...</string>
+    <string name="productDetailsRatingTitle">Calificación \u0026 Reseñas</string>
+    <string name="productDetailsRatingsCountFormat">%1$d calificaciones</string>
+    <string name="productDetailsReviewsCountFormat">%1$d reseñas</string>
+
+    <!-- Profile Screen -->
+    <string name="profileTitle">Mi perfil</string>
+    <string name="profilePersonalInfoTitle">Información personal</string>
+    <string name="profilePersonalInfoSubtitle">Nombre, apellido, correo</string>
+    <string name="profileSettingsTitle">Configuración</string>
+    <string name="profileSettingsSubtitle">Idioma y tema</string>
+    <string name="profileBtnLogout">Cerrar sesión</string>
+
+    <!-- Personal Info Screen -->
+    <string name="personalInfoTitle">Información personal</string>
+    <string name="personalInfoFirstNameLabel">Nombre</string>
+    <string name="personalInfoLastNameLabel">Apellido</string>
+    <string name="personalInfoEmailLabel">Correo electrónico</string>
+    <string name="personalInfoBtnSave">Guardar</string>
+    <string name="personalInfoSaveSuccess">Información personal actualizada exitosamente</string>
+    <string name="personalInfoFirstNameError">El nombre no debe estar vacío</string>
+    <string name="personalInfoLastNameError">El apellido no debe estar vacío</string>
+    <string name="personalInfoEmailError">El correo no debe estar vacío</string>
+
+    <!-- Settings Screen -->
+    <string name="settingsTitle">Configuración</string>
+    <string name="settingsThemeTitle">Tema</string>
+    <string name="settingsThemeLight">Claro</string>
+    <string name="settingsThemeDark">Oscuro</string>
+    <string name="settingsLanguageTitle">Idioma</string>
+    <string name="settingsLanguageEnglish">Inglés</string>
+    <string name="settingsLanguageSpanish">Español</string>
+
+    <!-- Errors -->
+    <string name="errorNetwork">Sin conexión a internet</string>
+    <string name="errorServer">Error del servidor. Inténtalo más tarde</string>
+    <string name="errorUnknown">Algo salió mal</string>
+    <string name="errorGenericOops">¡Ups!</string>
+</resources>

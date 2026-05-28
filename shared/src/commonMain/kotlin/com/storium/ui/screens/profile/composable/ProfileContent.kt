@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.storium.ui.core.composable.button.BtnPrimary
+import com.storium.ui.core.composable.other.Divider
 import com.storium.ui.core.composable.toolbar.Toolbar
 import com.storium.ui.screens.profile.ProfileIntent
 import com.storium.ui.screens.profile.ProfileScreenState
@@ -21,6 +22,8 @@ import com.storium.ui.theme.marginPrimary3_5X
 import org.jetbrains.compose.resources.stringResource
 import storium.shared.generated.resources.Res
 import storium.shared.generated.resources.profileBtnLogout
+import storium.shared.generated.resources.profilePersonalInfoSubtitle
+import storium.shared.generated.resources.profilePersonalInfoTitle
 import storium.shared.generated.resources.profileSettingsSubtitle
 import storium.shared.generated.resources.profileSettingsTitle
 import storium.shared.generated.resources.profileTitle
@@ -40,8 +43,17 @@ fun ProfileContent(
 
         state.profile?.let { profile ->
             ProfileHeader(profile = profile)
-            Spacer(modifier = Modifier.height(marginPrimary3_5X))
         }
+
+        Spacer(modifier = Modifier.height(marginPrimary3_5X))
+
+        ProfileMenuItem(
+            title = stringResource(Res.string.profilePersonalInfoTitle),
+            subtitle = stringResource(Res.string.profilePersonalInfoSubtitle),
+            onClick = { onIntent(ProfileIntent.PersonalInfoClicked) },
+        )
+
+        Divider()
 
         ProfileMenuItem(
             title = stringResource(Res.string.profileSettingsTitle),

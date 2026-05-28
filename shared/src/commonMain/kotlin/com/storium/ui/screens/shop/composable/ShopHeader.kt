@@ -8,8 +8,10 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.tooling.preview.Preview
 import com.storium.ui.core.composable.surface.ElevatedSurface
 import com.storium.ui.core.composable.toolbar.SearchToolbar
@@ -21,6 +23,7 @@ import com.storium.ui.screens.shop.composable.preview.ShopPreviewUiModels
 import com.storium.ui.screens.shop.model.DisplayMode
 import com.storium.ui.theme.AppIcons
 import com.storium.ui.theme.StoriumTheme
+import com.storium.ui.theme.appColors
 import com.storium.ui.theme.defaultIconSize
 import com.storium.ui.theme.marginPrimary2X
 import org.jetbrains.compose.resources.painterResource
@@ -58,6 +61,7 @@ fun ShopHeader(
                                 .clickable { onIntent(ShopIntent.SearchToggled) },
                             painter = painterResource(AppIcons.Search),
                             contentDescription = null,
+                            colorFilter = ColorFilter.tint(MaterialTheme.appColors.iconPrimary),
                         )
 
                         Image(
@@ -72,6 +76,7 @@ fun ShopHeader(
                                 },
                             ),
                             contentDescription = null,
+                            colorFilter = ColorFilter.tint(MaterialTheme.appColors.iconPrimary),
                         )
                     },
                 )

@@ -8,6 +8,9 @@ import com.storium.data.features.user.local.storage.UserStorageImpl
 import com.storium.data.local.storage.USER_STORAGE_NAME
 import com.storium.domain.features.user.UserRepository
 import com.storium.domain.features.user.usecase.GetUserDataFlowUseCase
+import com.storium.domain.features.user.usecase.UpdateUserDataUseCase
+import com.storium.ui.screens.personalinfo.PersonalInfoViewModel
+import com.storium.ui.screens.personalinfo.validation.PersonalInfoValidator
 import com.storium.ui.screens.profile.ProfileViewModel
 import org.koin.core.module.dsl.viewModel
 import org.koin.core.qualifier.named
@@ -25,7 +28,12 @@ val userModule = module {
 
     // Use Cases
     factory { GetUserDataFlowUseCase(get()) }
+    factory { UpdateUserDataUseCase(get()) }
+
+    // Validation
+    factory { PersonalInfoValidator() }
 
     // ViewModels
-    viewModel { ProfileViewModel(get(), get()) }
+    viewModel { ProfileViewModel(get(), get(), get()) }
+    viewModel { PersonalInfoViewModel(get(), get(), get(), get()) }
 }

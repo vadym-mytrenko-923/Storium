@@ -11,4 +11,11 @@ class UserRepositoryImpl(
     private val userLocalDataSource: UserLocalDataSource,
 ) : UserRepository {
     override val userDataFlow: Flow<User?> = userLocalDataSource.userDataFlow.map { it?.toDomainModel() }
+
+    override suspend fun updateUserData(firstName: String, lastName: String, email: String) {
+        val userData = userLocalDataSource.getUserData() ?: return
+        userLocalDataSource.setUserData(
+            userData = userData.copy(firstName = firstName, lastName = lastName, email = email),
+        )
+    }
 }

@@ -32,9 +32,31 @@
     <!-- Profile Screen -->
     <string name="profileDisplayNameFormat" translatable="false">%1$s %2$s</string>
     <string name="profileTitle">My profile</string>
+    <string name="profilePersonalInfoTitle">Personal Info</string>
+    <string name="profilePersonalInfoSubtitle">First name, last name, email</string>
     <string name="profileSettingsTitle">Settings</string>
-    <string name="profileSettingsSubtitle">User info, language, and theme</string>
+    <string name="profileSettingsSubtitle">Language and theme</string>
     <string name="profileBtnLogout">Logout</string>
+
+    <!-- Personal Info Screen -->
+    <string name="personalInfoTitle">Personal Info</string>
+    <string name="personalInfoFirstNameLabel">First Name</string>
+    <string name="personalInfoLastNameLabel">Last Name</string>
+    <string name="personalInfoEmailLabel">Email</string>
+    <string name="personalInfoBtnSave">Save</string>
+    <string name="personalInfoSaveSuccess">Personal info updated successfully</string>
+    <string name="personalInfoFirstNameError">First name should not be empty</string>
+    <string name="personalInfoLastNameError">Last name should not be empty</string>
+    <string name="personalInfoEmailError">Email should not be empty</string>
+
+    <!-- Settings Screen -->
+    <string name="settingsTitle">Settings</string>
+    <string name="settingsThemeTitle">Theme</string>
+    <string name="settingsThemeLight">Light</string>
+    <string name="settingsThemeDark">Dark</string>
+    <string name="settingsLanguageTitle">Language</string>
+    <string name="settingsLanguageEnglish">English</string>
+    <string name="settingsLanguageSpanish">Spanish</string>
 
     <!-- Errors -->
     <string name="errorNetwork">No internet connection</string>

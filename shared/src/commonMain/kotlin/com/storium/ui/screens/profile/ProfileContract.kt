@@ -7,6 +7,7 @@ data class ProfileScreenState(
 )
 
 sealed interface ProfileIntent {
+    data object PersonalInfoClicked : ProfileIntent
     data object SettingsClicked : ProfileIntent
     data object LogoutClicked : ProfileIntent
 }

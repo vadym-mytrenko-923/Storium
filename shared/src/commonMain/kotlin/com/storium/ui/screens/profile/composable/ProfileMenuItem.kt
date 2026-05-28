@@ -14,14 +14,15 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.tooling.preview.Preview
 import com.storium.ui.theme.AppIcons
 import com.storium.ui.theme.StoriumTheme
 import com.storium.ui.theme.appColors
+import com.storium.ui.theme.defaultIconSize
 import com.storium.ui.theme.marginPrimary2X
 import com.storium.ui.theme.marginPrimaryHalf
 import com.storium.ui.theme.profileMenuItemHeight
-import com.storium.ui.theme.smallIconSize
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
@@ -57,9 +58,10 @@ fun ProfileMenuItem(
         }
 
         Image(
-            modifier = Modifier.size(smallIconSize),
+            modifier = Modifier.size(defaultIconSize),
             painter = painterResource(AppIcons.ArrowRight),
             contentDescription = null,
+            colorFilter = ColorFilter.tint(MaterialTheme.appColors.iconPrimary),
         )
     }
 }

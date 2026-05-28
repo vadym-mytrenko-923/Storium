@@ -14,7 +14,7 @@ class LoginViewModel(
     private val uiErrorParser: UiErrorParser,
 ) : BaseViewModel<LoginScreenState, LoginIntent, LoginEffect>(LoginScreenState()) {
 
-    override fun reduceIntent(intent: LoginIntent) {
+    override suspend fun reduceIntent(intent: LoginIntent) {
         when (intent) {
             is LoginIntent.UsernameChanged -> onUsernameChanged(intent.value)
             is LoginIntent.PasswordChanged -> onPasswordChanged(intent.value)
@@ -42,19 +42,17 @@ class LoginViewModel(
         }
     }
 
-    private fun login() {
+    private suspend fun login() {
         if (!currentState.validation.isValid) return
 
-        launchViewModelScope {
-            updateUiState { copy(isLoading = true) }
-            loginUseCase(LoginParams(username = currentState.username, password = currentState.password))
-                .onSuccess {
-                    setUserLoggedInUseCase()
-                }
-                .onFailure { error ->
-                    updateUiState { copy(isLoading = false) }
-                    sendUiEffect(LoginEffect.ShowError(uiErrorParser.parseError(error)))
-                }
-        }
+        updateUiState { copy(isLoading = true) }
+        loginUseCase(LoginParams(username = currentState.username, password = currentState.password))
+            .onSuccess {
+                setUserLoggedInUseCase()
+            }
+            .onFailure { error ->
+                updateUiState { copy(isLoading = false) }
+                sendUiEffect(LoginEffect.ShowError(uiErrorParser.parseError(error)))
+            }
     }
 }

@@ -15,7 +15,9 @@ import com.storium.ui.navigation.base.NavigationEffectHandler
 import com.storium.ui.navigation.model.AppNavRoute
 import com.storium.ui.screens.auth.login.LoginScreen
 import com.storium.ui.screens.main.MainScreen
+import com.storium.ui.screens.personalinfo.PersonalInfoScreen
 import com.storium.ui.screens.product.details.ProductDetailsScreen
+import com.storium.ui.screens.settings.SettingsScreen
 import kotlinx.coroutines.flow.StateFlow
 
 @Composable
@@ -54,6 +56,12 @@ fun AppNavHost(
         }
         composable<AppNavRoute.ProductDetails> {
             ProductDetailsScreen()
+        }
+        composable<AppNavRoute.PersonalInfo> {
+            PersonalInfoScreen()
+        }
+        composable<AppNavRoute.Settings> {
+            SettingsScreen()
         }
     }
 }

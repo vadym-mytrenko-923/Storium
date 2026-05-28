@@ -31,5 +31,5 @@ val appModule = module {
     single { UiErrorParser() }
 
     // ViewModels
-    viewModel { AppViewModel(get()) }
+    viewModel { AppViewModel(get(), get(), get(), get()) }
 }
