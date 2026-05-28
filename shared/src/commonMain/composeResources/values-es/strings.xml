@@ -59,4 +59,5 @@
     <string name="errorServer">Error del servidor. Inténtalo más tarde</string>
     <string name="errorUnknown">Algo salió mal</string>
     <string name="errorGenericOops">¡Ups!</string>
+    <string name="successGenericTitle">¡Éxito!</string>
 </resources>

@@ -63,4 +63,5 @@
     <string name="errorServer">Server error. Please try again later</string>
     <string name="errorUnknown">Something went wrong</string>
     <string name="errorGenericOops">Oops!</string>
+    <string name="successGenericTitle">Success!</string>
 </resources>

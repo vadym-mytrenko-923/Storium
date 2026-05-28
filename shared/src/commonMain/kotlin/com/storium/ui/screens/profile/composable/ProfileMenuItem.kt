@@ -61,7 +61,7 @@ fun ProfileMenuItem(
             modifier = Modifier.size(defaultIconSize),
             painter = painterResource(AppIcons.ArrowRight),
             contentDescription = null,
-            colorFilter = ColorFilter.tint(MaterialTheme.appColors.iconPrimary),
+            colorFilter = ColorFilter.tint(MaterialTheme.appColors.primary),
         )
     }
 }

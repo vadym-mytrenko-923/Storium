@@ -48,6 +48,7 @@ import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringResource
 import storium.shared.generated.resources.Res
 import storium.shared.generated.resources.errorGenericOops
+import storium.shared.generated.resources.successGenericTitle
 import kotlin.math.roundToInt
 
 class AppAlertController internal constructor(
@@ -101,7 +102,10 @@ fun AppAlertProvider(content: @Composable () -> Unit) {
                 .systemBarsPadding(),
             snackbar = { data ->
                 val alertParams = (data.visuals as? AppAlertParams) ?: return@SnackbarHost
-                val title = alertParams.title ?: stringResource(Res.string.errorGenericOops)
+                val title = alertParams.title ?: when (alertParams.type) {
+                    AppAlertType.Error -> stringResource(Res.string.errorGenericOops)
+                    AppAlertType.Success -> stringResource(Res.string.successGenericTitle)
+                }
                 val dismissThresholdPx = with(density) { appAlertSwipeThresholdSize.toPx() }
                 val offsetY = remember(data) { Animatable(0f) }
 
