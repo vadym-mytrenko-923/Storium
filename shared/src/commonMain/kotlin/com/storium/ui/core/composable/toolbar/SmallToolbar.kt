@@ -89,7 +89,7 @@ private fun SmallToolbarWithLeadingPreview() {
             leadingContent = {
                 Image(
                     modifier = Modifier.size(defaultIconSize),
-                    painter = painterResource(AppIcons.ArrowBack),
+                    painter = painterResource(AppIcons.Back),
                     contentDescription = null,
                 )
             },

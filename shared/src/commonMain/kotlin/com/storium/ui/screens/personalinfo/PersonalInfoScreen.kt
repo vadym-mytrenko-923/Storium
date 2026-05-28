@@ -80,7 +80,7 @@ private fun PersonalInfoScreenContent(
                         modifier = Modifier
                             .size(defaultIconSize)
                             .clickable { onIntent(PersonalInfoIntent.BackClicked) },
-                        painter = painterResource(AppIcons.ChevronLeft),
+                        painter = painterResource(AppIcons.Back),
                         contentDescription = null,
                         colorFilter = ColorFilter.tint(MaterialTheme.appColors.iconPrimary),
                     )

@@ -63,7 +63,7 @@ private fun SettingsScreenContent(
                         modifier = Modifier
                             .size(defaultIconSize)
                             .clickable { onIntent(SettingsIntent.BackClicked) },
-                        painter = painterResource(AppIcons.ChevronLeft),
+                        painter = painterResource(AppIcons.Back),
                         contentDescription = null,
                         colorFilter = ColorFilter.tint(MaterialTheme.appColors.iconPrimary),
                     )

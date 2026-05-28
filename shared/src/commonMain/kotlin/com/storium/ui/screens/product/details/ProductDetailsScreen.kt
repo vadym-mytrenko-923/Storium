@@ -69,7 +69,7 @@ private fun ProductDetailsScreenContent(
                             modifier = Modifier
                                 .size(defaultIconSize)
                                 .clickable { onIntent(ProductDetailsIntent.BackClicked) },
-                            painter = painterResource(AppIcons.ArrowBack),
+                            painter = painterResource(AppIcons.Back),
                             contentDescription = null,
                             colorFilter = ColorFilter.tint(MaterialTheme.appColors.iconPrimary),
                         )
