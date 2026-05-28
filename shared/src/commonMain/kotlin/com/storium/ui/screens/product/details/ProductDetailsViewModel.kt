@@ -20,11 +20,9 @@ class ProductDetailsViewModel(
         loadProduct(productId = savedStateHandle.toRoute<AppNavRoute.ProductDetails>().productId)
     }
 
-    override fun reduceIntent(intent: ProductDetailsIntent) {
-        launchViewModelScope {
-            when (intent) {
-                is ProductDetailsIntent.BackClicked -> appNavigator.back()
-            }
+    override suspend fun reduceIntent(intent: ProductDetailsIntent) {
+        when (intent) {
+            is ProductDetailsIntent.BackClicked -> appNavigator.back()
         }
     }
 

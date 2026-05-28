@@ -23,6 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.tooling.preview.Preview
@@ -77,6 +78,7 @@ fun SearchToolbar(
                 .clickable { onCloseClicked() },
             painter = painterResource(AppIcons.ArrowBack),
             contentDescription = null,
+            colorFilter = ColorFilter.tint(MaterialTheme.appColors.iconPrimary),
         )
 
         BasicTextField(
@@ -112,6 +114,7 @@ fun SearchToolbar(
                     .clickable { searchQuery = "" },
                 painter = painterResource(AppIcons.Close),
                 contentDescription = null,
+                colorFilter = ColorFilter.tint(MaterialTheme.appColors.iconPrimary),
             )
         }
     }

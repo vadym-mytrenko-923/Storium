@@ -27,16 +27,14 @@ class ShopViewModel(
         observeProducts()
     }
 
-    override fun reduceIntent(intent: ShopIntent) {
-        launchViewModelScope {
-            when (intent) {
-                is ShopIntent.CategoryToggled -> toggleCategorySelectionUseCase(intent.categoryId)
-                is ShopIntent.DisplayModeToggled -> onDisplayModeToggled()
-                is ShopIntent.ProductClicked -> appNavigator.navigateTo(AppNavRoute.ProductDetails(intent.productId))
-                is ShopIntent.SearchToggled -> onSearchToggled()
-                is ShopIntent.SearchQueryChanged -> setProductsSearchQueryUseCase(intent.query)
-                is ShopIntent.PullToRefresh -> onPullToRefresh()
-            }
+    override suspend fun reduceIntent(intent: ShopIntent) {
+        when (intent) {
+            is ShopIntent.CategoryToggled -> toggleCategorySelectionUseCase(intent.categoryId)
+            is ShopIntent.DisplayModeToggled -> onDisplayModeToggled()
+            is ShopIntent.ProductClicked -> appNavigator.navigateTo(AppNavRoute.ProductDetails(intent.productId))
+            is ShopIntent.SearchToggled -> onSearchToggled()
+            is ShopIntent.SearchQueryChanged -> setProductsSearchQueryUseCase(intent.query)
+            is ShopIntent.PullToRefresh -> onPullToRefresh()
         }
     }
 

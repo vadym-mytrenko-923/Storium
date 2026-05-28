@@ -33,8 +33,8 @@ fun ProfileHeader(
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .padding(marginPrimary2X),
-        verticalAlignment = Alignment.CenterVertically,
+            .padding(horizontal = marginPrimary2X),
+        verticalAlignment = Alignment.Top,
     ) {
         AsyncImage(
             modifier = Modifier

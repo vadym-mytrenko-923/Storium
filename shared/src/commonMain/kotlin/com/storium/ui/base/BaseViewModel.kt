@@ -20,10 +20,10 @@ abstract class BaseViewModel<STATE, INTENT, EFFECT>(initialState: STATE) : ViewM
     protected val currentState: STATE get() = _uiStateFlow.value
 
     fun onUserIntent(intent: INTENT) {
-        reduceIntent(intent)
+        launchViewModelScope { reduceIntent(intent) }
     }
 
-    protected abstract fun reduceIntent(intent: INTENT)
+    protected abstract suspend fun reduceIntent(intent: INTENT)
 
     protected fun updateUiState(reducer: STATE.() -> STATE) {
         _uiStateFlow.value = currentState.reducer()

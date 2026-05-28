@@ -11,6 +11,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.storium.ui.core.composable.other.FullscreenProgressIndicator
@@ -70,6 +71,7 @@ private fun ProductDetailsScreenContent(
                                 .clickable { onIntent(ProductDetailsIntent.BackClicked) },
                             painter = painterResource(AppIcons.ArrowBack),
                             contentDescription = null,
+                            colorFilter = ColorFilter.tint(MaterialTheme.appColors.iconPrimary),
                         )
                     },
                 )

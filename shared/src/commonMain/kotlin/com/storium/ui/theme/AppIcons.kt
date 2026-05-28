@@ -4,8 +4,11 @@ import storium.shared.generated.resources.Res
 import storium.shared.generated.resources.ic_arrow_back
 import storium.shared.generated.resources.ic_arrow_right
 import storium.shared.generated.resources.ic_avatar_placeholder
+import storium.shared.generated.resources.ic_chevron_left
 import storium.shared.generated.resources.ic_close
 import storium.shared.generated.resources.ic_error_close
+import storium.shared.generated.resources.ic_flag_english
+import storium.shared.generated.resources.ic_flag_spanish
 import storium.shared.generated.resources.ic_image_placeholder
 import storium.shared.generated.resources.ic_input_check
 import storium.shared.generated.resources.ic_nav_profile_active
@@ -15,11 +18,14 @@ import storium.shared.generated.resources.ic_nav_shop_inactive
 import storium.shared.generated.resources.ic_search
 import storium.shared.generated.resources.ic_star_empty
 import storium.shared.generated.resources.ic_star_filled
+import storium.shared.generated.resources.ic_theme_dark
+import storium.shared.generated.resources.ic_theme_light
 import storium.shared.generated.resources.ic_view_grid
 import storium.shared.generated.resources.ic_view_list
 
 object AppIcons {
     val ArrowBack = Res.drawable.ic_arrow_back
+    val ChevronLeft = Res.drawable.ic_chevron_left
     val ArrowRight = Res.drawable.ic_arrow_right
     val Close = Res.drawable.ic_close
     val InputCheck = Res.drawable.ic_input_check
@@ -33,6 +39,10 @@ object AppIcons {
     val StarFilled = Res.drawable.ic_star_filled
     val StarEmpty = Res.drawable.ic_star_empty
     val Search = Res.drawable.ic_search
+    val ThemeLight = Res.drawable.ic_theme_light
+    val ThemeDark = Res.drawable.ic_theme_dark
+    val FlagEnglish = Res.drawable.ic_flag_english
+    val FlagSpanish = Res.drawable.ic_flag_spanish
     val ViewList = Res.drawable.ic_view_list
     val ViewGrid = Res.drawable.ic_view_grid
 }

@@ -49,6 +49,8 @@ val productCardImageHeight = 184.dp
 val discountChipHeight = 24.dp
 val discountChipPadding = 6.dp
 val categoryChipHeight = 36.dp
+val selectableChipHeight = 56.dp
+val selectableChipBorderWidth = 1.dp
 val profileMenuItemHeight = 72.dp
 val carouselIndicatorHeight = 3.dp
 val ratingBarHeight = 8.dp
@@ -73,6 +75,9 @@ val textLineHeightSmall = 12.sp
 
 // Alert
 val appAlertSwipeThresholdSize = 48.dp
+
+// Divider
+val dividerWidth = 1.dp
 
 // Elevation
 val elevationInput = 8.dp
