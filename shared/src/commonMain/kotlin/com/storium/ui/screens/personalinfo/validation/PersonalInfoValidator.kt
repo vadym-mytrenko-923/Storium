@@ -1,5 +1,7 @@
 package com.storium.ui.screens.personalinfo.validation
 
+private val EMAIL_REGEX = Regex("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$")
+
 class PersonalInfoValidator {
     fun validate(
         firstName: String,
@@ -9,7 +11,7 @@ class PersonalInfoValidator {
     ): PersonalInfoValidationResult {
         val isFirstNameValid = firstName.isNotBlank()
         val isLastNameValid = lastName.isNotBlank()
-        val isEmailValid = email.isNotBlank()
+        val isEmailValid = email.isNotBlank() && EMAIL_REGEX.matches(email.trim())
 
         return PersonalInfoValidationResult(
             isFirstNameValid = isFirstNameValid,

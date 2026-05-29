@@ -43,7 +43,7 @@
     <string name="personalInfoSaveSuccess">Información personal actualizada exitosamente</string>
     <string name="personalInfoFirstNameError">El nombre no debe estar vacío</string>
     <string name="personalInfoLastNameError">El apellido no debe estar vacío</string>
-    <string name="personalInfoEmailError">El correo no debe estar vacío</string>
+    <string name="personalInfoEmailError">Ingrese un correo electrónico válido</string>
 
     <!-- Settings Screen -->
     <string name="settingsTitle">Configuración</string>

@@ -47,7 +47,7 @@
     <string name="personalInfoSaveSuccess">Personal info updated successfully</string>
     <string name="personalInfoFirstNameError">First name should not be empty</string>
     <string name="personalInfoLastNameError">Last name should not be empty</string>
-    <string name="personalInfoEmailError">Email should not be empty</string>
+    <string name="personalInfoEmailError">Please enter a valid email address</string>
 
     <!-- Settings Screen -->
     <string name="settingsTitle">Settings</string>
